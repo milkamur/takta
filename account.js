@@ -146,16 +146,20 @@ function formatPhone(phone) {
 ============================== */
 
 if (telegramLoginBtn) {
-
-  telegramLoginBtn.addEventListener("click", () => {
-
-    alert(
-      "Вход через Telegram подключим следующим этапом"
-    );
-
-  });
-
-}
+    telegramLoginBtn.addEventListener("click", async () => {
+      const { error } = await supabaseClient.auth.signInWithOAuth({
+        provider: "custom:telegram",
+        options: {
+          redirectTo: "https://milkamur.github.io/takta/account.html"
+        }
+      });
+  
+      if (error) {
+        console.error("Telegram login error:", error);
+        alert("Не удалось открыть вход через Telegram");
+      }
+    });
+  }
 
 
 /* ==============================
