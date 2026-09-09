@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ТАКТА</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <section class="hero">
+
+    <header class="header">
+      <div class="logo">ТАКТА</div>
+
+      <button class="burger" id="burgerBtn" aria-label="Меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="hero-content">
+
+
+
+      <img
+      class="takta-title"
+      src="images/takta-title.png"
+      alt="ТАКТА"
+    >
+
+      <p class="tagline">
+        ЛЮДИ · СЛОВА · СТРАТЕГИЯ
+      </p>
+
+
+    </div>
+
+    <a href="#" class="join-btn" id="joinGameBtn">
+        <span class="join-text">ВСТУПИТЬ В ИГРУ</span>
+        <span class="arrow">→</span>
+    </a>
+
+      <section class="main-links">
+
+        <a href="roles.html" class="main-card">
+            <img src="images/roles-card.png" alt="Роли">
+          <div class="main-card-overlay"></div>
+      
+          <div class="main-card-content">
+            <h3>РОЛИ</h3>
+            <p>УНИКАЛЬНЫЕ<br>МЕХАНИКИ</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+      
+      
+        <a href="rules.html" class="main-card">
+            <img src="images/rules-card.png" alt="Правила">
+          <div class="main-card-overlay"></div>
+      
+          <div class="main-card-content">
+            <h3>ПРАВИЛА</h3>
+            <p>ВСЁ, ЧТО НУЖНО<br>ЗНАТЬ</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+      
+      
+        <a href="shop.html" class="main-card">
+            <img src="images/shop-card.png" alt="Магазин">
+          <div class="main-card-overlay"></div>
+      
+          <div class="main-card-content">
+            <h3>МАГАЗИН</h3>
+            <p>МАСКИ, КАРТЫ<br>И АКСЕССУАРЫ</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+      
+      </section>
+
+      <a href="account.html" class="account-card">
+
+        <div class="account-icon">
+          <span class="account-head"></span>
+          <span class="account-body"></span>
+        </div>
+      
+        <div class="account-text">
+          <h3>ЛИЧНЫЙ КАБИНЕТ</h3>
+          <p>ТВОИ ИГРЫ · БРОНИ · ДОПЫ</p>
+        </div>
+      
+        <span class="account-arrow">→</span>
+      
+      </a>
+    
+  </section>
+
+  <section class="after-hero">
+  </section>
+
+<!-- МЕНЮ БУРГЕРА -->
+
+<div class="burger-menu" id="burgerMenu">
+
+    <button class="burger-close" id="burgerClose" type="button">
+      ×
+    </button>
+  
+    <nav class="burger-nav">
+      <a href="index.html">ГЛАВНАЯ</a>
+      <a href="roles.html">РОЛИ</a>
+      <a href="rules.html">ПРАВИЛА</a>
+      <a href="shop.html">МАГАЗИН</a>
+      <a href="account.html">ЛИЧНЫЙ КАБИНЕТ</a>
+    </nav>
+  
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

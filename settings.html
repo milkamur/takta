@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Настройки — TAKTA</title>
+
+  <link rel="stylesheet" href="account.css">
+  <link rel="stylesheet" href="settings.css">
+</head>
+
+<body>
+
+  <main class="settings-page">
+
+    <a href="account.html" class="settings-back">←</a>
+
+    <div class="settings-logo">
+      ТАКТА
+    </div>
+
+
+    <section class="settings-header">
+      <h1>НАСТРОЙКИ</h1>
+    </section>
+
+
+    <section class="settings-section">
+
+      <div class="settings-section-title">
+        ПРОФИЛЬ
+      </div>
+
+
+      <div class="avatar-block">
+
+        <div class="avatar-preview">
+          <span>И</span>
+        </div>
+
+        <div class="avatar-info">
+          <div class="avatar-title">
+            АВАТАР
+          </div>
+
+          <div class="avatar-subtitle">
+            ДОБАВИМ ПОЗЖЕ
+          </div>
+        </div>
+
+      </div>
+
+
+      <label class="settings-field">
+
+        <span class="settings-field-label">
+          ИМЯ
+        </span>
+
+        <input
+          type="text"
+          id="profileNameInput"
+          maxlength="24"
+          placeholder="ИГРОК"
+          autocomplete="name"
+        >
+
+      </label>
+
+
+      <div class="settings-field settings-phone">
+
+        <span class="settings-field-label">
+          ТЕЛЕФОН
+        </span>
+
+        <div
+          class="settings-phone-value"
+          id="settingsPhone"
+        >
+          —
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="settings-section">
+
+      <div class="settings-section-title">
+        ПОДДЕРЖКА
+      </div>
+
+      <a
+        href="support.html"
+        class="settings-card"
+      >
+
+        <div>
+
+          <div class="settings-card-title">
+            ЧАТ С ТАКТА
+          </div>
+
+          <div class="settings-card-subtitle">
+            ВОПРОСЫ ПО ИГРАМ И ЗАКАЗАМ
+          </div>
+
+        </div>
+
+        <span class="settings-card-arrow">
+          →
+        </span>
+
+      </a>
+
+    </section>
+
+
+    <button
+      class="settings-logout"
+      id="settingsLogoutBtn"
+      type="button"
+    >
+      ВЫЙТИ ИЗ АККАУНТА
+    </button>
+
+  </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="settings.js"></script>
+
+</body>
+
+</html>

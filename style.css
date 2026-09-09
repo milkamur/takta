@@ -1,0 +1,776 @@
+@font-face {
+    font-family: "CinzelRus";
+    src: url("fonts/CinzelRus.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+* {
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+  }
+  
+  body {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+  }
+  
+  /* =========================
+     HERO
+  ========================= */
+  
+  .hero {
+    position: relative;
+  
+    width: 100%;
+    min-height: 100svh;
+    padding-bottom: 32px;
+  
+    padding: 24px 24px 32px;
+  
+    display: flex;
+    flex-direction: column;
+  
+    overflow: hidden;
+  
+    background-color: #000;
+  
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.02) 0%,
+        rgba(0, 0, 0, 0.04) 45%,
+        rgba(0, 0, 0, 0.18) 58%,
+        rgba(0, 0, 0, 0.5) 74%,
+        rgba(0, 0, 0, 0.86) 90%,
+        #000 100%
+      ),
+      url("images/takta-bg.png");
+  
+      background-size: auto 76%;
+      background-position: center top;
+      background-repeat: no-repeat;
+  }
+  
+  /* дополнительное затемнение слева,
+     чтобы текст читался как на референсе */
+  
+     .hero::before {
+        content: "";
+      
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      
+        background: linear-gradient(
+          to right,
+          #000 0%,
+          #000 18%,
+          rgba(0, 0, 0, 0.96) 28%,
+          rgba(0, 0, 0, 0.78) 40%,
+          rgba(0, 0, 0, 0.48) 53%,
+          rgba(0, 0, 0, 0.18) 65%,
+          rgba(0, 0, 0, 0) 76%
+        );
+      
+        pointer-events: none;
+      }
+  
+  /* весь контент должен быть выше затемнения */
+  
+  .header,
+  .hero-content,
+  .join-btn {
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* =========================
+     HEADER
+  ========================= */
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    font-size: 24px;
+    letter-spacing: 8px;
+    font-weight: 400;
+  }
+  
+  .burger {
+    width: 38px;
+    height: 32px;
+  
+    padding: 0;
+    border: 0;
+  
+    background: transparent;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+  
+    cursor: pointer;
+  }
+  
+  .burger span {
+    display: block;
+  
+    width: 100%;
+    height: 1px;
+  
+    background: #fff;
+  }
+  
+  /* =========================
+     HERO TEXT
+  ========================= */
+  
+  .hero-content {
+    margin-top: 35px;
+  }
+  
+  .eyebrow {
+    margin: 0;
+  
+    font-size: 10px;
+    line-height: 1.6;
+    letter-spacing: 5px;
+  
+    color: rgba(255, 255, 255, 0.82);
+
+    transform: translateY(-10px);
+  }
+  
+  .takta-title {
+    display: block;
+  
+    width: 74vw;
+    height: auto;
+  
+    margin: 42px 0 10px;
+  
+    object-fit: contain;
+
+    transform: translate(-12px, -10px);
+  }
+  
+  .tagline {
+    margin: 0;
+  
+    font-size: 10px;
+    letter-spacing: 4px;
+  
+    color: rgba(255, 255, 255, 0.78);
+
+    transform: translateY(-25px);
+  }
+  
+  .hero-text {
+    margin: 46px 0 0;
+  
+    font-size: 12px;
+    line-height: 1.65;
+    letter-spacing: 6px;
+  
+    color: rgba(255,255,255,0.88);
+
+    transform: translateY(-40px);
+  }
+  
+  /* =========================
+     BUTTON
+  ========================= */
+  
+  .join-btn {
+    position: relative;
+  
+    margin-top: auto;
+  
+    min-height: 44px;
+  
+    padding: 0 22px 0 30px;
+  
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 999px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    color: #fff;
+    text-decoration: none;
+  
+    font-size: 16px;
+    letter-spacing: 5px;
+    text-align: center;
+  
+    background:
+      linear-gradient(
+        90deg,
+        rgba(255,255,255,0.14),
+        rgba(255,255,255,0.025)
+      );
+  
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+  }
+  
+  .arrow {
+    position: absolute;
+    right: 18px;
+  
+    font-size: 22px;
+    font-family: Arial, sans-serif;
+    font-weight: 200;
+  
+    transform: scaleX(0.7);
+  }
+  
+  .join-text {
+    transform: translateX(-8px);
+  }
+
+  /* =========================
+     НИЖЕ HERO
+  ========================= */
+  
+  .after-hero {
+    min-height: 300px;
+    background: #000;
+  }
+
+  /* =========================
+   БЛИЖАЙШАЯ ИГРА
+========================= */
+
+.next-game {
+    position: relative;
+    z-index: 2;
+  
+    width: 100%;
+    height: 140px;
+    min-height: 0;
+  
+    margin-top: 22px;
+    padding: 16px 20px;
+  
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 14px;
+  
+    overflow: hidden;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.98) 0%,
+        rgba(0, 0, 0, 0.92) 35%,
+        rgba(0, 0, 0, 0.50) 62%,
+        rgba(0, 0, 0, 0.12) 100%
+      ),
+      url("images/next-game-bg.png");
+  
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  
+  /* маленькая надпись */
+  
+  .next-game-label {
+    margin-bottom: 3px;
+  
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 3px;
+  
+    color: rgba(255, 255, 255, 0.65);
+  }
+  
+  
+  /* дата */
+  
+  .next-game-date {
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 2px;
+  
+    color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .game-day {
+    font-size: 29px;
+    line-height: 1;
+  }
+  
+  .game-month {
+    font-size: 18px;
+    line-height: 1;
+  }
+  
+  
+  /* информация */
+  
+  .next-game-info {
+    margin-top: 8px;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  
+  .game-info-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  
+    font-size: 11px;
+    line-height: 1.1;
+    letter-spacing: 1.7px;
+  
+    color: rgba(255, 255, 255, 0.75);
+  }
+  
+  .game-time {
+    font-size: 13px;
+  }
+  
+  .game-icon {
+    width: 16px;
+  
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+  
+    text-align: center;
+  
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  
+  /* подробнее */
+  
+  .game-more {
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+  
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  
+    color: rgba(255,255,255,.75);
+    font-size: 9px;
+    letter-spacing: 1.7px;
+    text-decoration: none;
+  }
+  
+  .game-more span {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+  }
+
+  /* =========================
+   РОЛИ / ПРАВИЛА / МАГАЗИН
+========================= */
+
+.main-links {
+    position: relative;
+    z-index: 2;
+  
+    width: 100%;
+    margin-top: 18px;
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  
+  .main-card {
+    position: relative;
+  
+    min-width: 0;
+    height: 270px;
+  
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+  
+    overflow: hidden;
+  
+    color: #fff;
+    text-decoration: none;
+  
+    background: #080808;
+  }
+  
+  
+  /* КАРТИНКА В КАРТОЧКЕ */
+  
+  .main-card img {
+    position: absolute;
+    inset: 0;
+  
+    width: 100%;
+    height: 100%;
+  
+    object-fit: cover;
+    object-position: center center;
+  
+    display: block;
+  }
+
+  /* КАРТИНКА ПРАВИЛА — ДАЛЬШЕ */
+
+.main-card:nth-child(2) img {
+    object-fit: contain;
+    object-position: center top;
+  }
+
+  /* КАРТИНКА РОЛИ — ДАЛЬШЕ */
+
+.main-card:nth-child(1) img {
+    object-fit: contain;
+    object-position: center top;
+  }
+
+  .main-card:nth-child(3) img {
+    object-fit: contain;
+    object-position: center top;
+    transform: none;
+
+    
+  filter: brightness(0.72);
+  }
+  
+  
+  /* ЗАТЕМНЕНИЕ КАРТИНКИ СНИЗУ */
+  
+  .main-card-overlay {
+    position: absolute;
+    inset: 0;
+  
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.10) 0%,
+      rgba(0, 0, 0, 0.18) 35%,
+      rgba(0, 0, 0, 0.48) 58%,
+      rgba(0, 0, 0, 0.82) 76%,
+      rgba(0, 0, 0, 0.97) 100%
+    );
+  }
+  
+  .main-card-content {
+    position: absolute;
+    z-index: 2;
+  
+    left: 10px;
+    right: 10px;
+    bottom: 8px;
+  
+    text-align: center;
+  }
+  
+  .main-card h3 {
+    margin: 0;
+  
+    font-family: "Cormorant Garamond", serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  
+  .main-card p {
+    min-height: 30px;
+    margin: 5px 0 7px;
+  
+    font-family: "Cormorant Garamond", serif;
+    font-size: 10px;
+    line-height: 1.25;
+    letter-spacing: 1.2px;
+  
+    color: rgba(255,255,255,.66);
+  }
+  .card-arrow {
+    width: 28px;
+    height: 28px;
+  
+    margin: 0 auto;
+  
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 50%;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 200;
+  }
+
+  /* =========================
+   ЛИЧНЫЙ КАБИНЕТ
+========================= */
+
+.account-card {
+    position: relative;
+    z-index: 2;
+  
+    width: 100%;
+    min-height: 82px;
+  
+    margin-top: 18px;
+    padding: 12px 16px;
+  
+    display: flex;
+    align-items: center;
+  
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 14px;
+  
+    color: #fff;
+    text-decoration: none;
+    overflow: hidden;
+  
+    background: linear-gradient(
+      110deg,
+      rgba(255,255,255,.08) 0%,
+      rgba(255,255,255,.025) 35%,
+      rgba(0,0,0,0) 75%
+    );
+  }
+  
+  /* круг с человечком */
+  
+  .account-icon {
+    position: relative;
+  
+    flex: 0 0 62px;
+    width: 62px;
+    height: 62px;
+  
+    margin-right: 18px;
+  
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 50%;
+  }
+  
+  /* голова */
+  
+  .account-head {
+    position: absolute;
+  
+    width: 13px;
+    height: 13px;
+  
+    top: 13px;
+    left: 50%;
+  
+    border: 2px solid rgba(255,255,255,.9);
+    border-radius: 50%;
+  
+    transform: translateX(-50%);
+  }
+  
+  /* плечи */
+  
+  .account-body {
+    position: absolute;
+  
+    width: 24px;
+    height: 18px;
+  
+    left: 50%;
+    bottom: 11px;
+  
+    border: 2px solid rgba(255,255,255,.9);
+    border-bottom: 0;
+  
+    border-radius: 20px 20px 0 0;
+  
+    transform: translateX(-50%);
+  }
+  
+  
+  /* текст */
+  
+  .account-text {
+    min-width: 0;
+  }
+  
+  .account-text h3 {
+    margin: 0;
+  
+    font-family: "Cormorant Garamond", serif;
+    font-size: 16px;
+    font-weight: 400;
+  
+    letter-spacing: 2px;
+  }
+  
+  .account-text p {
+    margin: 7px 0 0;
+  
+    font-family: "Cormorant Garamond", serif;
+    font-size: 10px;
+  
+    letter-spacing: 2px;
+  
+    color: rgba(255,255,255,0.52);
+  }
+  
+  
+  /* стрелка */
+  
+  .account-arrow {
+    margin-left: auto;
+    padding-left: 12px;
+  
+    font-family: Arial, sans-serif;
+    font-size: 27px;
+    font-weight: 200;
+  
+    color: rgba(255,255,255,0.85);
+  }
+
+  .main-card:nth-child(2) .main-card-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.18) 0%,
+      rgba(0, 0, 0, 0.25) 40%,
+      rgba(0, 0, 0, 0.55) 60%,
+      rgba(0, 0, 0, 0.88) 75%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  }
+
+  /* БУРГЕР */
+
+.burger {
+    position: relative;
+    z-index: 20;
+  
+    width: 34px;
+    height: 24px;
+  
+    padding: 0;
+    border: 0;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+    background: transparent;
+  
+    cursor: pointer;
+  }
+  
+  .burger span {
+    width: 100%;
+    height: 1px;
+  
+    display: block;
+  
+    background: rgba(255,255,255,.85);
+  }
+  
+  
+  /* МЕНЮ */
+  
+  .burger-menu {
+    position: fixed;
+    inset: 0;
+  
+    z-index: 100;
+  
+    padding: 90px 30px 40px;
+  
+    background: rgba(0,0,0,.97);
+  
+    opacity: 0;
+    visibility: hidden;
+  
+    transition: .3s ease;
+  }
+  
+  .burger-menu.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  
+  .burger-close {
+    position: absolute;
+    top: 26px;
+    right: 28px;
+  
+    border: 0;
+    background: transparent;
+  
+    color: #fff;
+  
+    font-family: Arial, sans-serif;
+    font-size: 34px;
+    font-weight: 200;
+  }
+  
+  
+  .burger-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  
+  .burger-nav a {
+    color: #fff;
+    text-decoration: none;
+  
+    font-family: "Cormorant Garamond", serif;
+  
+    font-size: 25px;
+    font-weight: 400;
+    letter-spacing: 4px;
+  }
+
+  /* ГЛАВНАЯ БЕЗ АФИШИ */
+
+.join-btn {
+    margin-bottom: 28px;
+  }
+  
+  .main-links {
+    margin-top: 0;
+  }
+
+/* =========================
+   CINZELRUS — ТЕСТ
+========================= */
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "CinzelRus", serif;
+}
+
+body {
+  letter-spacing: 0.04em;
+}

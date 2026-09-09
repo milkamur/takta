@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Личный кабинет — ТАКТА</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="account.css">
+</head>
+
+<body>
+
+  <main class="account-page">
+
+    <a href="index.html" class="account-back">←</a>
+
+    <div class="account-page-logo">
+      ТАКТА
+    </div>
+
+    <a href="settings.html" class="settings-btn" aria-label="Настройки">
+        <img src="images/settings.svg" alt="">
+      </a>
+
+      <section class="auth-box">
+
+        <p class="auth-eyebrow">ТАКТА</p>
+      
+        <h1>ЛИЧНЫЙ КАБИНЕТ</h1>
+      
+      
+        <!-- ОСНОВНОЙ ВХОД — TELEGRAM -->
+      
+        <button
+          class="auth-submit telegram-login"
+          id="telegramLoginBtn"
+          type="button"
+        >
+          <span class="auth-submit-text">
+            ВОЙТИ ЧЕРЕЗ TELEGRAM
+          </span>
+      
+          <span class="auth-submit-arrow">→</span>
+        </button>
+      
+      
+        <div class="auth-divider">
+          <span></span>
+          <p>ИЛИ</p>
+          <span></span>
+        </div>
+      
+      
+        <!-- РЕЗЕРВНЫЙ ВХОД — ТЕЛЕФОН -->
+      
+        <form class="auth-form" id="phoneForm">
+      
+          <label class="auth-field">
+      
+            <span>
+              ВОЙТИ ПО НОМЕРУ ТЕЛЕФОНА
+            </span>
+      
+            <input
+              type="tel"
+              id="authPhone"
+              name="tel"
+              autocomplete="tel"
+              inputmode="tel"
+              value="+7 "
+              maxlength="16"
+              placeholder="+7 999 123-45-67"
+              required
+            >
+      
+          </label>
+      
+      
+          <div class="auth-consent">
+      
+            <label class="consent-label" for="privacyConsent">
+      
+              <input
+                type="checkbox"
+                id="privacyConsent"
+              >
+      
+              <span class="consent-check"></span>
+      
+            </label>
+      
+      
+            <span class="consent-text">
+      
+              Я СОГЛАСЕН С
+      
+              <a
+                href="privacy.html"
+                class="consent-link"
+              >
+                ПОЛИТИКОЙ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ
+              </a>
+      
+            </span>
+      
+          </div>
+      
+      
+          <button
+            class="auth-submit"
+            type="submit"
+          >
+      
+            <span class="auth-submit-text">
+              ВОЙТИ
+            </span>
+      
+            <span class="auth-submit-arrow">→</span>
+      
+          </button>
+      
+        </form>
+      
+      </section>
+
+    <section class="profile-box" id="profileBox">
+
+      
+        <h1 class="profile-title">
+          ДОБРО ПОЖАЛОВАТЬ,
+          <span id="profileName">ИГРОК</span>
+        </h1>
+      
+        <p class="profile-email" id="profileEmail"></p>
+      
+        <div class="profile-links">
+
+            <div class="profile-card bookings-card" id="bookingsBtn">
+              <div>
+                <span class="profile-card-label">БРОНИ</span>
+                <span class="profile-card-text">ПРЕДСТОЯЩИЕ ИГРЫ</span>
+              </div>
+          
+              <span class="profile-card-arrow">→</span>
+            </div>
+          
+            <div class="booking-list" id="bookingList"></div>
+          
+          
+            <a href="orders.html" class="profile-card">
+              <div>
+                <span class="profile-card-label">ЗАКАЗЫ</span>
+                <span class="profile-card-text">МАСКИ И ПОКУПКИ</span>
+              </div>
+          
+              <span class="profile-card-arrow">→</span>
+            </a>
+          
+          </div>
+      
+        <button class="logout-btn" id="logoutBtn" type="button">
+          ВЫЙТИ ИЗ АККАУНТА
+        </button>
+      </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="account.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Бронирование — ТАКТА</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="booking.css">
+</head>
+
+<body>
+
+  <main class="booking-page">
+
+    <a href="index.html" class="booking-back">←</a>
+
+    <div class="booking-logo">
+      ТАКТА
+    </div>
+
+    <section class="booking-box">
+
+      <p class="booking-label">
+        БЛИЖАЙШАЯ ИГРА
+      </p>
+
+      <h1>
+        12 СЕНТЯБРЯ
+      </h1>
+
+      <div class="booking-info">
+
+        <div class="booking-row">
+          <span>ГОРОД</span>
+          <strong>МОСКВА</strong>
+        </div>
+
+        <div class="booking-row">
+          <span>ВРЕМЯ</span>
+          <strong>19:00</strong>
+        </div>
+
+        <div class="booking-row">
+          <span>ФОРМАТ</span>
+          <strong>ЗАКРЫТАЯ ИГРА</strong>
+        </div>
+
+      </div>
+
+      <div class="booking-description">
+        <p>
+          Авторская психологическая игра ТАКТА
+          в закрытом формате.
+        </p>
+      </div>
+
+      <button class="booking-button" id="bookingButton" type="button">
+        <span>ЗАБРОНИРОВАТЬ</span>
+        <span class="booking-arrow">→</span>
+      </button>
+
+      <p class="booking-message" id="bookingMessage"></p>
+
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="booking.js"></script>
+
+</body>
+</html>

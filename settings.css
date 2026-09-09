@@ -1,0 +1,259 @@
+/* =========================
+   SETTINGS
+========================= */
+
+.settings-page {
+    position: relative;
+  
+    min-height: 100vh;
+  
+    padding:
+      22px
+      22px
+      80px;
+  
+    box-sizing: border-box;
+  
+    color: rgba(255, 255, 255, 0.92);
+  }
+  
+  
+  /* Верх */
+  
+  .settings-back {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+  
+    color: rgba(255, 255, 255, 0.8);
+  
+    font-size: 32px;
+    line-height: 1;
+  
+    text-decoration: none;
+  }
+  
+  .settings-logo {
+    text-align: center;
+  
+    font-size: 18px;
+    letter-spacing: 0.32em;
+  
+    color: rgba(255, 255, 255, 0.55);
+  }
+  
+  
+  .settings-header {
+    margin-top: 105px;
+    text-align: center;
+  }
+  
+  .settings-header h1 {
+    margin: 0;
+  
+    font-size: 34px;
+    font-weight: 400;
+  
+    letter-spacing: 0.08em;
+  }
+  
+  
+  /* Раздел */
+  
+  .settings-section {
+    margin-top: 58px;
+  }
+  
+  .settings-section-title {
+    margin-bottom: 18px;
+  
+    font-size: 11px;
+    letter-spacing: 0.24em;
+  
+    color: rgba(255, 255, 255, 0.35);
+  }
+  
+  
+  /* Аватар */
+  
+  .avatar-block {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  
+    margin-bottom: 30px;
+  }
+  
+  .avatar-preview {
+    width: 64px;
+    height: 64px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+  
+    background:
+      rgba(255, 255, 255, 0.025);
+  
+    font-size: 24px;
+  
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .avatar-title {
+    font-size: 17px;
+    letter-spacing: 0.1em;
+  }
+  
+  .avatar-subtitle {
+    margin-top: 6px;
+  
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  
+    color: rgba(255, 255, 255, 0.28);
+  }
+  
+  
+  /* Поля */
+  
+  .settings-field {
+    display: block;
+  
+    margin-top: 24px;
+  }
+  
+  .settings-field-label {
+    display: block;
+  
+    margin-bottom: 9px;
+  
+    font-size: 10px;
+    letter-spacing: 0.2em;
+  
+    color: rgba(255, 255, 255, 0.35);
+  }
+  
+  .settings-field input {
+    width: 100%;
+  
+    box-sizing: border-box;
+  
+    padding:
+      14px
+      0;
+  
+    background: transparent;
+  
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  
+    outline: none;
+  
+    font-family: inherit;
+    font-size: 20px;
+  
+    letter-spacing: 0.08em;
+  
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .settings-field input:focus {
+    border-bottom-color:
+      rgba(255, 255, 255, 0.55);
+  }
+  
+  .settings-phone-value {
+    padding: 14px 0;
+  
+    border-bottom:
+      1px solid rgba(255, 255, 255, 0.15);
+  
+    font-size: 18px;
+    letter-spacing: 0.08em;
+  
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  
+  /* Поддержка */
+  
+  .settings-card {
+    min-height: 92px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    padding: 20px 22px;
+  
+    box-sizing: border-box;
+  
+    border:
+      1px solid rgba(255, 255, 255, 0.2);
+  
+    border-radius: 18px;
+  
+    background:
+      linear-gradient(
+        110deg,
+        rgba(255,255,255,0.025),
+        rgba(255,255,255,0.005)
+      );
+  
+    text-decoration: none;
+  
+    color: inherit;
+  }
+  
+  .settings-card-title {
+    font-size: 19px;
+    letter-spacing: 0.08em;
+  }
+  
+  .settings-card-subtitle {
+    margin-top: 7px;
+  
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  
+    color:
+      rgba(255, 255, 255, 0.3);
+  }
+  
+  .settings-card-arrow {
+    font-size: 25px;
+  
+    color:
+      rgba(255, 255, 255, 0.75);
+  }
+  
+  
+  /* Logout */
+  
+  .settings-logout {
+    display: block;
+  
+    margin:
+      70px
+      auto
+      0;
+  
+    padding: 0;
+  
+    border: 0;
+    background: transparent;
+  
+    font-family: inherit;
+  
+    font-size: 11px;
+    letter-spacing: 0.23em;
+  
+    color:
+      rgba(255, 255, 255, 0.3);
+  
+    cursor: pointer;
+  }

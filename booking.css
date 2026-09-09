@@ -1,0 +1,205 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    background: #000;
+  }
+  
+  .booking-page {
+    min-height: 100svh;
+    padding: 24px 22px 45px;
+    position: relative;
+  
+    background:
+      radial-gradient(
+        circle at 80% 18%,
+        rgba(255,255,255,.07),
+        transparent 30%
+      ),
+      #000;
+  
+    color: #fff;
+    font-family: "Cormorant Garamond", serif;
+  }
+  
+  
+  /* НАЗАД */
+  
+  .booking-back {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+  
+    color: rgba(255,255,255,.8);
+    text-decoration: none;
+  
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    font-weight: 200;
+  }
+  
+  
+  /* ЛОГО */
+  
+  .booking-logo {
+    padding-top: 10px;
+  
+    text-align: center;
+  
+    font-size: 17px;
+    letter-spacing: 6px;
+  
+    color: rgba(255,255,255,.78);
+  }
+  
+  
+  /* ОСНОВНОЙ БЛОК */
+  
+  .booking-box {
+    width: 100%;
+    max-width: 430px;
+  
+    margin: 85px auto 0;
+  }
+  
+  
+  /* МАЛЕНЬКАЯ НАДПИСЬ */
+  
+  .booking-label {
+    margin: 0 0 12px;
+  
+    text-align: center;
+  
+    font-size: 10px;
+    letter-spacing: 4px;
+  
+    color: rgba(255,255,255,.42);
+  }
+  
+  
+  /* ДАТА */
+  
+  .booking-box h1 {
+    margin: 0;
+  
+    text-align: center;
+  
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 3px;
+  }
+  
+  
+  /* ИНФОРМАЦИЯ */
+  
+  .booking-info {
+    margin-top: 45px;
+  
+    border-top: 1px solid rgba(255,255,255,.16);
+  }
+  
+  .booking-row {
+    min-height: 58px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    border-bottom: 1px solid rgba(255,255,255,.16);
+  }
+  
+  .booking-row span {
+    font-size: 10px;
+    letter-spacing: 3px;
+  
+    color: rgba(255,255,255,.42);
+  }
+  
+  .booking-row strong {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+  
+    color: rgba(255,255,255,.92);
+  }
+  
+  
+  /* ОПИСАНИЕ */
+  
+  .booking-description {
+    margin-top: 30px;
+  
+    text-align: center;
+  
+    color: rgba(255,255,255,.55);
+  }
+  
+  .booking-description p {
+    margin: 0;
+  
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: 1px;
+  }
+  
+  
+  /* КНОПКА */
+  
+  .booking-button {
+    width: 100%;
+    min-height: 50px;
+  
+    margin-top: 35px;
+    padding: 0 55px;
+  
+    position: relative;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: 999px;
+  
+    background:
+      linear-gradient(
+        90deg,
+        rgba(255,255,255,.10),
+        rgba(255,255,255,.02)
+      );
+  
+    color: #fff;
+  
+    font-family: "Cormorant Garamond", serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+  
+    cursor: pointer;
+  }
+  
+  .booking-arrow {
+    position: absolute;
+    right: 18px;
+  
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: 0;
+  }
+  
+  
+  /* СООБЩЕНИЕ ПОСЛЕ БРОНИ */
+  
+  .booking-message {
+    min-height: 20px;
+  
+    margin: 18px 0 0;
+  
+    text-align: center;
+  
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  
+    color: rgba(255,255,255,.65);
+  }
