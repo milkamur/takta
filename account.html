@@ -26,102 +26,74 @@
 
       <section class="auth-box">
 
-        <p class="auth-eyebrow">ТАКТА</p>
-      
-        <h1>ЛИЧНЫЙ КАБИНЕТ</h1>
-      
-      
+        
         <!-- ОСНОВНОЙ ВХОД — TELEGRAM -->
       
         <button
-          class="auth-submit telegram-login"
-          id="telegramLoginBtn"
-          type="button"
+        class="auth-submit telegram-login"
+        id="telegramLoginBtn"
+        type="button"
+      >
+        <img
+          src="images/telegram.svg"
+          class="telegram-icon"
+          alt=""
         >
-          <span class="auth-submit-text">
-            ВОЙТИ ЧЕРЕЗ TELEGRAM
-          </span>
       
-          <span class="auth-submit-arrow">→</span>
-        </button>
+        <span class="auth-submit-text">
+          ВОЙТИ ЧЕРЕЗ TELEGRAM
+        </span>
       
-      
-        <div class="auth-divider">
-          <span></span>
-          <p>ИЛИ</p>
-          <span></span>
-        </div>
+        <span class="auth-submit-arrow">→</span>
+      </button>
       
       
         <!-- РЕЗЕРВНЫЙ ВХОД — ТЕЛЕФОН -->
       
-        <form class="auth-form" id="phoneForm">
+        <button
+        class="phone-login-toggle"
+        id="phoneLoginToggle"
+        type="button"
+      >
+        ВОЙТИ ПО НОМЕРУ ТЕЛЕФОНА
+      </button>
       
-          <label class="auth-field">
+      <form class="auth-form phone-auth-form" id="phoneForm">
+        <label class="auth-field">
+          <span>НОМЕР ТЕЛЕФОНА</span>
       
-            <span>
-              ВОЙТИ ПО НОМЕРУ ТЕЛЕФОНА
-            </span>
+          <input
+            type="tel"
+            id="authPhone"
+            name="tel"
+            autocomplete="tel"
+            inputmode="tel"
+            value="+7 "
+            maxlength="16"
+            placeholder="+7 999 123-45-67"
+            required
+          >
+        </label>
       
-            <input
-              type="tel"
-              id="authPhone"
-              name="tel"
-              autocomplete="tel"
-              inputmode="tel"
-              value="+7 "
-              maxlength="16"
-              placeholder="+7 999 123-45-67"
-              required
-            >
-      
+        <div class="auth-consent">
+          <label class="consent-label" for="privacyConsent">
+            <input type="checkbox" id="privacyConsent">
+            <span class="consent-check"></span>
           </label>
       
+          <span class="consent-text">
+            Я СОГЛАСЕН С
+            <a href="privacy.html" class="consent-link">
+              ПОЛИТИКОЙ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ
+            </a>
+          </span>
+        </div>
       
-          <div class="auth-consent">
-      
-            <label class="consent-label" for="privacyConsent">
-      
-              <input
-                type="checkbox"
-                id="privacyConsent"
-              >
-      
-              <span class="consent-check"></span>
-      
-            </label>
-      
-      
-            <span class="consent-text">
-      
-              Я СОГЛАСЕН С
-      
-              <a
-                href="privacy.html"
-                class="consent-link"
-              >
-                ПОЛИТИКОЙ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ
-              </a>
-      
-            </span>
-      
-          </div>
-      
-      
-          <button
-            class="auth-submit"
-            type="submit"
-          >
-      
-            <span class="auth-submit-text">
-              ВОЙТИ
-            </span>
-      
-            <span class="auth-submit-arrow">→</span>
-      
-          </button>
-      
-        </form>
+        <button class="auth-submit" type="submit">
+          <span class="auth-submit-text">ВОЙТИ</span>
+          <span class="auth-submit-arrow">→</span>
+        </button>
+      </form>
       
       </section>
 

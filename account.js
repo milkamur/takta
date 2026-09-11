@@ -560,3 +560,17 @@ if (
   );
 
 }
+
+const phoneLoginToggle = document.getElementById("phoneLoginToggle");
+
+if (phoneLoginToggle && phoneForm) {
+  phoneLoginToggle.addEventListener("click", () => {
+    phoneForm.classList.toggle("is-open");
+
+    const isOpen = phoneForm.classList.contains("is-open");
+
+    phoneLoginToggle.textContent = isOpen
+      ? "СКРЫТЬ ВХОД ПО НОМЕРУ"
+      : "ВОЙТИ ПО НОМЕРУ ТЕЛЕФОНА";
+  });
+}

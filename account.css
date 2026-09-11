@@ -940,3 +940,94 @@
     display: block;
     opacity: 0.72;
   }
+
+  .phone-login-toggle {
+    display: block;
+    width: auto;
+    margin: 16px auto 0;
+    padding: 0;
+  
+    border: 0;
+    background: transparent;
+  
+    color: rgba(255, 255, 255, 0.38);
+    font: inherit;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+  
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .phone-login-toggle:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .phone-auth-form {
+    display: none;
+    margin-top: 22px;
+  }
+  
+  .phone-auth-form.is-open {
+    display: block;
+  }
+
+  /* ===== КОМПОЗИЦИЯ ЭКРАНА ВХОДА ===== */
+
+.auth-box {
+    padding-top: 145px;
+  }
+  
+  /* маленькая ТАКТА над заголовком */
+  .auth-eyebrow {
+    margin: 0 0 14px;
+  }
+  
+  /* ЛИЧНЫЙ КАБИНЕТ */
+  .auth-box h1 {
+    margin: 0 0 28px;
+  }
+  
+  /* главная кнопка Telegram */
+  .telegram-login {
+    margin-top: 0;
+  }
+  
+  /* резервный вход по телефону */
+  .phone-login-toggle {
+    margin: 32px auto 0;
+  }
+  
+  /* раскрытая форма телефона */
+  .phone-auth-form {
+    margin-top: 28px;
+  }
+  .telegram-login {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Telegram слева */
+  .telegram-icon {
+    position: absolute;
+    left: 34px;
+  
+    width: 22px;
+    height: 22px;
+  
+    display: block;
+    object-fit: contain;
+  }
+  
+  /* Текст остаётся строго по центру */
+  .telegram-login .auth-submit-text {
+    text-align: center;
+  }
+  
+  /* Стрелка справа */
+  .telegram-login .auth-submit-arrow {
+    position: absolute;
+    right: 34px;
+  }
