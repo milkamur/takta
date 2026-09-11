@@ -1,0 +1,388 @@
+.rules-page {
+    min-height: 100vh;
+    padding: 0 22px 70px;
+    background:
+      radial-gradient(
+        circle at 50% 10%,
+        rgba(255,255,255,0.025),
+        transparent 35%
+      ),
+      #050505;
+    color: #fff;
+  }
+  
+  
+  /* =========================
+     ШАПКА
+  ========================= */
+  
+  .rules-header {
+    position: relative;
+    height: 84px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .rules-back {
+    position: absolute;
+    left: 0;
+  
+    color: rgba(255,255,255,0.62);
+    text-decoration: none;
+  
+    font-size: 28px;
+    font-family: serif;
+    font-weight: 200;
+  }
+  
+  .rules-logo {
+    font-size: 17px;
+    letter-spacing: 0.35em;
+    color: rgba(255,255,255,0.88);
+  }
+  
+  
+  /* =========================
+     INTRO
+  ========================= */
+  
+  .rules-intro {
+    padding-top: 5px;
+    padding-bottom: 38px;
+  }
+  
+  
+  .rules-intro h1 {
+    margin: 0;
+  
+    font-size: 54px;
+    line-height: 0.95;
+  
+    font-weight: 400;
+    letter-spacing: 0.08em;
+  
+    color: rgba(255,255,255,0.94);
+  }
+  
+  .rules-description {
+    margin: 24px 0 0;
+  
+    font-size: 10px;
+    line-height: 1.8;
+    letter-spacing: 0.25em;
+  
+    color: rgba(255,255,255,0.45);
+  }
+  
+  
+  /* =========================
+     СПИСОК ПРАВИЛ
+  ========================= */
+  
+  .rules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  
+  
+  /* =========================
+     КАРТОЧКА
+  ========================= */
+  
+  .rule-card {
+    position: relative;
+  
+    border-radius: 16px;
+    overflow: hidden;
+  
+    border: 1px solid rgba(180,180,180,0.14);
+  
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.025),
+        rgba(255,255,255,0.008)
+      ),
+      rgba(8,8,8,0.72);
+  
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.045),
+      0 8px 22px rgba(0,0,0,0.36);
+  
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  
+  /* =========================
+     ВЕРХ КАРТОЧКИ
+  ========================= */
+  
+  .rule-card-head {
+    width: 100%;
+    min-height: 112px;
+  
+    display: grid;
+    grid-template-columns: 54px 1px 1fr 32px;
+    align-items: center;
+    gap: 14px;
+  
+    padding: 18px 16px;
+  
+    border: 0;
+    background: transparent;
+  
+    color: inherit;
+    text-align: left;
+  
+    font: inherit;
+    cursor: pointer;
+  }
+  
+  
+  /* НОМЕР */
+  
+  .rule-number {
+    font-size: 38px;
+    line-height: 1;
+  
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  
+    color: rgba(255,255,255,0.72);
+  }
+  
+  
+  /* ВЕРТИКАЛЬНАЯ ЛИНИЯ */
+  
+  .rule-divider {
+    width: 1px;
+    height: 58px;
+  
+    background: rgba(255,255,255,0.16);
+  }
+  
+  
+  /* ТЕКСТ */
+  
+  .rule-main {
+    min-width: 0;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  
+  .rule-title {
+    font-size: 15px;
+    letter-spacing: 0.16em;
+  
+    color: rgba(255,255,255,0.92);
+  }
+  
+  .rule-preview {
+    font-size: 9px;
+    line-height: 1.55;
+    letter-spacing: 0.06em;
+  
+    color: rgba(255,255,255,0.42);
+  }
+  
+  
+  /* ПЛЮС */
+  
+  .rule-plus {
+    width: 30px;
+    height: 30px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    border-radius: 50%;
+  
+    border: 1px solid rgba(255,255,255,0.35);
+  
+    color: rgba(255,255,255,0.85);
+  
+    font-size: 21px;
+    line-height: 1;
+  
+    transition:
+      transform 0.3s ease,
+      background 0.3s ease;
+  }
+  
+  
+  /* =========================
+     РАСКРЫВАЮЩИЙСЯ ТЕКСТ
+  ========================= */
+  
+  .rule-card-body {
+    max-height: 0;
+  
+    padding: 0 18px;
+  
+    overflow: hidden;
+  
+    opacity: 0;
+  
+    transition:
+      max-height 0.45s ease,
+      opacity 0.3s ease,
+      padding 0.3s ease;
+  }
+  
+  .rule-card-body p {
+    margin: 0 0 14px;
+  
+    font-size: 11px;
+    line-height: 1.75;
+    letter-spacing: 0.04em;
+  
+    color: rgba(255,255,255,0.56);
+  }
+  
+  
+  /* ОТКРЫТАЯ КАРТОЧКА */
+  
+  .rule-card.is-open .rule-card-body {
+    max-height: 300px;
+  
+    padding: 0 18px 18px;
+  
+    opacity: 1;
+  }
+  
+  .rule-card.is-open .rule-plus {
+    transform: rotate(45deg);
+  
+    background: rgba(255,255,255,0.05);
+  }
+  
+  
+  /* =========================
+     АВТОРСКАЯ МАФИЯ
+  ========================= */
+  
+  .rules-author {
+    margin-top: 18px;
+    padding: 32px 22px 30px;
+  
+    border-radius: 18px;
+  
+    border: 1px solid rgba(180,180,180,0.13);
+  
+    text-align: center;
+  
+    background:
+      radial-gradient(
+        circle at 50% 0%,
+        rgba(255,255,255,0.045),
+        transparent 60%
+      ),
+      rgba(8,8,8,0.75);
+  
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      0 10px 30px rgba(0,0,0,0.38);
+  }
+  
+  .rules-author-kicker {
+    margin: 0 0 6px;
+  
+    font-size: 8px;
+    letter-spacing: 0.34em;
+  
+    color: rgba(255,255,255,0.4);
+  }
+  
+  .rules-author h2 {
+    margin: 0;
+  
+    font-size: 38px;
+    font-weight: 400;
+  
+    letter-spacing: 0.1em;
+  
+    color: rgba(255,255,255,0.9);
+  }
+  
+  .rules-author p:last-child {
+    max-width: 290px;
+  
+    margin: 18px auto 0;
+  
+    font-size: 10px;
+    line-height: 1.75;
+  
+    letter-spacing: 0.05em;
+  
+    color: rgba(255,255,255,0.48);
+  }
+  
+  
+  /* =========================
+     КНОПКА РОЛЕЙ
+  ========================= */
+  
+  .rules-roles-button {
+    min-height: 58px;
+  
+    margin-top: 20px;
+    padding: 0 22px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    border-radius: 999px;
+  
+    border: 1px solid rgba(255,255,255,0.24);
+  
+    color: rgba(255,255,255,0.86);
+    text-decoration: none;
+  
+    font-size: 10px;
+    letter-spacing: 0.22em;
+  
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.04),
+        rgba(255,255,255,0.01)
+      ),
+      #080808;
+  
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.07),
+      0 8px 22px rgba(0,0,0,0.38);
+  }
+  
+  .rules-roles-arrow {
+    font-size: 22px;
+    letter-spacing: 0;
+  }
+  
+  
+  /* =========================
+     ФИНАЛ
+  ========================= */
+  
+  .rules-ending {
+    padding-top: 25px;
+  
+    text-align: center;
+  }
+  
+  .rules-ending p {
+    margin: 8px 0 0;
+  
+    font-size: 9px;
+    letter-spacing: 0.34em;
+  
+    color: rgba(255,255,255,0.5);
+  }

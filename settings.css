@@ -1,3 +1,10 @@
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #050505;
+}
+
 /* =========================
    SETTINGS
 ========================= */
@@ -13,6 +20,8 @@
       80px;
   
     box-sizing: border-box;
+  
+    background: #050505;
   
     color: rgba(255, 255, 255, 0.92);
   }
@@ -44,7 +53,7 @@
   
   
   .settings-header {
-    margin-top: 105px;
+    margin-top: 60px;
     text-align: center;
   }
   
@@ -256,4 +265,62 @@
       rgba(255, 255, 255, 0.3);
   
     cursor: pointer;
+  }
+
+  .settings-save {
+    width: 100%;
+  
+    min-height: 52px;
+  
+    margin-top: 22px;
+  
+    border:
+      1px solid rgba(255, 255, 255, 0.24);
+  
+    border-radius: 999px;
+  
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.04),
+        rgba(255,255,255,0.01)
+      );
+  
+    color:
+      rgba(255, 255, 255, 0.85);
+  
+    font-family: inherit;
+  
+    font-size: 10px;
+  
+    letter-spacing: 0.22em;
+  
+    cursor: pointer;
+  
+    transition:
+      border-color 0.2s ease,
+      background 0.2s ease,
+      opacity 0.2s ease;
+  }
+  
+  .settings-save:active {
+    transform: scale(0.99);
+  }
+  
+  .settings-save.is-saved {
+    border-color:
+      rgba(255, 255, 255, 0.4);
+  
+    background:
+      rgba(255, 255, 255, 0.05);
+  }
+
+  .settings-field input::placeholder {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.28);
+  }
+  
+  .settings-field input:focus::placeholder {
+    color: transparent;
   }

@@ -89,18 +89,6 @@
     color: rgba(255,255,255,0.48);
   }
   
-  /* МАЛЕНЬКАЯ ЛИНИЯ */
-  
-  .roles-line {
-    display: block;
-  
-    width: 28px;
-    height: 1px;
-  
-    margin-top: 18px;
-  
-    background: rgba(255,255,255,0.38);
-  }
 
   /* =========================
    ФИЛЬТР РОЛЕЙ
@@ -269,3 +257,12 @@ text-decoration: none;
   color: #fff;
   text-decoration: none;
 }
+
+.roles-intro h1 {
+    transform: translateY(-30px);
+  }
+  
+  .roles-description {
+    transform: translateY(-30px);
+  }
+

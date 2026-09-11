@@ -1,0 +1,569 @@
+.shop-page {
+    min-height: 100vh;
+    padding: 0 22px 70px;
+    background:
+      radial-gradient(
+        circle at 50% 8%,
+        rgba(255,255,255,0.025),
+        transparent 34%
+      ),
+      #050505;
+    color: #fff;
+  }
+  
+  
+  /* =========================
+     ШАПКА
+  ========================= */
+  
+  .shop-header {
+    position: relative;
+    height: 84px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .shop-back {
+    position: absolute;
+    left: 0;
+  
+    color: rgba(255,255,255,0.62);
+    text-decoration: none;
+  
+    font-size: 28px;
+    font-family: serif;
+    font-weight: 200;
+  }
+  
+  .shop-logo {
+    font-size: 17px;
+    letter-spacing: 0.35em;
+    color: rgba(255,255,255,0.88);
+  }
+  
+  
+  /* =========================
+     КОРЗИНА В ШАПКЕ
+  ========================= */
+  
+  .shop-cart-button {
+    position: absolute;
+    right: 0;
+  
+    width: 38px;
+    height: 38px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    border: 0;
+    background: transparent;
+    color: #fff;
+  
+    cursor: pointer;
+  }
+  
+  .shop-cart-icon {
+    font-size: 22px;
+    opacity: 0.76;
+  }
+  
+  .shop-cart-count {
+    position: absolute;
+    top: 1px;
+    right: -2px;
+  
+    min-width: 16px;
+    height: 16px;
+  
+    padding: 0 4px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    border-radius: 999px;
+  
+    background: rgba(255,255,255,0.9);
+    color: #050505;
+  
+    font-size: 8px;
+    line-height: 1;
+  }
+  
+  
+  /* =========================
+     INTRO
+  ========================= */
+  
+  .shop-intro {
+    padding-top: 12px;
+    padding-bottom: 30px;
+  }
+  
+  .shop-intro h1 {
+    margin: 0;
+  
+    font-size: 52px;
+    line-height: 0.95;
+  
+    font-weight: 400;
+    letter-spacing: 0.06em;
+  
+    color: rgba(255,255,255,0.94);
+  }
+  
+  .shop-description {
+    margin: 24px 0 0;
+  
+    font-size: 10px;
+    line-height: 1.8;
+    letter-spacing: 0.24em;
+  
+    color: rgba(255,255,255,0.44);
+  }
+  
+  
+  /* =========================
+     ФИЛЬТР
+  ========================= */
+  
+  .shop-filter {
+    display: flex;
+    gap: 8px;
+  
+    margin-bottom: 22px;
+  
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  
+  .shop-filter::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .shop-filter-btn {
+    flex-shrink: 0;
+  
+    min-height: 34px;
+    padding: 0 15px;
+  
+    border: 0;
+    border-radius: 999px;
+  
+    background: transparent;
+  
+    color: rgba(255,255,255,0.38);
+  
+    font: inherit;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  
+    cursor: pointer;
+  }
+  
+  .shop-filter-btn.is-active {
+    color: rgba(255,255,255,0.9);
+  
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.055),
+        rgba(255,255,255,0.015)
+      ),
+      #080808;
+  
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 0 0 1px rgba(255,255,255,0.055);
+  }
+  
+  
+  /* =========================
+     СЕТКА ТОВАРОВ
+  ========================= */
+  
+  .shop-grid {
+    display: grid;
+  
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  
+    gap: 12px;
+  }
+  
+  
+  /* =========================
+     КАРТОЧКА ТОВАРА
+  ========================= */
+  
+  .shop-product {
+    position: relative;
+  
+    min-width: 0;
+  
+    overflow: hidden;
+  
+    border-radius: 16px;
+  
+    border: 1px solid rgba(180,180,180,0.13);
+  
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.025),
+        rgba(255,255,255,0.008) 40%,
+        rgba(0,0,0,0.22) 100%
+      ),
+      #080808;
+  
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      0 10px 28px rgba(0,0,0,0.38);
+  }
+  
+  
+  /* =========================
+     ИЗОБРАЖЕНИЕ
+  ========================= */
+  
+  .shop-product-image {
+    position: relative;
+  
+    width: 100%;
+    aspect-ratio: 1 / 1.15;
+  
+    overflow: hidden;
+  }
+  
+  .shop-product-image img {
+    width: 100%;
+    height: 100%;
+  
+    display: block;
+  
+    object-fit: contain;
+    object-position: center;
+  
+    transform: scale(0.88);
+  }
+  
+  .shop-product-image::after {
+    content: "";
+  
+    position: absolute;
+    inset: 0;
+  
+    pointer-events: none;
+  
+    background:
+      linear-gradient(
+        to bottom,
+        transparent 55%,
+        rgba(8,8,8,0.45) 78%,
+        #080808 100%
+      );
+  }
+  
+  
+  /* =========================
+     ТЕКСТ ТОВАРА
+  ========================= */
+  
+  .shop-product-content {
+    position: relative;
+    z-index: 2;
+  
+    padding: 0 14px 15px;
+  }
+  
+  .shop-product-label {
+    display: block;
+  
+    margin-bottom: 5px;
+  
+    font-size: 7px;
+    letter-spacing: 0.3em;
+  
+    color: rgba(255,255,255,0.36);
+  }
+  
+  .shop-product h2 {
+    margin: 0;
+  
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+  
+    color: rgba(255,255,255,0.93);
+  }
+  
+  .shop-product-price {
+    margin: 12px 0 16px;
+  
+    font-size: 18px;
+    letter-spacing: 0.06em;
+  
+    color: rgba(255,255,255,0.7);
+  }
+  
+  
+  /* =========================
+     КНОПКА В КОРЗИНУ
+  ========================= */
+  
+  .shop-add-button {
+    width: 100%;
+    min-height: 42px;
+  
+    padding: 0 12px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    border-radius: 999px;
+  
+    border: 1px solid rgba(255,255,255,0.26);
+  
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.01)
+      );
+  
+    color: rgba(255,255,255,0.82);
+  
+    font: inherit;
+  
+    font-size: 8px;
+    letter-spacing: 0.18em;
+  
+    cursor: pointer;
+  
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease,
+      transform 0.15s ease;
+  }
+  
+  .shop-add-button:active {
+    transform: scale(0.98);
+  }
+  
+  .shop-add-icon {
+    font-size: 18px;
+    letter-spacing: 0;
+  }
+  
+  .shop-add-button.is-added {
+    border-color: rgba(255,255,255,0.38);
+  
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.07),
+        rgba(255,255,255,0.02)
+      );
+  }
+  
+  
+  /* =========================
+     ШИРОКАЯ КАРТОЧКА ЛЬВА
+  ========================= */
+  
+  .shop-product-wide {
+    grid-column: 1 / -1;
+  
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  
+    min-height: 220px;
+  }
+  
+  .shop-product-wide .shop-product-image {
+    order: 2;
+  
+    aspect-ratio: auto;
+    height: 100%;
+  }
+  
+  .shop-product-wide .shop-product-content {
+    order: 1;
+  
+    padding: 28px 10px 22px 20px;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .shop-product-wide .shop-product-image::after {
+    background:
+      linear-gradient(
+        to left,
+        transparent 55%,
+        rgba(8,8,8,0.3) 76%,
+        #080808 100%
+      );
+  }
+  
+  .shop-product-wide .shop-product-image img {
+    transform: scale(0.92);
+  }
+  
+  .shop-product-wide .shop-add-button {
+    margin-top: 4px;
+  }
+  
+  
+  /* =========================
+     НИЖНИЙ ТЕКСТ
+  ========================= */
+  
+  .shop-ending {
+    padding-top: 40px;
+  
+    text-align: center;
+  }
+  
+  .shop-ending p {
+    margin: 0;
+  
+    font-size: 9px;
+    line-height: 1.8;
+    letter-spacing: 0.28em;
+  
+    color: rgba(255,255,255,0.44);
+  }
+  
+  
+  /* =========================
+     ДЛЯ ОЧЕНЬ УЗКИХ ЭКРАНОВ
+  ========================= */
+  
+  @media (max-width: 360px) {
+  
+    .shop-page {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  
+    .shop-intro h1 {
+      font-size: 46px;
+    }
+  
+    .shop-product h2 {
+      font-size: 16px;
+    }
+  
+    .shop-product-price {
+      font-size: 16px;
+    }
+  
+  }
+
+/* =========================
+   СЛАЙДЕР ЛЬВА
+========================= */
+
+.shop-product-slider {
+    position: relative;
+  }
+  
+  .shop-product-slides {
+    position: absolute;
+    inset: 0;
+  
+    display: flex;
+  
+    overflow-x: auto;
+    overflow-y: hidden;
+  
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  
+    scrollbar-width: none;
+  
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .shop-product-slides::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .shop-product-slide {
+    flex: 0 0 100%;
+  
+    width: 100%;
+    height: 100%;
+  
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  
+  .shop-product-slide img {
+    width: 100%;
+    height: 100%;
+  
+    display: block;
+  
+    object-fit: contain;
+    object-position: center;
+  
+    transform: scale(0.92);
+  
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  
+  
+  /* ТОЧКИ */
+  
+  .shop-slider-dots {
+    position: absolute;
+  
+    left: 50%;
+    bottom: 14px;
+  
+    z-index: 5;
+  
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  
+    transform: translateX(-50%);
+  
+    pointer-events: none;
+  }
+  
+  .shop-slider-dot {
+    width: 4px;
+    height: 4px;
+  
+    border-radius: 50%;
+  
+    background: rgba(255,255,255,0.25);
+  
+    transition:
+      width 0.25s ease,
+      background 0.25s ease;
+  }
+  
+  .shop-slider-dot.is-active {
+    width: 14px;
+  
+    border-radius: 999px;
+  
+    background: rgba(255,255,255,0.8);
+  }
+
+  .shop-cart-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+    object-fit: contain;
+  }
