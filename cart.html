@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Корзина — JAX</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cart.css">
+</head>
+
+<body>
+
+  <main class="cart-page">
+
+    <header class="cart-header">
+
+      <a href="shop.html" class="cart-back" aria-label="Назад">
+        ←
+      </a>
+
+      <div class="cart-logo">
+        JAX
+      </div>
+
+    </header>
+
+
+    <section class="cart-intro">
+
+      <h1>КОРЗИНА</h1>
+
+      <p class="cart-description">
+        ВАШ ВЫБОР.<br>
+        ВАШ СТИЛЬ.
+      </p>
+
+    </section>
+
+
+    <section class="cart-content">
+
+      <div class="cart-items" id="cartItems"></div>
+
+
+      <div class="cart-empty" id="cartEmpty">
+
+        <p>
+          КОРЗИНА ПОКА ПУСТА.
+        </p>
+
+        <a href="shop.html" class="cart-shop-link">
+          ПЕРЕЙТИ В МАГАЗИН
+        </a>
+
+      </div>
+
+
+      <div class="cart-summary" id="cartSummary">
+
+        <div class="cart-summary-row">
+
+          <span>ИТОГО</span>
+
+          <strong id="cartTotal">
+            0 ₽
+          </strong>
+
+        </div>
+
+        <button class="cart-checkout-button" type="button">
+          ОФОРМИТЬ ЗАКАЗ
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script src="cart.js"></script>
+
+</body>
+
+</html>

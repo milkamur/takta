@@ -304,7 +304,7 @@ function showProfile(user) {
 
   profileBox.classList.add("active");
 
-
+}
   /*
     Настоящий подтверждённый телефон
     появится позже.
@@ -331,15 +331,14 @@ function showProfile(user) {
 
 
   const name =
-    user.user_metadata?.name ||
-    "ИГРОК";
+  user.user_metadata?.nickname ||
+  user.user_metadata?.name ||
+  "ИГРОК";
 
 
-  if (profileName) {
-    profileName.textContent =
-      name.toUpperCase();
-  }
-
+if (profileName) {
+  profileName.textContent =
+    name.toUpperCase();
 }
 
 

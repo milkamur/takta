@@ -35,7 +35,7 @@
 
     <!-- ЗАГОЛОВОК -->
     <section class="roles-intro">
-      
+
         <h1>РОЛИ</h1>
       
         <p class="roles-description">
@@ -43,32 +43,48 @@
           ИГРАЕТ СВОЮ РОЛЬ.
         </p>
       
-        <span class="roles-line"></span>
-      
       </section>
 
       <nav class="roles-filter">
-        <button class="roles-filter-btn is-active" type="button">
+
+        <button
+          class="roles-filter-btn is-active"
+          type="button"
+          data-filter="all"
+        >
           ВСЕ РОЛИ
         </button>
       
-        <button class="roles-filter-btn" type="button">
+        <button
+          class="roles-filter-btn"
+          type="button"
+          data-filter="peaceful"
+        >
           МИРНЫЕ
         </button>
       
-        <button class="roles-filter-btn" type="button">
+        <button
+          class="roles-filter-btn"
+          type="button"
+          data-filter="mafia"
+        >
           МАФИЯ
         </button>
       
-        <button class="roles-filter-btn" type="button">
+        <button
+          class="roles-filter-btn"
+          type="button"
+          data-filter="neutral"
+        >
           НЕЙТРАЛЬНЫЕ
         </button>
+      
       </nav>
 
       <section class="roles-grid">
 
         <!-- ДОН МАФИИ -->
-        <a href="don-mafia.html" class="role-card">
+        <a href="don-mafia.html" class="role-card" data-category="mafia">
           <div class="role-card-image">
             <img src="images/don.png" alt="Дон мафии">
           </div>
@@ -84,7 +100,7 @@
       
       
         <!-- МАФИЯ -->
-        <a href="mafia.html" class="role-card">
+        <a href="mafia.html" class="role-card" data-category="mafia">
           <div class="role-card-image">
             <img src="images/mafia.png" alt="Мафия">
           </div>
@@ -99,7 +115,7 @@
         </a>
 
         <!-- ПСИХ -->
-<a href="psycho.html" class="role-card">
+        <a href="psycho.html" class="role-card" data-category="neutral">
 
     <div class="role-card-image">
       <img src="images/psycho.png" alt="Псих">
@@ -117,7 +133,7 @@
   </a>
 
   <!-- РЕШАЛА -->
-<a href="reshala.html" class="role-card">
+  <a href="reshala.html" class="role-card" data-category="peaceful">
 
     <div class="role-card-image">
       <img src="images/reshala.png" alt="Решала">
@@ -133,10 +149,220 @@
     </div>
   
   </a>
+
+  <!-- КОП -->
+  <a href="cop.html" class="role-card" data-category="peaceful">
+
+    <div class="role-card-image">
+      <img src="images/cop.png" alt="Коп">
+    </div>
+  
+    <div class="role-card-content">
+      <h2>КОП</h2>
+  
+      <p>
+        КАЖДУЮ НОЧЬ ПРОВЕРЯЕТ ОДНОГО ИГРОКА
+        И ВЫЧИСЛЯЕТ МАФИЮ.
+      </p>
+    </div>
+  
+  </a>
+
+  <!-- МИРНЫЙ -->
+  <a href="peaceful.html" class="role-card" data-category="peaceful">
+
+    <div class="role-card-image">
+      <img src="images/peaceful.png" alt="Мирный">
+    </div>
+  
+    <div class="role-card-content">
+      <h2>МИРНЫЙ</h2>
+  
+      <p>
+        НАБЛЮДАЕТ, ОБСУЖДАЕТ
+        И ПОМОГАЕТ ГОРОДУ ВЫЧИСЛИТЬ МАФИЮ.
+      </p>
+    </div>
+  
+  </a>
+
+  <!-- СУДЬЯ -->
+  <a href="judge.html" class="role-card" data-category="peaceful">
+
+    <div class="role-card-image">
+      <img src="images/judge.png" alt="Судья">
+    </div>
+  
+    <div class="role-card-content">
+      <h2>СУДЬЯ</h2>
+  
+      <p>
+        ПРИ РАВЕНСТВЕ ГОЛОСОВ
+        ПРИНИМАЕТ ОКОНЧАТЕЛЬНОЕ РЕШЕНИЕ.
+      </p>
+    </div>
+  
+  </a>
+
+  <!-- МАТЬ -->
+  <a href="mother.html" class="role-card" data-category="peaceful">
+
+    <div class="role-card-image">
+      <img src="images/mother.png" alt="Мать">
+    </div>
+  
+    <div class="role-card-content">
+      <h2>МАТЬ</h2>
+  
+      <p>
+        КАЖДУЮ НОЧЬ ЗАЩИЩАЕТ
+        ОДНОГО ИГРОКА ОТ НАПАДЕНИЯ.
+      </p>
+    </div>
+  
+  </a>
+
+  <!-- БОМБА -->
+  <a href="bomb.html" class="role-card" data-category="neutral">
+
+    <div class="role-card-image">
+      <img src="images/bomb.png" alt="Бомба">
+    </div>
+  
+    <div class="role-card-content">
+      <h2>БОМБА</h2>
+  
+      <p>
+        СВЯЗЫВАЕТ С СОБОЙ ДВУХ ИГРОКОВ
+        И ЗАБИРАЕТ ИХ ПРИ СВОЁМ УХОДЕ.
+      </p>
+    </div>
+  
+  </a>
+
+  <!-- ДВОЙНИК -->
+  <a href="double.html" class="role-card" data-category="neutral">
+
+    <div class="role-card-image">
+      <img src="images/double.png" alt="Двойник">
+    </div>
+  
+    <div class="role-card-content">
+      <h2>ДВОЙНИК</h2>
+  
+      <p>
+        ПОСЛЕ ПЕРВОЙ НОЧИ КОПИРУЕТ
+        РОЛЬ ОДНОГО ИЗ ПОГИБШИХ ИГРОКОВ.
+      </p>
+    </div>
+  
+  </a>
+
+  <!-- СКОРОСТРЕЛ -->
+  <a href="sharpshooter.html" class="role-card" data-category="peaceful">
+
+    <div class="role-card-image">
+      <img src="images/sharpshooter.png" alt="Скорострел">
+    </div>
+  
+    <div class="role-card-content">
+      <h2>СКОРОСТРЕЛ</h2>
+  
+      <p>
+        ПЕРЕД УХОДОМ ВЫБИРАЕТ ДВУХ ИГРОКОВ
+        И МОЖЕТ ЗАБРАТЬ МАФИЮ С СОБОЙ.
+      </p>
+    </div>
+  
+  </a>
+
+  <!-- ВОЛШЕБНИК -->
+  <a href="wizard.html" class="role-card" data-category="peaceful">
+
+    <div class="role-card-image">
+      <img src="images/wizard.png" alt="Волшебник">
+    </div>
+  
+    <div class="role-card-content">
+      <h2>ВОЛШЕБНИК</h2>
+  
+      <p>
+        ОДИН РАЗ ЗА ИГРУ ДАЁТ ИГРОКУ
+        ИММУНИТЕТ ОТ ДНЕВНОГО ГОЛОСОВАНИЯ.
+      </p>
+    </div>
+  
+  </a>
+
+  <!-- NEO -->
+  <a href="neo.html" class="role-card" data-category="peaceful">
+
+    <div class="role-card-image">
+      <img src="images/neo.png" alt="NEO">
+    </div>
+  
+    <div class="role-card-content">
+      <h2>NEO</h2>
+  
+      <p>
+        ПЕРЕНАПРАВЛЯЕТ АТАКУ
+        НА ДРУГОГО ИГРОКА.
+      </p>
+    </div>
+  
+  </a>
+
+  <!-- ЧУМА -->
+  <a href="plague.html" class="role-card" data-category="neutral">
+
+    <div class="role-card-image">
+      <img src="images/plague.png" alt="Чума">
+    </div>
+  
+    <div class="role-card-content">
+      <h2>ЧУМА</h2>
+  
+      <p>
+        ПОБЕЖДАЕТ, ЕСЛИ ЗАСТАВИТ
+        ОСТАЛЬНЫХ УСТРАНИТЬ СЕБЯ.
+      </p>
+    </div>
+  
+  </a>
       
       </section>
 
   </main>
+
+  <script>
+    const filterButtons = document.querySelectorAll('.roles-filter-btn');
+    const roleCards = document.querySelectorAll('.role-card');
+  
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+  
+        filterButtons.forEach(btn => {
+          btn.classList.remove('is-active');
+        });
+  
+        button.classList.add('is-active');
+  
+        const filter = button.dataset.filter;
+  
+        roleCards.forEach(card => {
+          const category = card.dataset.category;
+  
+          if (filter === 'all' || category === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+  
+      });
+    });
+  </script>
+  
 
 </body>
 

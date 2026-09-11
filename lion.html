@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Лев — JAX</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="product.css">
+</head>
+
+<body>
+
+  <main class="product-page">
+
+    <!-- ШАПКА -->
+    <header class="product-header">
+
+      <a href="shop.html" class="product-back" aria-label="Назад">
+        ←
+      </a>
+
+      <div class="product-logo">
+        JAX
+      </div>
+
+    </header>
+
+
+    <!-- МАСКА -->
+    <section class="product-hero">
+
+        <div class="product-slider">
+      
+          <div class="product-slide">
+            <img
+              src="images/lion-mask-1.png"
+              alt="Маска Лев — вид спереди"
+            >
+          </div>
+      
+          <div class="product-slide">
+            <img
+              src="images/lion-mask-2.png"
+              alt="Маска Лев — вид сбоку"
+            >
+          </div>
+      
+          <div class="product-slide">
+            <img
+              src="images/lion-mask-3.png"
+              alt="Маска Лев — другой ракурс"
+            >
+          </div>
+      
+        </div>
+      
+        <div class="product-dots">
+          <span class="product-dot is-active"></span>
+          <span class="product-dot"></span>
+          <span class="product-dot"></span>
+        </div>
+      
+      </section>
+
+
+    <!-- ИНФОРМАЦИЯ -->
+    <section class="product-info">
+
+
+      <h1>
+        ЛЕВ
+      </h1>
+
+      <p class="product-price">
+        12 000 ₽
+      </p>
+
+
+      <!-- ОПИСАНИЕ -->
+      <div class="product-description">
+
+        <p>
+          Образ силы, власти и абсолютного присутствия
+          за игровым столом.
+        </p>
+      
+        <p>
+          Маска Льва создана как часть атмосферы JAX —
+          не просто аксессуар, а полноценный элемент образа игрока.
+        </p>
+      
+        <p>
+          Каждая маска JAX — индивидуальна.
+          Эта модель создаётся в единственном экземпляре и после приобретения
+          больше не поступает в продажу.
+        </p>
+      
+        <p>
+          Только один игрок становится её владельцем.
+        </p>
+      
+      </div>
+
+
+      <!-- ХАРАКТЕРИСТИКИ -->
+      <div class="product-details">
+
+        <div class="product-detail-row">
+
+          <span>
+            МОДЕЛЬ
+          </span>
+
+          <strong>
+            ЛЕВ
+          </strong>
+
+        </div>
+
+
+        <div class="product-detail-row">
+
+          <span>
+            ЦВЕТ
+          </span>
+
+          <strong>
+            ЧЁРНЫЙ
+          </strong>
+
+        </div>
+
+
+        <div class="product-detail-row">
+
+          <span>
+            СТОИМОСТЬ
+          </span>
+
+          <strong>
+            12 000 ₽
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- КНОПКА -->
+      <button
+        class="product-add-button"
+        type="button"
+      >
+
+        <span>
+          В КОРЗИНУ
+        </span>
+
+        <span class="product-add-icon">
+          +
+        </span>
+
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    const addButton =
+      document.querySelector('.product-add-button');
+
+    addButton.addEventListener('click', () => {
+
+      const isAdded =
+        addButton.classList.contains('is-added');
+
+      if (isAdded) {
+
+        addButton.classList.remove('is-added');
+
+        addButton.children[0].textContent =
+          'В КОРЗИНУ';
+
+        addButton.children[1].textContent =
+          '+';
+
+      } else {
+
+        addButton.classList.add('is-added');
+
+        addButton.children[0].textContent =
+          'ДОБАВЛЕНО';
+
+        addButton.children[1].textContent =
+          '✓';
+
+      }
+
+    });
+
+    const slider = document.querySelector('.product-slider');
+const dots = document.querySelectorAll('.product-dot');
+
+slider.addEventListener('scroll', () => {
+
+  const slideWidth = slider.clientWidth;
+
+  const currentSlide = Math.round(
+    slider.scrollLeft / slideWidth
+  );
+
+  dots.forEach((dot, index) => {
+
+    dot.classList.toggle(
+      'is-active',
+      index === currentSlide
+    );
+
+  });
+
+});
+
+  </script>
+
+</body>
+
+</html>

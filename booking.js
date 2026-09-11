@@ -22,7 +22,7 @@ bookingButton.addEventListener("click", async () => {
       user_id: session.user.id,
       game_date: "2026-09-12",
       game_time: "19:00:00",
-      game_title: "ТАКТА — ЗАКРЫТАЯ ИГРА",
+      game_title: "JAX — ЗАКРЫТАЯ ИГРА",
       status: "pending"
     })
     .select()

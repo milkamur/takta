@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Магазин — JAX</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="shop.css">
+</head>
+
+<body>
+
+  <main class="shop-page">
+
+    <!-- ШАПКА -->
+    <header class="shop-header">
+
+      <a href="index.html" class="shop-back" aria-label="Назад">
+        ←
+      </a>
+
+      <div class="shop-logo">
+        JAX
+      </div>
+
+      <a href="cart.html" class="shop-cart-button" aria-label="Корзина">
+        <img
+        src="images/cart.svg"
+        class="shop-cart-icon"
+        alt=""
+      >
+        <span class="shop-cart-count">0</span>
+      </a>
+
+    </header>
+
+
+    <!-- HERO -->
+    <section class="shop-intro">
+
+      <h1>
+        МАГАЗИН
+      </h1>
+
+      <p class="shop-description">
+        БОЛЬШЕ, ЧЕМ АКСЕССУАР.<br>
+        ЧАСТЬ ИГРЫ.
+      </p>
+
+    </section>
+
+
+    <!-- ФИЛЬТР -->
+<nav class="shop-filter">
+
+  <button
+    class="shop-filter-btn is-active"
+    type="button"
+  >
+    МАСКИ
+  </button>
+
+</nav>
+
+
+    <!-- ТОВАРЫ -->
+    <section class="shop-grid">
+
+
+      <!-- МЕДВЕДЬ -->
+      <article
+        class="shop-product"
+        data-name="Медведь"
+        data-price="12000"
+      >
+
+      <div class="shop-product-image shop-product-slider">
+
+        <div class="shop-product-slides">
+      
+          <div class="shop-product-slide">
+            <img
+              src="images/bear-mask-1.png"
+              alt="Маска Медведь — вид 1"
+            >
+          </div>
+      
+          <div class="shop-product-slide">
+            <img
+              src="images/bear-mask-2.png"
+              alt="Маска Медведь — вид 2"
+            >
+          </div>
+      
+          <div class="shop-product-slide">
+            <img
+              src="images/bear-mask-3.png"
+              alt="Маска Медведь — вид 3"
+            >
+          </div>
+      
+        </div>
+      
+        <div class="shop-slider-dots">
+          <span class="shop-slider-dot is-active"></span>
+          <span class="shop-slider-dot"></span>
+          <span class="shop-slider-dot"></span>
+        </div>
+      
+      </div>
+
+        <div class="shop-product-content">
+
+          <span class="shop-product-label">
+            МАСКА
+          </span>
+
+          <h2>
+            МЕДВЕДЬ
+          </h2>
+
+          <p class="shop-product-price">
+            12 000 ₽
+          </p>
+
+          <button
+          class="shop-add-button"
+          type="button"
+          data-product="Медведь"
+          data-price="12000"
+          data-image="images/bear-mask-1.png"
+        >
+          <span>В КОРЗИНУ</span>
+          <span class="shop-add-icon">+</span>
+        </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- ТИГР -->
+      <article
+        class="shop-product"
+        data-name="Тигр"
+        data-price="12000"
+      >
+
+      <div class="shop-product-image shop-product-slider">
+
+        <div class="shop-product-slides">
+      
+          <div class="shop-product-slide">
+            <img
+              src="images/tiger-mask-1.png"
+              alt="Маска Тигр — вид 1"
+            >
+          </div>
+      
+          <div class="shop-product-slide">
+            <img
+              src="images/tiger-mask-2.png"
+              alt="Маска Тигр — вид 2"
+            >
+          </div>
+      
+          <div class="shop-product-slide">
+            <img
+              src="images/tiger-mask-3.png"
+              alt="Маска Тигр — вид 3"
+            >
+          </div>
+      
+        </div>
+      
+        <div class="shop-slider-dots">
+          <span class="shop-slider-dot is-active"></span>
+          <span class="shop-slider-dot"></span>
+          <span class="shop-slider-dot"></span>
+        </div>
+      
+      </div>
+
+        <div class="shop-product-content">
+
+          <span class="shop-product-label">
+            МАСКА
+          </span>
+
+          <h2>
+            ТИГР
+          </h2>
+
+          <p class="shop-product-price">
+            12 000 ₽
+          </p>
+
+          <button
+          class="shop-add-button"
+          type="button"
+          data-product="Тигр"
+          data-price="12000"
+          data-image="images/tiger-mask-1.png"
+        >
+          <span>В КОРЗИНУ</span>
+          <span class="shop-add-icon">+</span>
+        </button>
+
+        </div>
+
+      </article>
+
+
+
+<!-- ЛЕВ -->
+<article
+  class="shop-product shop-product-wide"
+  data-name="Лев"
+  data-price="12000"
+>
+
+<div class="shop-product-image shop-product-slider">
+
+    <div class="shop-product-slides">
+  
+      <div class="shop-product-slide">
+        <img
+          src="images/lion-mask-1.png"
+          alt="Маска Лев — вид 1"
+        >
+      </div>
+  
+      <div class="shop-product-slide">
+        <img
+          src="images/lion-mask-2.png"
+          alt="Маска Лев — вид 2"
+        >
+      </div>
+  
+      <div class="shop-product-slide">
+        <img
+          src="images/lion-mask-3.png"
+          alt="Маска Лев — вид 3"
+        >
+      </div>
+  
+    </div>
+  
+    <div class="shop-slider-dots">
+      <span class="shop-slider-dot is-active"></span>
+      <span class="shop-slider-dot"></span>
+      <span class="shop-slider-dot"></span>
+    </div>
+  
+  </div>
+
+  <div class="shop-product-content">
+
+    <span class="shop-product-label">
+      МАСКА
+    </span>
+
+    <h2>
+      ЛЕВ
+    </h2>
+
+    <p class="shop-product-price">
+      12 000 ₽
+    </p>
+
+    <button
+    class="shop-add-button"
+    type="button"
+    data-product="Лев"
+    data-price="12000"
+    data-image="images/lion-mask-1.png"
+  >
+    <span>В КОРЗИНУ</span>
+    <span class="shop-add-icon">+</span>
+  </button>
+
+  </div>
+
+</article>
+
+    </section>
+
+
+    <!-- ФИНАЛЬНЫЙ ТЕКСТ -->
+    <section class="shop-ending">
+        <p>
+          ИНДИВИДУАЛЬНОСТЬ В ОБРАЗЕ.<br>
+          СТИЛЬ В ДЕТАЛЯХ.
+        </p>
+      </section>
+
+  </main>
+
+
+  <script>
+const addButtons =
+  document.querySelectorAll('.shop-add-button');
+
+const cartCount =
+  document.querySelector('.shop-cart-count');
+
+
+function getCart() {
+  return JSON.parse(
+    localStorage.getItem('jaxCart')
+  ) || [];
+}
+
+
+function saveCart(cart) {
+  localStorage.setItem(
+    'jaxCart',
+    JSON.stringify(cart)
+  );
+}
+
+
+function updateCartCount() {
+
+  const cart = getCart();
+
+  cartCount.textContent =
+    cart.length;
+
+}
+
+
+function updateShopButtons() {
+
+  const cart = getCart();
+
+  document
+    .querySelectorAll('.shop-product')
+    .forEach(product => {
+
+      const name =
+        product.dataset.name;
+
+      const button =
+        product.querySelector('.shop-add-button');
+
+      const buttonText =
+        button.querySelector('span:first-child');
+
+      const buttonIcon =
+        button.querySelector('.shop-add-icon');
+
+      const isAdded =
+        cart.some(item => item.name === name);
+
+
+      button.classList.toggle(
+        'is-added',
+        isAdded
+      );
+
+
+      if (isAdded) {
+
+        buttonText.textContent =
+          'ДОБАВЛЕНО';
+
+        buttonIcon.textContent =
+          '✓';
+
+      } else {
+
+        buttonText.textContent =
+          'В КОРЗИНУ';
+
+        buttonIcon.textContent =
+          '+';
+
+      }
+
+    });
+
+}
+
+
+addButtons.forEach(button => {
+
+button.addEventListener('click', event => {
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  const name = button.dataset.product;
+  const price = Number(button.dataset.price);
+  const image = button.dataset.image;
+
+  let cart = getCart();
+
+  const exists = cart.some(
+    item => item.name === name
+  );
+
+  if (exists) {
+
+    cart = cart.filter(
+      item => item.name !== name
+    );
+
+  } else {
+
+    cart.push({
+      name,
+      price,
+      image
+    });
+
+  }
+
+  saveCart(cart);
+
+  updateCartCount();
+  updateShopButtons();
+
+});
+
+});
+
+
+updateCartCount();
+
+updateShopButtons();
+  
+
+    const lionCard = document.querySelector(
+  '.shop-product[data-name="Лев"]'
+);
+
+lionCard.addEventListener('click', (event) => {
+
+  // Если нажали на "В КОРЗИНУ" — страницу товара не открываем
+  if (event.target.closest('.shop-add-button')) {
+    return;
+  }
+
+  window.location.href = 'lion.html';
+
+});
+
+const lionSlider = document.querySelector(
+  '.shop-product[data-name="Лев"] .shop-product-slides'
+);
+
+const lionDots = document.querySelectorAll(
+  '.shop-product[data-name="Лев"] .shop-slider-dot'
+);
+
+lionSlider.addEventListener('scroll', () => {
+
+  const slideWidth = lionSlider.clientWidth;
+
+  const currentSlide = Math.round(
+    lionSlider.scrollLeft / slideWidth
+  );
+
+  lionDots.forEach((dot, index) => {
+
+    dot.classList.toggle(
+      'is-active',
+      index === currentSlide
+    );
+
+  });
+
+});
+
+const tigerSlider = document.querySelector(
+  '.shop-product[data-name="Тигр"] .shop-product-slides'
+);
+
+const tigerDots = document.querySelectorAll(
+  '.shop-product[data-name="Тигр"] .shop-slider-dot'
+);
+
+tigerSlider.addEventListener('scroll', () => {
+
+  const slideWidth = tigerSlider.clientWidth;
+
+  const currentSlide = Math.round(
+    tigerSlider.scrollLeft / slideWidth
+  );
+
+  tigerDots.forEach((dot, index) => {
+
+    dot.classList.toggle(
+      'is-active',
+      index === currentSlide
+    );
+
+  });
+
+});
+
+const tigerCard = document.querySelector(
+  '.shop-product[data-name="Тигр"]'
+);
+
+tigerCard.addEventListener('click', (event) => {
+
+  if (event.target.closest('.shop-add-button')) {
+    return;
+  }
+
+  window.location.href = 'tiger.html';
+
+});
+
+const bearSlider = document.querySelector(
+  '.shop-product[data-name="Медведь"] .shop-product-slides'
+);
+
+const bearDots = document.querySelectorAll(
+  '.shop-product[data-name="Медведь"] .shop-slider-dot'
+);
+
+bearSlider.addEventListener('scroll', () => {
+
+  const slideWidth = bearSlider.clientWidth;
+
+  const currentSlide = Math.round(
+    bearSlider.scrollLeft / slideWidth
+  );
+
+  bearDots.forEach((dot, index) => {
+
+    dot.classList.toggle(
+      'is-active',
+      index === currentSlide
+    );
+
+  });
+
+});
+
+const bearCard = document.querySelector(
+  '.shop-product[data-name="Медведь"]'
+);
+
+bearCard.addEventListener('click', (event) => {
+
+  if (event.target.closest('.shop-add-button')) {
+    return;
+  }
+
+  window.location.href = 'bear.html';
+
+});
+
+  </script>
+
+</body>
+
+</html>

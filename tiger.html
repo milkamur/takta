@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Тигр — JAX</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="product.css">
+</head>
+
+<body>
+
+  <main class="product-page">
+
+    <header class="product-header">
+
+      <a href="shop.html" class="product-back" aria-label="Назад">
+        ←
+      </a>
+
+      <div class="product-logo">
+        JAX
+      </div>
+
+    </header>
+
+
+    <!-- СЛАЙДЕР -->
+    <section class="product-hero">
+
+      <div class="product-slider">
+
+        <div class="product-slide">
+          <img
+            src="images/tiger-mask-1.png"
+            alt="Маска Тигр — вид 1"
+          >
+        </div>
+
+        <div class="product-slide">
+          <img
+            src="images/tiger-mask-2.png"
+            alt="Маска Тигр — вид 2"
+          >
+        </div>
+
+        <div class="product-slide">
+          <img
+            src="images/tiger-mask-3.png"
+            alt="Маска Тигр — вид 3"
+          >
+        </div>
+
+      </div>
+
+      <div class="product-dots">
+        <span class="product-dot is-active"></span>
+        <span class="product-dot"></span>
+        <span class="product-dot"></span>
+      </div>
+
+    </section>
+
+
+    <section class="product-info">
+
+      <h1>
+        ТИГР
+      </h1>
+
+      <p class="product-price">
+        12 000 ₽
+      </p>
+
+
+      <div class="product-description">
+
+        <p>
+          Образ хищной уверенности, контроля и скрытой силы.
+          Тигр не требует внимания — он забирает его сам.
+        </p>
+
+        <p>
+          Эта маска создана для игрока, который предпочитает
+          действовать точно, спокойно и без лишних слов.
+        </p>
+
+        <p>
+          Каждая маска JAX — индивидуальна.
+          Эта модель существует в единственном экземпляре
+          и после приобретения больше не поступает в продажу.
+        </p>
+
+        <p>
+          Только один игрок становится её владельцем.
+        </p>
+
+      </div>
+
+
+      <div class="product-details">
+
+        <div class="product-detail-row">
+
+          <span>
+            МОДЕЛЬ
+          </span>
+
+          <strong>
+            ТИГР
+          </strong>
+
+        </div>
+
+
+        <div class="product-detail-row">
+
+          <span>
+            ЦВЕТ
+          </span>
+
+          <strong>
+            ЧЁРНЫЙ
+          </strong>
+
+        </div>
+
+
+        <div class="product-detail-row">
+
+          <span>
+            СТОИМОСТЬ
+          </span>
+
+          <strong>
+            12 000 ₽
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="product-add-button"
+        type="button"
+      >
+
+        <span>
+          В КОРЗИНУ
+        </span>
+
+        <span class="product-add-icon">
+          +
+        </span>
+
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    const addButton =
+      document.querySelector('.product-add-button');
+
+    addButton.addEventListener('click', () => {
+
+      const isAdded =
+        addButton.classList.contains('is-added');
+
+      if (isAdded) {
+
+        addButton.classList.remove('is-added');
+
+        addButton.children[0].textContent =
+          'В КОРЗИНУ';
+
+        addButton.children[1].textContent =
+          '+';
+
+      } else {
+
+        addButton.classList.add('is-added');
+
+        addButton.children[0].textContent =
+          'ДОБАВЛЕНО';
+
+        addButton.children[1].textContent =
+          '✓';
+
+      }
+
+    });
+
+
+    const slider =
+      document.querySelector('.product-slider');
+
+    const dots =
+      document.querySelectorAll('.product-dot');
+
+    slider.addEventListener('scroll', () => {
+
+      const slideWidth =
+        slider.clientWidth;
+
+      const currentSlide =
+        Math.round(
+          slider.scrollLeft / slideWidth
+        );
+
+      dots.forEach((dot, index) => {
+
+        dot.classList.toggle(
+          'is-active',
+          index === currentSlide
+        );
+
+      });
+
+    });
+
+  </script>
+
+</body>
+
+</html>
