@@ -300,33 +300,49 @@ if (phoneForm) {
 
 function showProfile(user) {
 
-  authBox.style.display = "none";
-
-  profileBox.classList.add("active");
-
-}
-  /*
-    Настоящий подтверждённый телефон
-    появится позже.
-
-    Пока берём временный номер
-    из metadata / localStorage.
-  */
-
-  const phone =
-    user.phone ||
-    user.user_metadata?.phone_unverified ||
-    localStorage.getItem("takta_phone") ||
-    "";
-
-
-  if (profileEmail) {
-
-    profileEmail.textContent =
-      phone
-        ? formatPhone(phone)
-        : "";
-
+    authBox.style.display = "none";
+  
+    profileBox.classList.add("active");
+  
+  
+    /*
+      Настоящий подтверждённый телефон
+      появится позже.
+  
+      Пока берём временный номер
+      из metadata / localStorage.
+    */
+  
+    const phone =
+      user.phone ||
+      user.user_metadata?.phone_unverified ||
+      localStorage.getItem("takta_phone") ||
+      "";
+  
+  
+    if (profileEmail) {
+  
+      profileEmail.textContent =
+        phone
+          ? formatPhone(phone)
+          : "";
+  
+    }
+  
+  
+    const name =
+      user.user_metadata?.nickname ||
+      user.user_metadata?.name ||
+      "ИГРОК";
+  
+  
+    if (profileName) {
+  
+      profileName.textContent =
+        name.toUpperCase();
+  
+    }
+  
   }
 
 
