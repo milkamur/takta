@@ -20,33 +20,42 @@
       JAX
     </div>
 
-    <a href="settings.html" class="settings-btn" aria-label="Настройки">
-        <img src="images/settings.svg" alt="">
-      </a>
-
-      <section class="auth-box">
+    <a
+    href="settings.html"
+    class="settings-btn"
+    id="settingsButton"
+    aria-label="Настройки"
+    style="display: none;"
+  >
+    <img src="images/settings.svg" alt="">
+  </a>
+  
+  <section class="auth-box">
 
         
         <!-- ОСНОВНОЙ ВХОД — TELEGRAM -->
       
-        <button
-        class="auth-submit telegram-login"
-        id="telegramLoginBtn"
-        type="button"
-      >
-        <img
-          src="images/telegram.svg"
-          class="telegram-icon"
-          alt=""
-        >
-      
-        <span class="auth-submit-text">
-          ВОЙТИ ЧЕРЕЗ TELEGRAM
-        </span>
-      
-        <span class="auth-submit-arrow">→</span>
-      </button>
-      
+<!-- ОСНОВНОЙ ВХОД — TELEGRAM -->
+
+
+  
+  <button
+    class="auth-submit telegram-login"
+    id="telegramLoginBtn"
+    type="button"
+  >
+    <img
+      src="images/telegram.svg"
+      class="telegram-icon"
+      alt=""
+    >
+  
+    <span class="auth-submit-text">
+      ВОЙТИ ЧЕРЕЗ TELEGRAM
+    </span>
+  
+    <span class="auth-submit-arrow">→</span>
+  </button>
       
         <!-- РЕЗЕРВНЫЙ ВХОД — ТЕЛЕФОН -->
       
@@ -75,25 +84,32 @@
           >
         </label>
       
-        <div class="auth-consent">
-          <label class="consent-label" for="privacyConsent">
-            <input type="checkbox" id="privacyConsent">
-            <span class="consent-check"></span>
-          </label>
-      
-          <span class="consent-text">
-            Я СОГЛАСЕН С
-            <a href="privacy.html" class="consent-link">
-              ПОЛИТИКОЙ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ
-            </a>
-          </span>
-        </div>
+
       
         <button class="auth-submit" type="submit">
           <span class="auth-submit-text">ВОЙТИ</span>
           <span class="auth-submit-arrow">→</span>
         </button>
       </form>
+
+      <div class="auth-consent">
+        <label class="consent-label" for="privacyConsent">
+          <input type="checkbox" id="privacyConsent">
+          <span class="consent-check"></span>
+        </label>
+      
+        <span class="consent-text">
+          Я ДАЮ
+          <a href="consent.html" class="consent-link">
+            СОГЛАСИЕ
+          </a>
+          НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ
+          И ОЗНАКОМЛЕН С
+          <a href="privacy.html" class="consent-link">
+            ПОЛИТИКОЙ
+          </a>
+        </span>
+      </div>
       
       </section>
 

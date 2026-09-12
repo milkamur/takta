@@ -13,6 +13,9 @@ const profileEmail = document.getElementById("profileEmail");
 
 const logoutBtn = document.getElementById("logoutBtn");
 
+const settingsButton =
+  document.getElementById("settingsButton");
+
 
 /* ==============================
    СОГЛАСИЕ
@@ -147,16 +150,40 @@ function formatPhone(phone) {
 
 if (telegramLoginBtn) {
     telegramLoginBtn.addEventListener("click", async () => {
-      const { error } = await supabaseClient.auth.signInWithOAuth({
-        provider: "custom:telegram",
-        options: {
-          redirectTo: "https://milkamur.github.io/takta/account.html"
-        }
-      });
+  
+      // Проверяем согласие на обработку ПД
+      if (!privacyConsent.checked) {
+        const consent =
+          document.querySelector(".auth-consent");
+  
+        consent?.classList.add("consent-error");
+  
+        setTimeout(() => {
+          consent?.classList.remove("consent-error");
+        }, 2000);
+  
+        return;
+      }
+  
+      // Вход через Telegram
+      const { error } =
+        await supabaseClient.auth.signInWithOAuth({
+          provider: "custom:telegram",
+          options: {
+            redirectTo:
+              "https://milkamur.github.io/takta/account.html"
+          }
+        });
   
       if (error) {
-        console.error("Telegram login error:", error);
-        alert("Не удалось открыть вход через Telegram");
+        console.error(
+          "Telegram login error:",
+          error
+        );
+  
+        alert(
+          "Не удалось открыть вход через Telegram"
+        );
       }
     });
   }
@@ -303,6 +330,10 @@ function showProfile(user) {
     authBox.style.display = "none";
   
     profileBox.classList.add("active");
+
+    if (settingsButton) {
+        settingsButton.style.display = "block";
+      }
   
   
     /*
@@ -356,6 +387,10 @@ function showAuth() {
   profileBox.classList.remove("active");
 
   authBox.style.display = "block";
+
+  if (settingsButton) {
+    settingsButton.style.display = "none";
+  }
 
 }
 

@@ -31,7 +31,7 @@ async function loadSettings() {
 
   profileNameInput.value =
     nickname;
-
+}
 
 saveProfileNameBtn.addEventListener(
   'click',
