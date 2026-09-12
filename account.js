@@ -346,17 +346,6 @@ function showProfile(user) {
   }
 
 
-  const name =
-  user.user_metadata?.nickname ||
-  user.user_metadata?.name ||
-  "ИГРОК";
-
-
-if (profileName) {
-  profileName.textContent =
-    name.toUpperCase();
-}
-
 
 /* ==============================
    ПОКАЗАТЬ ЭКРАН ВХОДА
