@@ -27,3 +27,44 @@ if (joinGameBtn) {
     }
   });
 }
+
+/* =========================
+   JAX INTRO VIDEO
+========================= */
+
+const jaxIntro = document.getElementById('jaxIntro');
+const jaxIntroVideo = document.getElementById('jaxIntroVideo');
+
+if (jaxIntro && jaxIntroVideo) {
+
+  const introAlreadyShown =
+    sessionStorage.getItem('jaxIntroShown');
+
+  /* Если заставку уже показывали */
+  if (introAlreadyShown) {
+
+    jaxIntro.remove();
+
+  } else {
+
+    /* Запоминаем, что заставка была показана */
+    sessionStorage.setItem('jaxIntroShown', 'true');
+
+    jaxIntroVideo.addEventListener('ended', () => {
+
+      jaxIntro.classList.add('is-hidden');
+
+      setTimeout(() => {
+        jaxIntro.remove();
+      }, 500);
+
+    });
+
+    /* Если видео не загрузилось */
+    jaxIntroVideo.addEventListener('error', () => {
+      jaxIntro.remove();
+    });
+
+  }
+
+}
