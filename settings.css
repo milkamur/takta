@@ -282,7 +282,3 @@ body {
   .settings-field input:focus::placeholder {
     color: transparent;
   }
-
-  .settings-section:first-of-type .settings-section-title {
-    text-align: center;
-  }

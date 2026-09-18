@@ -49,8 +49,10 @@
   ========================= */
   
   .shop-cart-button {
-    position: absolute;
-    right: 0;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1100;
   
     width: 38px;
     height: 38px;
@@ -566,4 +568,66 @@
     height: 24px;
     display: block;
     object-fit: contain;
+  }
+
+  /* =========================
+   FLOATING CART
+========================= */
+
+.floating-cart {
+    position: fixed;
+  
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+  
+    z-index: 1000;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    padding: 18px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+  
+background: rgba(8, 8, 8, 0.35);
+
+backdrop-filter: blur(6px);
+-webkit-backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(14px);
+  
+    color: rgba(255,255,255,0.92);
+    text-decoration: none;
+  
+    font-size: 13px;
+    letter-spacing: 0.16em;
+  
+    box-sizing: border-box;
+  
+    opacity: 0;
+    visibility: hidden;
+  
+    transform: translateY(25px);
+  
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0.3s ease;
+  }
+  
+  .floating-cart.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .floating-cart-arrow {
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .shop-logo {
+    color: inherit;
+    text-decoration: none;
   }
