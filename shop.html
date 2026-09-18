@@ -25,9 +25,9 @@
         ←
       </a>
 
-      <div class="shop-logo">
+      <a href="index.html" class="shop-logo">
         JAX
-      </div>
+      </a>
 
       <a href="cart.html" class="shop-cart-button" aria-label="Корзина">
         <img
@@ -426,6 +426,7 @@ button.addEventListener('click', event => {
 
   updateCartCount();
   updateShopButtons();
+  updateFloatingCart();
 
 });
 
@@ -562,6 +563,16 @@ bearCard.addEventListener('click', (event) => {
 });
 
   </script>
+
+<a href="cart.html" class="floating-cart" id="floatingCart">
+    <span id="floatingCartText">
+      КОРЗИНА · 1 ТОВАР
+    </span>
+  
+    <span class="floating-cart-arrow">→</span>
+  </a>
+
+  <script src="shop.js"></script>
 
 </body>
 

@@ -22,15 +22,31 @@
     <!-- ШАПКА -->
     <header class="product-header">
 
-      <a href="shop.html" class="product-back" aria-label="Назад">
-        ←
-      </a>
-
-      <div class="product-logo">
-        JAX
-      </div>
-
-    </header>
+        <a href="shop.html" class="product-back" aria-label="Назад">
+          ←
+        </a>
+      
+        <a href="index.html" class="product-logo">
+            JAX
+          </a>
+      
+        <a
+          href="cart.html"
+          class="product-cart-button"
+          aria-label="Корзина"
+        >
+          <img
+            src="images/cart.svg"
+            class="product-cart-icon"
+            alt=""
+          >
+      
+          <span class="product-cart-count">
+            0
+          </span>
+        </a>
+      
+      </header>
 
 
     <!-- МАСКА -->
@@ -173,40 +189,169 @@
 
   </main>
 
+  <a
+  href="cart.html"
+  class="floating-cart"
+  id="floatingCart"
+>
+  <span id="floatingCartText">
+    КОРЗИНА · 1 ТОВАР
+  </span>
+
+  <span class="floating-cart-arrow">
+    →
+  </span>
+</a>
 
   <script>
 
-    const addButton =
-      document.querySelector('.product-add-button');
+const addButton =
+  document.querySelector('.product-add-button');
 
-    addButton.addEventListener('click', () => {
+const cartCount =
+  document.querySelector('.product-cart-count');
 
-      const isAdded =
-        addButton.classList.contains('is-added');
+const floatingCart =
+  document.getElementById('floatingCart');
 
-      if (isAdded) {
+const floatingCartText =
+  document.getElementById('floatingCartText');
 
-        addButton.classList.remove('is-added');
 
-        addButton.children[0].textContent =
-          'В КОРЗИНУ';
+function getCart() {
+  return JSON.parse(
+    localStorage.getItem('jaxCart')
+  ) || [];
+}
 
-        addButton.children[1].textContent =
-          '+';
 
-      } else {
+function saveCart(cart) {
+  localStorage.setItem(
+    'jaxCart',
+    JSON.stringify(cart)
+  );
+}
 
-        addButton.classList.add('is-added');
 
-        addButton.children[0].textContent =
-          'ДОБАВЛЕНО';
+function getCartWord(count) {
 
-        addButton.children[1].textContent =
-          '✓';
+  const mod10 = count % 10;
+  const mod100 = count % 100;
 
-      }
+  if (
+    mod10 === 1 &&
+    mod100 !== 11
+  ) {
+    return 'ТОВАР';
+  }
 
+  if (
+    mod10 >= 2 &&
+    mod10 <= 4 &&
+    !(mod100 >= 12 && mod100 <= 14)
+  ) {
+    return 'ТОВАРА';
+  }
+
+  return 'ТОВАРОВ';
+}
+
+
+function updateCartUI() {
+
+  const cart = getCart();
+
+  const isAdded =
+    cart.some(
+      item => item.name === 'Лев'
+    );
+
+  cartCount.textContent =
+    cart.length;
+
+
+  if (isAdded) {
+
+    addButton.classList.add(
+      'is-added'
+    );
+
+    addButton.children[0].textContent =
+      'ДОБАВЛЕНО';
+
+    addButton.children[1].textContent =
+      '✓';
+
+  } else {
+
+    addButton.classList.remove(
+      'is-added'
+    );
+
+    addButton.children[0].textContent =
+      'В КОРЗИНУ';
+
+    addButton.children[1].textContent =
+      '+';
+
+  }
+
+
+  if (cart.length > 0) {
+
+    floatingCartText.textContent =
+      `КОРЗИНА · ${cart.length} ${getCartWord(cart.length)}`;
+
+    floatingCart.classList.add(
+      'is-visible'
+    );
+
+  } else {
+
+    floatingCart.classList.remove(
+      'is-visible'
+    );
+
+  }
+
+}
+
+
+addButton.addEventListener('click', () => {
+
+  let cart = getCart();
+
+  const exists =
+    cart.some(
+      item => item.name === 'Лев'
+    );
+
+
+  if (exists) {
+
+    cart = cart.filter(
+      item => item.name !== 'Лев'
+    );
+
+  } else {
+
+    cart.push({
+      name: 'Лев',
+      price: 12000,
+      image: 'images/lion-mask-1.png'
     });
+
+  }
+
+
+  saveCart(cart);
+
+  updateCartUI();
+
+});
+
+
+updateCartUI();
 
     const slider = document.querySelector('.product-slider');
 const dots = document.querySelectorAll('.product-dot');
