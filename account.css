@@ -1031,3 +1031,7 @@
     position: absolute;
     right: 34px;
   }
+
+  .auth-logo {
+    cursor: pointer;
+  }
