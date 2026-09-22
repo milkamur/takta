@@ -18,7 +18,7 @@
   }
   
   body {
-    font-family: "Cormorant Garamond", serif;
+    font-family: "CinzelRus", serif;
     font-weight: 400;
   }
   
@@ -523,7 +523,7 @@
   .main-card h3 {
     margin: 0;
   
-    font-family: "Cormorant Garamond", serif;
+    font-family: "CinzelRus", serif;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 1px;
@@ -533,7 +533,7 @@
     min-height: 30px;
     margin: 5px 0 7px;
   
-    font-family: "Cormorant Garamond", serif;
+    font-family: "CinzelRus", serif;
     font-size: 10px;
     line-height: 1.25;
     letter-spacing: 1.2px;
@@ -662,7 +662,7 @@
   .account-text h3 {
     margin: 0;
   
-    font-family: "Cormorant Garamond", serif;
+    font-family: "CinzelRus", serif;
     font-size: 16px;
     font-weight: 400;
   
@@ -672,7 +672,7 @@
   .account-text p {
     margin: 7px 0 0;
   
-    font-family: "Cormorant Garamond", serif;
+    font-family: "CinzelRus", serif;
     font-size: 10px;
   
     letter-spacing: 2px;
@@ -787,7 +787,7 @@
     color: #fff;
     text-decoration: none;
   
-    font-family: "Cormorant Garamond", serif;
+    font-family: "CinzelRus", serif;
   
     font-size: 25px;
     font-weight: 400;
@@ -893,7 +893,7 @@ body {
 .legal-footer__brand {
   margin-bottom: 18px;
 
-  font-family: "Cinzel", serif;
+  font-family: "CinzelRus", serif;
   font-size: 18px;
   letter-spacing: 6px;
 
@@ -937,4 +937,78 @@ body {
   letter-spacing: 1px;
 
   color: rgba(255, 255, 255, 0.25);
+}
+
+/* ========================================
+   ЕДИНАЯ ШАПКА JAX
+======================================== */
+
+.jax-page-header {
+  position: relative;
+  height: 84px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jax-page-back {
+  position: absolute;
+  left: 0;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  background: transparent;
+
+  color: rgba(255,255,255,0.62);
+  text-decoration: none;
+
+  font-family: "CinzelRus", serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.jax-page-logo {
+  margin: 0;
+  padding: 0;
+
+  color: rgba(255,255,255,0.88);
+  text-decoration: none;
+
+  font-family: "CinzelRus", serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.35em;
+
+  cursor: pointer;
+}
+
+/* ========================================
+   ЕДИНАЯ ШАПКА JAX
+======================================== */
+
+.jax-logo {
+  font-family: "CinzelRus", serif !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.22em !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.jax-back {
+  font-family: "CinzelRus", serif !important;
+  font-size: 22px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  color: rgba(255, 255, 255, 0.70) !important;
+  text-decoration: none !important;
 }

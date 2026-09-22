@@ -1,51 +1,79 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>JAX</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
-<!-- JAX INTRO -->
-<div class="jax-intro" id="jaxIntro">
-
-  <video
-    class="jax-intro-video"
-    id="jaxIntroVideo"
-    autoplay
-    muted
-    playsinline
-    preload="auto"
-  >
-    <source
-      src="videos/jax-intro.mp4"
-      type="video/mp4"
-    >
-  </video>
-
-</div>
 
 <body>
 
+
+  <!-- =========================
+       JAX INTRO
+  ========================== -->
+
+  <div class="jax-intro" id="jaxIntro">
+
+    <video
+      class="jax-intro-video"
+      id="jaxIntroVideo"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+    >
+      <source
+        src="videos/jax-intro.mp4"
+        type="video/mp4"
+      >
+    </video>
+
+  </div>
+
+
+
+  <!-- =========================
+       ГЛАВНЫЙ ЭКРАН
+  ========================== -->
+
   <section class="hero">
 
-    <header class="header">
-      <div class="logo">JAX</div>
 
-      <button class="burger" id="burgerBtn" aria-label="Меню">
+    <!-- ШАПКА -->
+
+    <header class="header">
+
+      <div class="logo">
+        JAX
+      </div>
+
+
+      <button
+        class="burger"
+        id="burgerBtn"
+        type="button"
+        aria-label="Открыть меню"
+      >
         <span></span>
         <span></span>
         <span></span>
       </button>
+
     </header>
+
+
+
+    <!-- ЛОГОТИП И СЛОГАН -->
 
     <div class="hero-content">
 
-
-
-        <img
+      <img
         class="takta-title"
         src="images/jax-logo.png"
         alt="JAX MAFIA"
@@ -55,103 +83,234 @@
         РЕШЕНИЕ · ВЛАСТЬ · ИНТРИГА
       </p>
 
-
     </div>
 
-    <a href="#" class="join-btn" id="joinGameBtn">
-        <span class="join-text">ВСТУПИТЬ В ИГРУ</span>
+
+
+    <!-- КНОПКА ВСТУПИТЬ В ИГРУ -->
+
+    <a
+      href="#"
+      class="join-btn"
+      id="joinGameBtn"
+    >
+      <span class="join-text">
+        ВСТУПИТЬ В ИГРУ
+      </span>
     </a>
 
 
-      <section class="main-links">
 
-        <a href="roles.html" class="main-card">
-            <img src="images/roles-card.png" alt="Роли">
-          <div class="main-card-overlay"></div>
-      
-          <div class="main-card-content">
-            <h3>РОЛИ</h3>
-            <p>УНИКАЛЬНЫЕ<br>МЕХАНИКИ</p>
+    <!-- =========================
+         ОСНОВНЫЕ РАЗДЕЛЫ
+    ========================== -->
 
-          </div>
-        </a>
-      
-      
-        <a href="rules.html" class="main-card">
-            <img src="images/rules-card.png" alt="Правила">
-          <div class="main-card-overlay"></div>
-      
-          <div class="main-card-content">
-            <h3>ПРАВИЛА</h3>
-            <p>ВСЁ, ЧТО НУЖНО<br>ЗНАТЬ</p>
-
-          </div>
-        </a>
-      
-      
-        <a href="shop.html" class="main-card">
-            <img src="images/shop-card.png" alt="Магазин">
-          <div class="main-card-overlay"></div>
-      
-          <div class="main-card-content">
-            <h3>МАГАЗИН</h3>
-            <p>МАСКИ, КАРТЫ<br>И АКСЕССУАРЫ</p>
-
-          </div>
-        </a>
-      
-      </section>
+    <section class="main-links">
 
 
-    
+      <!-- РОЛИ -->
+
+      <a
+        href="roles.html"
+        class="main-card"
+      >
+
+        <img
+          src="images/roles-card.png"
+          alt="Роли"
+        >
+
+        <div class="main-card-overlay"></div>
+
+        <div class="main-card-content">
+
+          <h3>РОЛИ</h3>
+
+          <p>
+            УНИКАЛЬНЫЕ<br>
+            МЕХАНИКИ
+          </p>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- ПРАВИЛА -->
+
+      <a
+        href="rules.html"
+        class="main-card"
+      >
+
+        <img
+          src="images/rules-card.png"
+          alt="Правила"
+        >
+
+        <div class="main-card-overlay"></div>
+
+        <div class="main-card-content">
+
+          <h3>ПРАВИЛА</h3>
+
+          <p>
+            ВСЁ, ЧТО НУЖНО<br>
+            ЗНАТЬ
+          </p>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- МАГАЗИН -->
+
+      <a
+        href="shop.html"
+        class="main-card"
+      >
+
+        <img
+          src="images/shop-card.png"
+          alt="Магазин"
+        >
+
+        <div class="main-card-overlay"></div>
+
+        <div class="main-card-content">
+
+          <h3>МАГАЗИН</h3>
+
+          <p>
+            МАСКИ, КАРТЫ<br>
+            И АКСЕССУАРЫ
+          </p>
+
+        </div>
+
+      </a>
+
+
+    </section>
+
   </section>
 
 
-<!-- МЕНЮ БУРГЕРА -->
 
-<div class="burger-menu" id="burgerMenu">
+  <!-- =========================
+       БУРГЕР-МЕНЮ
+  ========================== -->
 
-    <button class="burger-close" id="burgerClose" type="button">
+  <div
+    class="burger-menu"
+    id="burgerMenu"
+  >
+
+    <button
+      class="burger-close"
+      id="burgerClose"
+      type="button"
+      aria-label="Закрыть меню"
+    >
       ×
     </button>
-  
+
+
     <nav class="burger-nav">
-      <a href="index.html">ГЛАВНАЯ</a>
-      <a href="roles.html">РОЛИ</a>
-      <a href="rules.html">ПРАВИЛА</a>
-      <a href="shop.html">МАГАЗИН</a>
-      <a href="account.html">ЛИЧНЫЙ КАБИНЕТ</a>
+
+      <a href="index.html">
+        ГЛАВНАЯ
+      </a>
+
+      <a href="roles.html">
+        РОЛИ
+      </a>
+
+      <a href="rules.html">
+        ПРАВИЛА
+      </a>
+
+      <a href="shop.html">
+        МАГАЗИН
+      </a>
+
+      <a href="account.html">
+        ЛИЧНЫЙ КАБИНЕТ
+      </a>
+
     </nav>
-  
+
   </div>
+
+
+
+  <!-- =========================
+       ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ
+  ========================== -->
+
+  <footer class="legal-footer">
+
+    <div class="legal-footer__brand">
+      JAX
+    </div>
+
+
+    <div class="legal-footer__info">
+
+      <p>
+        ИП Ерушина Ксения Сергеевна
+      </p>
+
+      <p>
+        ИНН 860330415010 · ОГРНИП 326470400122653
+      </p>
+
+      <p>
+        <a href="mailto:MILLER.1011@YANDEX.RU">
+          MILLER.1011@YANDEX.RU
+        </a>
+      </p>
+
+    </div>
+
+
+    <div class="legal-footer__links">
+
+      <a href="offer.html">
+        Публичная оферта
+      </a>
+
+      <span>·</span>
+
+      <a href="privacy.html">
+        Политика конфиденциальности
+      </a>
+
+    </div>
+
+
+    <div class="legal-footer__copyright">
+      © 2026 JAX
+    </div>
+
+  </footer>
+
+
+
+  <!-- =========================
+       SCRIPTS
+  ========================== -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="supabase.js"></script>
+
   <script src="script.js"></script>
+
+
 </body>
-
-<footer class="legal-footer">
-  <div class="legal-footer__brand">JAX</div>
-
-  <div class="legal-footer__info">
-    <p>ИП Ерушина Ксения Сергеевна</p>
-    <p>ИНН 860330415010 · ОГРНИП 326470400122653</p>
-    <p>
-      <a href="mailto:MILLER.1011@YANDEX.RU">
-        MILLER.1011@YANDEX.RU
-      </a>
-    </p>
-  </div>
-
-  <div class="legal-footer__links">
-    <a href="offer.html">Публичная оферта</a>
-    <span>·</span>
-    <a href="privacy.html">Политика конфиденциальности</a>
-  </div>
-
-  <div class="legal-footer__copyright">
-    © 2026 JAX
-  </div>
-</footer>
 
 </html>

@@ -1,0 +1,282 @@
+/* =========================
+   ORDERS — JAX
+========================= */
+
+body {
+    margin: 0;
+    background: #000;
+    color: #f2f2f2;
+  }
+  
+  .orders-page {
+    min-height: 100vh;
+    padding: 0 22px 70px;
+    box-sizing: border-box;
+  }
+  
+  
+  /* HEADER */
+  
+  .orders-header {
+    position: relative;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .orders-back {
+    position: absolute;
+    left: 0;
+  
+    border: 0;
+    padding: 10px 0;
+  
+    background: transparent;
+    color: #777;
+  
+    font-family: "CinzelRus", serif;
+    font-size: 36px;
+    font-weight: 200;
+  
+    cursor: pointer;
+  }
+  
+  .orders-logo {
+    color: #ddd;
+  
+    font-family: "CinzelRus", serif;
+    font-size: 20px;
+    letter-spacing: 8px;
+  
+    cursor: pointer;
+  }
+  
+  
+  /* HERO */
+  
+  .orders-hero {
+    margin-top: 5px;
+    margin-bottom: 45px;
+  }
+  
+  
+  .orders-hero h1 {
+    margin: 0 0 15px;
+  
+    font-family: "CinzelRus", serif;
+    font-size: clamp(36px, 10vw, 56px);
+    font-weight: 400;
+    letter-spacing: 2px;
+  }
+  
+  .orders-hero p {
+    margin: 0;
+  
+    color: #666;
+  
+    font-size: 13px;
+    line-height: 1.7;
+    letter-spacing: 1px;
+  }
+  
+  
+  /* LOADING */
+  
+  .orders-loading {
+    padding: 50px 0;
+  
+    color: #555;
+  
+    font-size: 10px;
+    letter-spacing: 4px;
+  }
+  
+  
+  /* ORDER LIST */
+  
+  .orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  
+  
+  /* CARD */
+  
+  .order-card {
+    position: relative;
+  
+    padding: 28px 24px 24px;
+  
+    border: 1px solid #222;
+    border-radius: 22px;
+  
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255,255,255,0.025),
+        rgba(255,255,255,0)
+      );
+  }
+  
+  .order-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    margin-bottom: 34px;
+  }
+  
+  .order-type,
+  .order-number {
+    color: #555;
+  
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+  
+  .order-card h2 {
+    margin: 0 0 12px;
+  
+    font-family: "CinzelRus", serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  
+  .order-nickname {
+    margin: 0;
+  
+    color: #aaa;
+  
+    font-family: "CinzelRus", serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+  
+  
+  /* PRICE */
+  
+  .order-price {
+    margin-top: 35px;
+  
+    font-family: "CinzelRus", serif;
+    font-size: 23px;
+    letter-spacing: 2px;
+  }
+  
+  
+  /* STATUS */
+  
+  .order-status {
+    margin-top: 30px;
+    padding-top: 23px;
+  
+    border-top: 1px solid #1d1d1d;
+  }
+  
+  .order-status-label {
+    display: block;
+  
+    margin-bottom: 10px;
+  
+    color: #4f4f4f;
+  
+    font-size: 9px;
+    letter-spacing: 4px;
+  }
+  
+  .order-status-value {
+    color: #bcbcbc;
+  
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: 2px;
+  }
+  
+  
+  /* ACTION */
+  
+  .order-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    width: 100%;
+    box-sizing: border-box;
+  
+    margin-top: 24px;
+    padding: 18px 20px;
+  
+    border: 1px solid #444;
+    border-radius: 999px;
+  
+    background: transparent;
+    color: #ddd;
+  
+    text-decoration: none;
+  
+    font-family: "CinzelRus", serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+  
+    cursor: pointer;
+  }
+  
+  .order-action-disabled {
+    border-color: #222;
+    color: #555;
+    cursor: default;
+  }
+  
+  
+  /* EMPTY */
+  
+  .orders-empty {
+    padding-top: 25px;
+  }
+  
+  .orders-empty-number {
+    display: block;
+  
+    margin-bottom: 25px;
+  
+    color: #333;
+  
+    font-family: "CinzelRus", serif;
+    font-size: 14px;
+    letter-spacing: 5px;
+  }
+  
+  .orders-empty h2 {
+    margin: 0 0 15px;
+  
+    font-family: "CinzelRus", serif;
+    font-size: 25px;
+    font-weight: 400;
+  }
+  
+  .orders-empty p {
+    margin: 0 0 40px;
+  
+    color: #666;
+  
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  
+  .orders-empty-link {
+    display: flex;
+    justify-content: space-between;
+  
+    padding: 19px 0;
+  
+    border-bottom: 1px solid #333;
+  
+    color: #ddd;
+    text-decoration: none;
+  
+    font-size: 10px;
+    letter-spacing: 3px;
+  }

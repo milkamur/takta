@@ -33,7 +33,7 @@
     text-decoration: none;
   
     font-size: 28px;
-    font-family: serif;
+    font-family: "CinzelRus", serif;
     font-weight: 200;
   }
   
@@ -628,6 +628,303 @@ backdrop-filter: blur(6px);
   }
 
   .shop-logo {
-    color: inherit;
-    text-decoration: none;
+    cursor: pointer;
   }
+
+  /* =========================
+   ВОЗМОЖНОСТИ JAX
+========================= */
+
+.shop-features {
+  padding: 0 20px 40px;
+}
+
+.shop-features[hidden] {
+  display: none !important;
+}
+
+
+/* КАРТОЧКА */
+
+.shop-feature-card {
+  width: 100%;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+
+  background: #050505;
+
+  cursor: pointer;
+}
+
+
+/* ВИЗУАЛ */
+
+.shop-feature-visual {
+  position: relative;
+
+  height: 280px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.025) 32%,
+      transparent 68%
+    ),
+    #050505;
+}
+
+
+/* маленький JAX */
+
+.shop-feature-mini {
+  margin-bottom: 20px;
+
+  font-size: 9px;
+  letter-spacing: 0.55em;
+
+  color: rgba(255, 255, 255, 0.35);
+}
+
+
+/* НИК */
+
+.shop-feature-nickname {
+  font-size: clamp(27px, 8vw, 42px);
+  font-weight: 300;
+
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.92);
+
+  text-shadow:
+    0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+
+/* UNIQUE ID */
+
+.shop-feature-status {
+  margin-top: 18px;
+
+  font-size: 8px;
+  letter-spacing: 0.4em;
+
+  color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* НИЖНЯЯ ЧАСТЬ */
+
+.shop-feature-content {
+  padding: 22px 20px 20px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+.shop-feature-content h2 {
+  margin: 8px 0 10px;
+
+  font-size: 22px;
+  font-weight: 400;
+
+  letter-spacing: 0.08em;
+
+  color: #fff;
+}
+
+
+.shop-feature-description {
+  margin: 0 0 24px;
+
+  font-size: 10px;
+  line-height: 1.6;
+
+  letter-spacing: 0.12em;
+
+  color: rgba(255, 255, 255, 0.48);
+}
+
+
+/* =========================
+   ВОЗМОЖНОСТИ JAX
+========================= */
+
+.shop-features {
+  padding: 0 20px 40px;
+}
+
+.shop-features[hidden] {
+  display: none !important;
+}
+
+
+/* КАРТОЧКА */
+
+.shop-feature-card {
+  width: 100%;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+
+  background: #050505;
+
+  cursor: pointer;
+}
+
+
+/* ВИЗУАЛ */
+
+.shop-feature-visual {
+  position: relative;
+
+  height: 280px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.025) 32%,
+      transparent 68%
+    ),
+    #050505;
+}
+
+
+/* маленький JAX */
+
+.shop-feature-mini {
+  margin-bottom: 20px;
+
+  font-size: 9px;
+  letter-spacing: 0.55em;
+
+  color: rgba(255, 255, 255, 0.35);
+}
+
+
+/* НИК */
+
+.shop-feature-nickname {
+  font-size: clamp(27px, 8vw, 42px);
+  font-weight: 300;
+
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.92);
+
+  text-shadow:
+    0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+
+/* UNIQUE ID */
+
+.shop-feature-status {
+  margin-top: 18px;
+
+  font-size: 8px;
+  letter-spacing: 0.4em;
+
+  color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* НИЖНЯЯ ЧАСТЬ */
+
+.shop-feature-content {
+  padding: 22px 20px 20px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+.shop-feature-content h2 {
+  margin: 8px 0 10px;
+
+  font-size: 22px;
+  font-weight: 400;
+
+  letter-spacing: 0.08em;
+
+  color: #fff;
+}
+
+
+.shop-feature-description {
+  margin: 0 0 24px;
+
+  font-size: 10px;
+  line-height: 1.6;
+
+  letter-spacing: 0.12em;
+
+  color: rgba(255, 255, 255, 0.48);
+}
+
+
+/* ПОДРОБНЕЕ */
+
+.shop-feature-button {
+  width: 100%;
+
+  padding: 15px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 0;
+  border-top:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  background: transparent;
+  color: #fff;
+
+  font-size: 10px;
+  letter-spacing: 0.18em;
+
+  cursor: pointer;
+}
+
+/* =========================
+   ПЕРЕКЛЮЧЕНИЕ МАГАЗИНА
+========================= */
+
+#masksSection[hidden],
+#featuresSection[hidden] {
+  display: none !important;
+}
+
+.shop-feature-price {
+  margin: 12px 0 18px;
+
+  font-size: 20px;
+  font-weight: 300;
+
+  letter-spacing: 0.12em;
+
+  color: rgba(255, 255, 255, 0.82);
+}

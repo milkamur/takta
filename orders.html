@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Мои заказы — JAX</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="orders.css">
+</head>
+
+<body>
+
+  <main class="orders-page">
+
+<!-- ШАПКА -->
+<header class="jax-page-header">
+
+    <button
+      class="jax-page-back jax-back"
+      type="button"
+      onclick="history.back()"
+      aria-label="Назад"
+    >
+      ←
+    </button>
+  
+    <a
+      href="index.html"
+      class="jax-page-logo jax-logo"
+    >
+      JAX
+    </a>
+  
+  </header>
+
+
+    <!-- ЗАГОЛОВОК -->
+    <section class="orders-hero">
+
+        <h1>
+          МОИ ЗАКАЗЫ
+        </h1>
+      
+        <p>
+          История заказов и статус заявок.
+        </p>
+      
+      </section>
+
+
+    <!-- ЗАГРУЗКА -->
+    <section
+      class="orders-loading"
+      id="ordersLoading"
+    >
+      <span>
+        ЗАГРУЖАЕМ ЗАКАЗЫ...
+      </span>
+    </section>
+
+
+    <!-- СПИСОК ЗАКАЗОВ -->
+    <section
+      class="orders-list"
+      id="ordersList"
+      hidden
+    >
+      <!--
+        Сюда orders.js автоматически
+        добавит реальные заявки из Supabase.
+      -->
+    </section>
+
+
+    <!-- ЕСЛИ ЗАКАЗОВ НЕТ -->
+    <section
+      class="orders-empty"
+      id="ordersEmpty"
+      hidden
+    >
+
+      <span class="orders-empty-number">
+        00
+      </span>
+
+      <h2>
+        ЗАКАЗОВ ПОКА НЕТ
+      </h2>
+
+      <p>
+        Здесь появятся ваши заказы
+        и заявки JAX.
+      </p>
+
+      <a
+        href="shop.html"
+        class="orders-empty-link"
+      >
+        <span>
+          ПЕРЕЙТИ В МАГАЗИН
+        </span>
+
+        <span>
+          →
+        </span>
+      </a>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- SUPABASE LIBRARY -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- НАШ SUPABASE CLIENT -->
+  <script src="supabase.js"></script>
+
+  <!-- ЗАКАЗЫ -->
+  <script src="orders.js"></script>
+
+</body>
+
+</html>

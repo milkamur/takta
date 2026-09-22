@@ -2,13 +2,17 @@ const burgerBtn = document.getElementById("burgerBtn");
 const burgerMenu = document.getElementById("burgerMenu");
 const burgerClose = document.getElementById("burgerClose");
 
-burgerBtn.addEventListener("click", () => {
-  burgerMenu.classList.add("active");
-});
+if (burgerBtn && burgerMenu) {
+  burgerBtn.addEventListener("click", () => {
+    burgerMenu.classList.add("active");
+  });
+}
 
-burgerClose.addEventListener("click", () => {
-  burgerMenu.classList.remove("active");
-});
+if (burgerClose && burgerMenu) {
+  burgerClose.addEventListener("click", () => {
+    burgerMenu.classList.remove("active");
+  });
+}
 
 const joinGameBtn = document.getElementById("joinGameBtn");
 
@@ -32,38 +36,89 @@ if (joinGameBtn) {
    JAX INTRO VIDEO
 ========================= */
 
-const jaxIntro = document.getElementById('jaxIntro');
-const jaxIntroVideo = document.getElementById('jaxIntroVideo');
+const jaxIntro =
+  document.getElementById('jaxIntro');
+
+const jaxIntroVideo =
+  document.getElementById('jaxIntroVideo');
+
 
 if (jaxIntro && jaxIntroVideo) {
 
-  const introAlreadyShown =
-    sessionStorage.getItem('jaxIntroShown');
+  /*
+    Проверяем, пришёл ли пользователь
+    на главную с другой страницы JAX.
+  */
 
-  /* Если заставку уже показывали */
-  if (introAlreadyShown) {
+  let cameFromJaxPage = false;
+
+  if (document.referrer) {
+
+    try {
+
+      const referrer =
+        new URL(document.referrer);
+
+      const current =
+        new URL(window.location.href);
+
+      cameFromJaxPage =
+        referrer.origin === current.origin &&
+        referrer.pathname !== current.pathname;
+
+    } catch (error) {
+
+      cameFromJaxPage = false;
+
+    }
+
+  }
+
+
+  /*
+    Если вернулись на главную
+    с другой страницы сайта —
+    заставку не показываем.
+  */
+
+  if (cameFromJaxPage) {
 
     jaxIntro.remove();
 
   } else {
 
-    /* Запоминаем, что заставка была показана */
-    sessionStorage.setItem('jaxIntroShown', 'true');
+    /*
+      Прямой вход или обновление
+      главной страницы —
+      показываем заставку.
+    */
 
-    jaxIntroVideo.addEventListener('ended', () => {
+    jaxIntroVideo.addEventListener(
+      'ended',
+      () => {
 
-      jaxIntro.classList.add('is-hidden');
+        jaxIntro.classList.add(
+          'is-hidden'
+        );
 
-      setTimeout(() => {
+        setTimeout(() => {
+
+          jaxIntro.remove();
+
+        }, 500);
+
+      }
+    );
+
+
+    jaxIntroVideo.addEventListener(
+      'error',
+      () => {
+
         jaxIntro.remove();
-      }, 500);
 
-    });
-
-    /* Если видео не загрузилось */
-    jaxIntroVideo.addEventListener('error', () => {
-      jaxIntro.remove();
-    });
+      }
+    );
 
   }
 

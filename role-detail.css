@@ -549,3 +549,7 @@
   .plague-page .role-hero-title {
     bottom: 220px;
   }
+
+  .role-detail-logo {
+    cursor: pointer;
+  }

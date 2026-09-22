@@ -33,7 +33,7 @@
     text-decoration: none;
   
     font-size: 28px;
-    font-family: serif;
+    font-family: "CinzelRus", serif;
     font-weight: 200;
   }
   
@@ -388,6 +388,5 @@
   }
 
   .rules-logo {
-    color: inherit;
-    text-decoration: none;
+    cursor: pointer;
   }

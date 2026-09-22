@@ -10,52 +10,33 @@ body {
 ========================= */
 
 .settings-page {
-    position: relative;
+  position: relative;
+
+  min-height: 100vh;
+
+  padding:
+    22px
+    22px
+    80px;
+
+  box-sizing: border-box;
+
+  background: #050505;
+
+  color: rgba(255, 255, 255, 0.92);
+}
   
-    min-height: 100vh;
+.settings-page button,
+.settings-page input {
+    font-family: "CinzelRus", serif;
+}
+
   
-    padding:
-      22px
-      22px
-      80px;
-  
-    box-sizing: border-box;
-  
-    background: #050505;
-  
-    color: rgba(255, 255, 255, 0.92);
-  }
-  
-  
-  /* Верх */
-  
-  .settings-back {
-    position: absolute;
-    top: 22px;
-    left: 22px;
-  
-    color: rgba(255, 255, 255, 0.8);
-  
-    font-size: 32px;
-    line-height: 1;
-  
-    text-decoration: none;
-  }
-  
-  .settings-logo {
-    text-align: center;
-  
-    font-size: 18px;
-    letter-spacing: 0.32em;
-  
-    color: rgba(255, 255, 255, 0.55);
-  }
-  
-  
-  .settings-header {
-    margin-top: 60px;
-    text-align: center;
-  }
+.settings-header {
+  padding-top: 35px;
+  margin-top: 60;
+  text-align: center;
+}
   
   .settings-header h1 {
     margin: 0;
@@ -120,7 +101,7 @@ body {
   
     outline: none;
   
-    font-family: inherit;
+    font-family: "CinzelRus", serif;
     font-size: 20px;
   
     letter-spacing: 0.08em;
@@ -150,6 +131,7 @@ body {
   
   .settings-card {
     min-height: 92px;
+
   
     display: flex;
     align-items: center;
@@ -214,7 +196,7 @@ body {
     border: 0;
     background: transparent;
   
-    font-family: inherit;
+    font-family: "CinzelRus", serif;
   
     font-size: 11px;
     letter-spacing: 0.23em;
@@ -247,7 +229,7 @@ body {
     color:
       rgba(255, 255, 255, 0.85);
   
-    font-family: inherit;
+      font-family: "CinzelRus", serif;
   
     font-size: 10px;
   
@@ -282,3 +264,37 @@ body {
   .settings-field input:focus::placeholder {
     color: transparent;
   }
+
+
+/* ШАПКА — как на остальных страницах */
+
+.settings-top {
+  position: relative;
+  top: -22px;
+
+  height: 84px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-back {
+  position: absolute;
+  left: 0;
+
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+
+  font-size: 22px;
+}
+
+.settings-logo {
+  color: inherit;
+  text-decoration: none;
+
+  font-size: 18px;
+  letter-spacing: 0.22em;
+
+  cursor: pointer;
+}

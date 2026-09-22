@@ -71,3 +71,88 @@ window.addEventListener(
   'storage',
   updateFloatingCart
 );
+
+/* =========================
+   ВКЛАДКИ МАГАЗИНА
+========================= */
+
+const shopTabButtons =
+  document.querySelectorAll('[data-shop-tab]');
+
+const masksSection =
+  document.getElementById('masksSection');
+
+const featuresSection =
+  document.getElementById('featuresSection');
+
+
+shopTabButtons.forEach(button => {
+
+  button.addEventListener('click', () => {
+
+    const selectedTab =
+      button.dataset.shopTab;
+
+
+    shopTabButtons.forEach(tabButton => {
+      tabButton.classList.remove('is-active');
+    });
+
+
+    button.classList.add('is-active');
+
+
+    if (selectedTab === 'masks') {
+
+      masksSection.hidden = false;
+      featuresSection.hidden = true;
+
+    }
+
+
+    if (selectedTab === 'features') {
+
+      masksSection.hidden = true;
+      featuresSection.hidden = false;
+
+    }
+
+  });
+
+});
+
+/* =========================
+   УНИКАЛЬНЫЙ НИК
+========================= */
+
+const nicknameDetailsBtn =
+  document.getElementById('nicknameDetailsBtn');
+
+const nicknameFeature =
+  document.getElementById('nicknameFeature');
+
+
+if (nicknameDetailsBtn) {
+
+  nicknameDetailsBtn.addEventListener('click', event => {
+
+    event.stopPropagation();
+
+    window.location.href =
+      'nickname.html';
+
+  });
+
+}
+
+
+if (nicknameFeature) {
+
+  nicknameFeature.addEventListener('click', () => {
+
+    window.location.href =
+      'nickname.html';
+
+  });
+
+}

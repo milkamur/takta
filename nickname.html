@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Уникальный ник — JAX</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="nickname.css">
+</head>
+
+
+<body>
+
+  <main class="nickname-page">
+
+
+    <!-- ШАПКА -->
+    <header class="nickname-header">
+
+        <a
+          href="shop.html"
+          class="nickname-back jax-back"
+          aria-label="Назад"
+        >
+          ←
+        </a>
+      
+        <div
+          class="nickname-logo jax-logo"
+          onclick="window.location.href='index.html'"
+          role="link"
+          tabindex="0"
+        >
+          JAX
+        </div>
+      
+      </header>
+
+
+
+    <!-- HERO -->
+    <section class="nickname-hero">
+      
+        <h1>
+          УНИКАЛЬНЫЙ НИК
+        </h1>
+      
+        <p class="nickname-intro">
+          Имя, которое принадлежит только тебе.
+        </p>
+      
+      </section>
+
+
+    <!-- ФОРМА -->
+    <section class="nickname-order">
+
+      <div class="nickname-field">
+
+        <label for="nicknameInput">
+          ЖЕЛАЕМЫЙ НИК
+        </label>
+
+        <input
+          id="nicknameInput"
+          type="text"
+          placeholder="@YOURNAME"
+          maxlength="20"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <div class="nickname-field">
+
+        <label for="nicknameComment">
+          КОММЕНТАРИЙ
+        </label>
+
+        <textarea
+          id="nicknameComment"
+          placeholder="Дополнительные пожелания к заказу"
+          maxlength="300"
+          rows="4"
+        ></textarea>
+
+      </div>
+
+
+
+      <!-- ИНФОРМАЦИЯ -->
+      <div class="nickname-notice">
+
+        <span>
+          КАК ЭТО РАБОТАЕТ
+        </span>
+      
+        <p>
+          После отправки заявки оператор JAX
+          свяжется с вами для подтверждения ника.
+          Оплата производится после согласования.
+        </p>
+      
+      </div>
+
+
+
+      <!-- КНОПКА -->
+      <button
+      class="nickname-submit"
+      id="nicknameSubmit"
+      type="button"
+    >
+      <span>
+        ОТПРАВИТЬ ЗАЯВКУ
+      </span>
+    
+      <span>
+        →
+      </span>
+    </button>
+
+    </section>
+
+
+  </main>
+
+<!-- SUPABASE LIBRARY -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- НАШ SUPABASE CLIENT -->
+<script src="supabase.js"></script>
+
+<!-- ЛОГИКА ЗАЯВКИ НА НИК -->
+<script src="nickname.js?v=2"></script>
+
+</body>
+
+</html>

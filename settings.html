@@ -10,6 +10,7 @@
 
   <title>Настройки — JAX</title>
 
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="account.css">
   <link rel="stylesheet" href="settings.css">
 </head>
@@ -18,11 +19,22 @@
 
   <main class="settings-page">
 
-    <a href="account.html" class="settings-back">←</a>
+  <header class="settings-top">
 
-    <div class="settings-logo">
-        JAX
-      </div>
+    <a href="account.html" class="settings-back jax-back">
+      ←
+    </a>
+    
+    <div
+      class="settings-logo jax-logo"
+      onclick="window.location.href='index.html'"
+      role="link"
+      tabindex="0"
+    >
+      JAX
+    </div>
+  
+  </header>
 
 
     <section class="settings-header">
@@ -53,8 +65,6 @@
   СОХРАНИТЬ
 </button>
 
-
-    </section>
 
 
     <section class="settings-section">

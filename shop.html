@@ -21,13 +21,18 @@
     <!-- ШАПКА -->
     <header class="shop-header">
 
-      <a href="index.html" class="shop-back" aria-label="Назад">
+      <a href="index.html" class="shop-back jax-back" aria-label="Назад">
         ←
       </a>
-
-      <a href="index.html" class="shop-logo">
+    
+      <div
+        class="shop-logo jax-logo"
+        onclick="window.location.href='index.html'"
+        role="link"
+        tabindex="0"
+      >
         JAX
-      </a>
+      </div>
 
       <a href="cart.html" class="shop-cart-button" aria-label="Корзина">
         <img
@@ -56,21 +61,30 @@
     </section>
 
 
-    <!-- ФИЛЬТР -->
+<!-- ФИЛЬТР -->
 <nav class="shop-filter">
 
   <button
     class="shop-filter-btn is-active"
     type="button"
+    data-shop-tab="masks"
   >
     МАСКИ
+  </button>
+
+  <button
+    class="shop-filter-btn"
+    type="button"
+    data-shop-tab="features"
+  >
+    ВОЗМОЖНОСТИ
   </button>
 
 </nav>
 
 
     <!-- ТОВАРЫ -->
-    <section class="shop-grid">
+    <section class="shop-grid" id="masksSection">
 
 
       <!-- МЕДВЕДЬ -->
@@ -290,6 +304,65 @@
 </article>
 
     </section>
+
+<!-- ВОЗМОЖНОСТИ -->
+<section class="shop-features" id="featuresSection" hidden>
+
+  <article
+    class="shop-feature-card"
+    id="nicknameFeature"
+  >
+
+    <div class="shop-feature-visual">
+
+      <span class="shop-feature-mini">
+        JAX
+      </span>
+
+      <div class="shop-feature-nickname">
+        @YOURNAME
+      </div>
+
+      <span class="shop-feature-status">
+        UNIQUE ID
+      </span>
+
+    </div>
+
+
+    <div class="shop-feature-content">
+
+      <span class="shop-product-label">
+        ВОЗМОЖНОСТЬ
+      </span>
+
+      <h2>
+        УНИКАЛЬНЫЙ НИК
+      </h2>
+      
+      <p class="shop-feature-price">
+        2 000 ₽
+      </p>
+      
+      <p class="shop-feature-description">
+        ИМЯ, КОТОРОЕ ПРИНАДЛЕЖИТ<br>
+        ТОЛЬКО ТЕБЕ.
+      </p>
+
+      <button
+        class="shop-feature-button"
+        id="nicknameDetailsBtn"
+        type="button"
+      >
+        <span>ПОДРОБНЕЕ</span>
+        <span>→</span>
+      </button>
+
+    </div>
+
+  </article>
+
+</section>
 
 
     <!-- ФИНАЛЬНЫЙ ТЕКСТ -->

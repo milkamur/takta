@@ -1,0 +1,235 @@
+/* =========================
+   PUBLIC OFFER — JAX
+========================= */
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+  }
+  
+  .offer-page {
+    width: 100%;
+    min-height: 100vh;
+  
+    padding:
+      calc(24px + env(safe-area-inset-top))
+      22px
+      calc(50px + env(safe-area-inset-bottom));
+  }
+  
+  
+  /* =========================
+     HEADER
+  ========================= */
+  
+  .offer-header {
+    position: relative;
+  
+    height: 54px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .offer-back {
+    position: absolute;
+    left: 0;
+  
+    padding: 0;
+  
+    border: 0;
+    background: transparent;
+  
+    color: rgba(255, 255, 255, 0.55);
+  
+    font: inherit;
+    font-size: 28px;
+    font-weight: 200;
+  
+    cursor: pointer;
+  }
+  
+  .offer-logo {
+    font-family: "CinzelRus", serif;
+    font-size: 18px;
+    font-weight: 300;
+  
+    letter-spacing: 0.38em;
+  
+    color: rgba(255, 255, 255, 0.82);
+  
+    cursor: pointer;
+  }
+  
+  
+  /* =========================
+     HERO
+  ========================= */
+  
+  .offer-hero {
+    padding: 65px 0 55px;
+  }
+  
+  .offer-kicker {
+    display: block;
+  
+    margin-bottom: 18px;
+  
+    font-size: 8px;
+    letter-spacing: 0.45em;
+  
+    color: rgba(255, 255, 255, 0.28);
+  }
+  
+  .offer-hero h1 {
+    margin: 0;
+  
+    font-family: "CinzelRus", serif;
+    font-size: clamp(42px, 12vw, 64px);
+    font-weight: 400;
+  
+    line-height: 1.02;
+    letter-spacing: 0.06em;
+  
+    color: rgba(255, 255, 255, 0.94);
+  }
+  
+  .offer-hero p {
+    margin: 22px 0 0;
+  
+    max-width: 330px;
+  
+    font-size: 10px;
+    line-height: 1.8;
+  
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  
+    color: rgba(255, 255, 255, 0.35);
+  }
+  
+  
+  /* =========================
+     CONTENT
+  ========================= */
+  
+  .offer-content {
+    width: 100%;
+  }
+  
+  .offer-section {
+    position: relative;
+  
+    padding: 34px 0 38px;
+  
+    border-top:
+      1px solid rgba(255, 255, 255, 0.10);
+  }
+  
+  .offer-number {
+    display: block;
+  
+    margin-bottom: 14px;
+  
+    font-size: 8px;
+    letter-spacing: 0.35em;
+  
+    color: rgba(255, 255, 255, 0.22);
+  }
+  
+  .offer-section h2 {
+    margin: 0 0 20px;
+  
+    font-family: "CinzelRus", serif;
+    font-size: 19px;
+    font-weight: 400;
+  
+    line-height: 1.35;
+    letter-spacing: 0.12em;
+  
+    color: rgba(255, 255, 255, 0.88);
+  }
+  
+  .offer-section p {
+    margin: 0 0 15px;
+  
+    max-width: 600px;
+  
+    font-size: 13px;
+    line-height: 1.85;
+  
+    letter-spacing: 0.025em;
+  
+    color: rgba(255, 255, 255, 0.48);
+  }
+  
+  .offer-section p:last-child {
+    margin-bottom: 0;
+  }
+  
+  
+  /* =========================
+     CONTACTS
+  ========================= */
+  
+  .offer-section:last-child p {
+    line-height: 2;
+  }
+  
+  
+  /* =========================
+     FOOTER
+  ========================= */
+  
+  .offer-footer {
+    padding: 50px 0 20px;
+  
+    text-align: center;
+  
+    border-top:
+      1px solid rgba(255, 255, 255, 0.10);
+  }
+  
+  .offer-footer-logo {
+    margin-bottom: 18px;
+  
+    font-family: "CinzelRus", serif;
+    font-size: 18px;
+  
+    letter-spacing: 0.4em;
+  
+    color: rgba(255, 255, 255, 0.75);
+  
+    cursor: pointer;
+  }
+  
+  .offer-footer p {
+    margin: 0;
+  
+    font-size: 9px;
+    letter-spacing: 0.25em;
+  
+    color: rgba(255, 255, 255, 0.25);
+  }
+  
+  
+  /* =========================
+     DESKTOP / TABLET
+  ========================= */
+  
+  @media (min-width: 700px) {
+  
+    .offer-page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  
+  }
