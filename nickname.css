@@ -29,6 +29,7 @@
   
   .nickname-header {
     position: relative;
+    top: -10px;
   
     height: 54px;
   
