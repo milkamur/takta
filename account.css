@@ -531,7 +531,7 @@
     font-size: 9px;
     letter-spacing: 2px;
   
-    color: rgba(255,255,255,.38);
+    color: rgba(255, 255, 255, 0.48);
   }
 
   /* РАСКРЫТИЕ БРОНЕЙ */
@@ -1119,4 +1119,66 @@
   line-height: 1;
 
   z-index: 10;
+}
+
+/* =========================
+   ОПЛАТА БРОНИ
+========================= */
+
+.booking-payment-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px 18px;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  color: #fff;
+  text-decoration: none;
+
+  font-family: "CinzelRus";
+  font-size: 11px;
+  letter-spacing: 0.08em;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.booking-payment-btn:active {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.booking-payment-btn span {
+  font-size: 17px;
+  line-height: 1;
+}
+
+/* =========================
+   СТАТУС БРОНИ
+========================= */
+
+.booking-item-status.paid {
+  color: #55d982;
+  opacity: 1;
+
+  text-shadow:
+    0 0 12px rgba(85, 217, 130, 0.18);
+}
+
+.booking-item-status.pending {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.booking-item-status.cancelled {
+  color: rgba(255, 255, 255, 0.3);
 }

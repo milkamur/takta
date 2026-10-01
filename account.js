@@ -487,7 +487,6 @@ async function loadBookings() {
     console.error(error);
 
     return;
-
   }
 
 
@@ -507,14 +506,13 @@ async function loadBookings() {
     `;
 
     return;
-
   }
 
 
   data.forEach((booking) => {
 
     const date =
-      new Date(booking.game_date);
+      new Date(booking.game_date + "T00:00:00");
 
 
     const formattedDate =
@@ -529,16 +527,72 @@ async function loadBookings() {
         .toUpperCase();
 
 
+    /* =========================
+       СТАТУС
+    ========================= */
+
     let statusText =
-      "ОЖИДАЕТ ПОДТВЕРЖДЕНИЯ";
+      "ОЖИДАЕТ ОПЛАТЫ";
+
+    let statusClass =
+      "pending";
+
+    let paymentButton = "";
 
 
-    if (
-      booking.status === "confirmed"
-    ) {
-      statusText = "ПОДТВЕРЖДЕНО";
+    // ОЖИДАЕТ ОПЛАТЫ
+    if (booking.status === "pending") {
+
+      statusText =
+        "ОЖИДАЕТ ОПЛАТЫ";
+
+      statusClass =
+        "pending";
+
+      paymentButton = `
+        <a
+          href="https://securepayecom.com/sc/byltvJggZCVZEYUc"
+          class="booking-payment-btn"
+        >
+          ОПЛАТИТЬ 5 000 ₽
+          <span>→</span>
+        </a>
+      `;
     }
 
+
+    // ОПЛАЧЕНО
+    if (
+      booking.status === "paid" ||
+      booking.status === "confirmed"
+    ) {
+
+      statusText =
+        "ОПЛАЧЕНО ✓";
+
+      statusClass =
+        "paid";
+
+      paymentButton = "";
+    }
+
+
+    // ОТМЕНЕНО
+    if (booking.status === "cancelled") {
+
+      statusText =
+        "БРОНЬ ОТМЕНЕНА";
+
+      statusClass =
+        "cancelled";
+
+      paymentButton = "";
+    }
+
+
+    /* =========================
+       КАРТОЧКА БРОНИ
+    ========================= */
 
     const item =
       document.createElement("div");
@@ -559,9 +613,11 @@ async function loadBookings() {
         ${booking.game_title}
       </div>
 
-      <div class="booking-item-status">
+      <div class="booking-item-status ${statusClass}">
         ${statusText}
       </div>
+
+      ${paymentButton}
 
     `;
 
@@ -600,16 +656,32 @@ if (
 
 }
 
-const phoneLoginToggle = document.getElementById("phoneLoginToggle");
+
+/* ==============================
+   ВХОД ПО НОМЕРУ
+============================== */
+
+const phoneLoginToggle =
+  document.getElementById("phoneLoginToggle");
+
 
 if (phoneLoginToggle && phoneForm) {
-  phoneLoginToggle.addEventListener("click", () => {
-    phoneForm.classList.toggle("is-open");
 
-    const isOpen = phoneForm.classList.contains("is-open");
+  phoneLoginToggle.addEventListener(
+    "click",
+    () => {
 
-    phoneLoginToggle.textContent = isOpen
-      ? "СКРЫТЬ ВХОД ПО НОМЕРУ"
-      : "ВОЙТИ ПО НОМЕРУ ТЕЛЕФОНА";
-  });
+      phoneForm.classList.toggle("is-open");
+
+      const isOpen =
+        phoneForm.classList.contains("is-open");
+
+      phoneLoginToggle.textContent =
+        isOpen
+          ? "СКРЫТЬ ВХОД ПО НОМЕРУ"
+          : "ВОЙТИ ПО НОМЕРУ ТЕЛЕФОНА";
+
+    }
+  );
+
 }
