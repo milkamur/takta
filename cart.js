@@ -126,3 +126,138 @@ function renderCart() {
 
 
 renderCart();
+
+// =========================
+// ОФОРМЛЕНИЕ ЗАКАЗА
+// =========================
+
+const checkoutButton =
+  document.querySelector('.cart-checkout-button');
+
+
+if (checkoutButton) {
+
+  checkoutButton.addEventListener(
+    'click',
+    async () => {
+
+      const cart = getCart();
+
+      if (cart.length === 0) {
+        return;
+      }
+
+
+      // =========================
+      // ПРОВЕРЯЕМ АВТОРИЗАЦИЮ
+      // =========================
+
+      const {
+        data: { session },
+        error: sessionError
+      } =
+        await supabaseClient.auth.getSession();
+
+
+      if (sessionError || !session?.user) {
+
+        window.location.href =
+          'account.html?mode=register&redirect=cart.html';
+
+        return;
+      }
+
+
+      checkoutButton.disabled = true;
+      checkoutButton.textContent =
+        'РЕЗЕРВИРУЕМ...';
+
+
+      try {
+
+        // =========================
+        // РЕЗЕРВИРУЕМ МАСКИ
+        // =========================
+
+        for (const item of cart) {
+
+          if (!item.productId) {
+            throw new Error(
+              `У товара ${item.name} отсутствует productId`
+            );
+          }
+
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient.rpc(
+              'reserve_product',
+              {
+                p_product_id:
+                  item.productId
+              }
+            );
+
+
+          if (error) {
+            throw error;
+          }
+
+
+          console.log(
+            'Товар зарезервирован:',
+            data
+          );
+        }
+
+
+        // =========================
+        // УСПЕХ
+        // =========================
+
+        checkoutButton.textContent =
+          'ТОВАР В РЕЗЕРВЕ';
+
+        console.log(
+          'Все товары успешно зарезервированы'
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          'Ошибка резервирования:',
+          error
+        );
+
+
+        // Если товар уже забрал другой человек
+        if (
+          error.message?.includes(
+            'PRODUCT_NOT_AVAILABLE'
+          )
+        ) {
+
+          alert(
+            'Одна из масок уже находится в резерве или продана.'
+          );
+
+        } else {
+
+          alert(
+            'Не удалось зарезервировать товар. Попробуйте ещё раз.'
+          );
+        }
+
+
+        checkoutButton.disabled = false;
+
+        checkoutButton.textContent =
+          'ОФОРМИТЬ ЗАКАЗ';
+      }
+
+    }
+  );
+}

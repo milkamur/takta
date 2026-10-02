@@ -28,35 +28,116 @@ function createOrderNumber() {
 
 
 // =========================
+// ПОЛУЧАЕМ ПРОФИЛЬ
+// =========================
+
+async function getProfile(userId) {
+
+  const {
+    data: profile,
+    error
+  } = await supabaseClient
+    .from("profiles")
+    .select(
+      "name, telegram_username, telegram_id, phone, email"
+    )
+    .eq("user_id", userId)
+    .maybeSingle();
+
+
+  if (error) {
+    console.error(
+      "Ошибка получения профиля:",
+      error
+    );
+
+    return null;
+  }
+
+  console.log(
+    "Профиль пользователя:",
+    profile
+  );
+
+  return profile;
+}
+
+
+// =========================
 // ПЕРЕХОД В PAYKEEPER
 // =========================
 
-function goToPayKeeper(orderNumber, user) {
+function goToPayKeeper(
+  orderNumber,
+  user,
+  profile
+) {
 
-  const form = document.createElement("form");
+  const form =
+    document.createElement("form");
 
   form.method = "POST";
   form.action = PAYKEEPER_URL;
 
-  // Данные, которые отправляем PayKeeper
+
+  // =========================
+  // ДАННЫЕ ПОЛЬЗОВАТЕЛЯ
+  // =========================
+
+  const clientName =
+    profile?.name ||
+    profile?.telegram_username ||
+    user.user_metadata?.full_name ||
+    user.user_metadata?.name ||
+    "Клиент JAX";
+
+  const clientEmail =
+    profile?.email ||
+    user.email ||
+    "";
+
+  const clientPhone =
+    profile?.phone ||
+    user.phone ||
+    "";
+
+
+  // =========================
+  // ДАННЫЕ PAYKEEPER
+  // =========================
+
   const fields = {
+
+    // Сумма
     sum: GAME_PRICE,
 
-    // ВАЖНО:
-    // именно этот номер PayKeeper потом
-    // вернёт нашему webhook
+    // Номер заказа JAX
     orderid: orderNumber,
 
-    service_name: "Бронирование игры JAX",
+    // Имя клиента
+    clientid: clientName,
 
-    // ID пользователя Supabase
-    clientid: user.id,
+    // Услуга
+    service_name:
+      "Бронирование игры JAX",
 
-    // E-mail пользователя, если есть
-    client_email: user.email || ""
+    // Email
+    client_email:
+      clientEmail,
+
+    // Телефон
+    client_phone:
+      clientPhone
   };
 
 
+  console.log(
+    "Отправляем в PayKeeper:",
+    fields
+  );
+
+
+  // Создаём скрытые поля формы
   Object.entries(fields).forEach(
     ([name, value]) => {
 
@@ -65,7 +146,7 @@ function goToPayKeeper(orderNumber, user) {
 
       input.type = "hidden";
       input.name = name;
-      input.value = value;
+      input.value = value ?? "";
 
       form.appendChild(input);
     }
@@ -74,8 +155,23 @@ function goToPayKeeper(orderNumber, user) {
 
   document.body.appendChild(form);
 
-  // Отправляем POST в PayKeeper
+  // Отправляем в PayKeeper
   form.submit();
+}
+
+
+// =========================
+// ВОЗВРАЩАЕМ КНОПКУ
+// =========================
+
+function resetBookingButton() {
+
+  bookingButton.disabled = false;
+
+  bookingButton
+    .querySelector("span")
+    .textContent =
+      "ЗАБРОНИРОВАТЬ";
 }
 
 
@@ -95,9 +191,24 @@ bookingButton.addEventListener(
     // =========================
 
     const {
-      data: { session }
+      data: { session },
+      error: sessionError
     } =
       await supabaseClient.auth.getSession();
+
+
+    if (sessionError) {
+
+      console.error(
+        "Ошибка получения сессии:",
+        sessionError
+      );
+
+      bookingMessage.textContent =
+        "Не удалось проверить аккаунт.";
+
+      return;
+    }
 
 
     if (!session?.user) {
@@ -109,17 +220,45 @@ bookingButton.addEventListener(
     }
 
 
+    const user = session.user;
+
+
     bookingButton.disabled = true;
+
+    bookingButton
+      .querySelector("span")
+      .textContent =
+        "ПРОВЕРЯЕМ ДАННЫЕ...";
+
+
+    // =========================
+    // ПОЛУЧАЕМ PROFILE
+    // =========================
+
+    const profile =
+      await getProfile(user.id);
+
+
+    if (!profile) {
+
+      bookingMessage.textContent =
+        "Не удалось получить данные профиля.";
+
+      resetBookingButton();
+
+      return;
+    }
+
+
+    // =========================
+    // ПРОВЕРЯЕМ БРОНЬ
+    // =========================
 
     bookingButton
       .querySelector("span")
       .textContent =
         "ПРОВЕРЯЕМ БРОНЬ...";
 
-
-    // =========================
-    // ИЩЕМ СУЩЕСТВУЮЩУЮ БРОНЬ
-    // =========================
 
     const {
       data: existingBooking,
@@ -130,7 +269,7 @@ bookingButton.addEventListener(
         .select("*")
         .eq(
           "user_id",
-          session.user.id
+          user.id
         )
         .eq(
           "game_date",
@@ -162,12 +301,7 @@ bookingButton.addEventListener(
       bookingMessage.textContent =
         "Не удалось проверить бронь. Попробуйте ещё раз.";
 
-      bookingButton.disabled = false;
-
-      bookingButton
-        .querySelector("span")
-        .textContent =
-          "ЗАБРОНИРОВАТЬ";
+      resetBookingButton();
 
       return;
     }
@@ -183,14 +317,16 @@ bookingButton.addEventListener(
         existingBooking.order_number;
 
 
-      // Если почему-то номер отсутствует
+      // Если номера заказа нет
       if (!orderNumber) {
 
         orderNumber =
           createOrderNumber();
 
 
-        const { error: updateError } =
+        const {
+          error: updateError
+        } =
           await supabaseClient
             .from("bookings")
             .update({
@@ -213,13 +349,7 @@ bookingButton.addEventListener(
           bookingMessage.textContent =
             "Не удалось подготовить оплату.";
 
-          bookingButton.disabled =
-            false;
-
-          bookingButton
-            .querySelector("span")
-            .textContent =
-              "ЗАБРОНИРОВАТЬ";
+          resetBookingButton();
 
           return;
         }
@@ -237,7 +367,8 @@ bookingButton.addEventListener(
 
       goToPayKeeper(
         orderNumber,
-        session.user
+        user,
+        profile
       );
 
       return;
@@ -265,8 +396,9 @@ bookingButton.addEventListener(
       await supabaseClient
         .from("bookings")
         .insert({
+
           user_id:
-            session.user.id,
+            user.id,
 
           game_date:
             GAME_DATE,
@@ -297,13 +429,7 @@ bookingButton.addEventListener(
       bookingMessage.textContent =
         "Не удалось создать бронь. Попробуйте ещё раз.";
 
-      bookingButton.disabled =
-        false;
-
-      bookingButton
-        .querySelector("span")
-        .textContent =
-          "ЗАБРОНИРОВАТЬ";
+      resetBookingButton();
 
       return;
     }
@@ -330,7 +456,8 @@ bookingButton.addEventListener(
 
     goToPayKeeper(
       orderNumber,
-      session.user
+      user,
+      profile
     );
   }
 );
