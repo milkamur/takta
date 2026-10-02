@@ -15,6 +15,15 @@ const PAYMENT_URL =
 
 
 // =========================
+// СОЗДАНИЕ НОМЕРА ЗАКАЗА
+// =========================
+
+function createOrderNumber() {
+  return "JAX-" + crypto.randomUUID().split("-")[0].toUpperCase();
+}
+
+
+// =========================
 // БРОНИРОВАНИЕ
 // =========================
 
@@ -73,6 +82,37 @@ bookingButton.addEventListener("click", async () => {
   // =========================
 
   if (existingBooking) {
+
+    // Если это старая бронь без номера — создаём номер
+    if (!existingBooking.order_number) {
+      const orderNumber = createOrderNumber();
+
+      const { error: updateError } =
+        await supabaseClient
+          .from("bookings")
+          .update({
+            order_number: orderNumber
+          })
+          .eq("id", existingBooking.id);
+
+      if (updateError) {
+        console.error(
+          "Ошибка создания номера заказа:",
+          updateError
+        );
+
+        bookingMessage.textContent =
+          "Не удалось подготовить оплату. Попробуйте ещё раз.";
+
+        bookingButton.disabled = false;
+
+        bookingButton.querySelector("span").textContent =
+          "ЗАБРОНИРОВАТЬ";
+
+        return;
+      }
+    }
+
     bookingMessage.textContent =
       "БРОНЬ УЖЕ СОЗДАНА. ПЕРЕХОДИМ К ОПЛАТЕ...";
 
@@ -92,6 +132,8 @@ bookingButton.addEventListener("click", async () => {
   bookingButton.querySelector("span").textContent =
     "БРОНИРУЕМ...";
 
+  const orderNumber = createOrderNumber();
+
   const { data: newBooking, error: insertError } =
     await supabaseClient
       .from("bookings")
@@ -100,7 +142,8 @@ bookingButton.addEventListener("click", async () => {
         game_date: GAME_DATE,
         game_time: GAME_TIME,
         game_title: GAME_TITLE,
-        status: "pending"
+        status: "pending",
+        order_number: orderNumber
       })
       .select()
       .single();

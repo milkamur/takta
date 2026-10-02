@@ -540,25 +540,25 @@ async function loadBookings() {
     let paymentButton = "";
 
 
-    // ОЖИДАЕТ ОПЛАТЫ
-    if (booking.status === "pending") {
+// ОЖИДАЕТ ОПЛАТЫ
+if (booking.status === "pending") {
 
-      statusText =
-        "ОЖИДАЕТ ОПЛАТЫ";
+  statusText =
+    "ОЖИДАЕТ ОПЛАТЫ";
 
-      statusClass =
-        "pending";
+  statusClass =
+    "pending";
 
-      paymentButton = `
-        <a
-          href="https://securepayecom.com/sc/byltvJggZCVZEYUc"
-          class="booking-payment-btn"
-        >
-          ОПЛАТИТЬ 5 000 ₽
-          <span>→</span>
-        </a>
-      `;
-    }
+  paymentButton = `
+    <a
+      href="https://lnk.paykeeper.ru/KXpnUmdU"
+      class="booking-payment-btn"
+    >
+      ОПЛАТИТЬ 5 000 ₽
+      <span>→</span>
+    </a>
+  `;
+}
 
 
     // ОПЛАЧЕНО
