@@ -4,14 +4,20 @@ const profileBox = document.getElementById("profileBox");
 const phoneForm = document.getElementById("phoneForm");
 const authPhone = document.getElementById("authPhone");
 
-const privacyConsent = document.getElementById("privacyConsent");
+const privacyConsent =
+  document.getElementById("privacyConsent");
 
-const telegramLoginBtn = document.getElementById("telegramLoginBtn");
+const telegramLoginBtn =
+  document.getElementById("telegramLoginBtn");
 
-const profileName = document.getElementById("profileName");
-const profileEmail = document.getElementById("profileEmail");
+const profileName =
+  document.getElementById("profileName");
 
-const logoutBtn = document.getElementById("logoutBtn");
+const profileEmail =
+  document.getElementById("profileEmail");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
 
 const settingsButton =
   document.getElementById("settingsButton");
@@ -22,13 +28,19 @@ const settingsButton =
 ============================== */
 
 if (privacyConsent) {
+
   privacyConsent.addEventListener("change", () => {
+
     if (privacyConsent.checked) {
+
       document
         .querySelector(".auth-consent")
         ?.classList.remove("consent-error");
+
     }
+
   });
+
 }
 
 
@@ -37,9 +49,13 @@ if (privacyConsent) {
 ============================== */
 
 function normalizePhone(value) {
+
   let digits = value.replace(/\D/g, "");
 
-  if (digits.length === 11 && digits.startsWith("8")) {
+  if (
+    digits.length === 11 &&
+    digits.startsWith("8")
+  ) {
     digits = "7" + digits.slice(1);
   }
 
@@ -47,7 +63,10 @@ function normalizePhone(value) {
     digits = "7" + digits;
   }
 
-  if (digits.length !== 11 || !digits.startsWith("7")) {
+  if (
+    digits.length !== 11 ||
+    !digits.startsWith("7")
+  ) {
     return null;
   }
 
@@ -60,6 +79,7 @@ function normalizePhone(value) {
 ============================== */
 
 function formatPhoneInput(value) {
+
   let digits = value.replace(/\D/g, "");
 
   if (digits.startsWith("8")) {
@@ -99,25 +119,34 @@ function formatPhoneInput(value) {
 if (authPhone) {
 
   authPhone.addEventListener("input", () => {
-    authPhone.value = formatPhoneInput(authPhone.value);
+
+    authPhone.value =
+      formatPhoneInput(authPhone.value);
+
   });
+
 
   authPhone.addEventListener("focus", () => {
+
     if (
       !authPhone.value ||
       authPhone.value.trim() === "+7"
     ) {
       authPhone.value = "+7 ";
     }
+
   });
 
+
   authPhone.addEventListener("blur", () => {
+
     if (
       !authPhone.value ||
       authPhone.value.trim() === "+7"
     ) {
       authPhone.value = "+7 ";
     }
+
   });
 
 }
@@ -128,7 +157,9 @@ if (authPhone) {
 ============================== */
 
 function formatPhone(phone) {
-  const digits = phone.replace(/\D/g, "");
+
+  const digits =
+    String(phone).replace(/\D/g, "");
 
   if (digits.length !== 11) {
     return phone;
@@ -140,53 +171,297 @@ function formatPhone(phone) {
     `${digits.slice(7, 9)}-` +
     `${digits.slice(9, 11)}`
   );
+
+}
+
+
+/* ==============================
+   СОХРАНЕНИЕ ПРОФИЛЯ
+   В ТАБЛИЦУ profiles
+============================== */
+
+async function syncProfile(user) {
+
+  if (!user) return null;
+
+  const meta =
+    user.user_metadata || {};
+
+  const identities =
+    user.identities || [];
+
+
+  /* =========================
+     TELEGRAM
+  ========================= */
+
+  const telegramIdentity =
+    identities.find((identity) => {
+
+      const provider =
+        String(identity.provider || "")
+          .toLowerCase();
+
+      return provider.includes("telegram");
+
+    });
+
+
+  const telegramData =
+    telegramIdentity?.identity_data || {};
+
+
+  /*
+    Telegram username.
+
+    Проверяем несколько вариантов,
+    потому что название поля зависит
+    от того, что именно вернул provider.
+  */
+
+  let telegramUsername =
+    telegramData.username ||
+    telegramData.user_name ||
+    telegramData.preferred_username ||
+    meta.telegram_username ||
+    meta.username ||
+    meta.user_name ||
+    meta.preferred_username ||
+    null;
+
+
+  if (telegramUsername) {
+
+    telegramUsername =
+      String(telegramUsername)
+        .replace(/^@/, "")
+        .trim();
+
+  }
+
+
+  /*
+    Telegram ID
+  */
+
+  const telegramId =
+    telegramData.id ||
+    telegramData.sub ||
+    telegramData.provider_id ||
+    telegramIdentity?.id ||
+    meta.telegram_id ||
+    meta.provider_id ||
+    (
+      String(meta.iss || "")
+        .toLowerCase()
+        .includes("telegram")
+        ? meta.sub
+        : null
+    ) ||
+    null;
+
+
+  /* =========================
+     ИМЯ
+  ========================= */
+
+  const firstName =
+    telegramData.first_name ||
+    meta.first_name ||
+    "";
+
+  const lastName =
+    telegramData.last_name ||
+    meta.last_name ||
+    "";
+
+  const telegramFullName =
+    `${firstName} ${lastName}`.trim();
+
+
+  const name =
+    telegramFullName ||
+    telegramData.full_name ||
+    telegramData.name ||
+    meta.full_name ||
+    meta.name ||
+    meta.nickname ||
+    telegramUsername ||
+    null;
+
+
+  /* =========================
+     ТЕЛЕФОН
+  ========================= */
+
+  const phone =
+    user.phone ||
+    meta.phone ||
+    meta.phone_unverified ||
+    localStorage.getItem("takta_phone") ||
+    null;
+
+
+  /* =========================
+     EMAIL
+  ========================= */
+
+  const email =
+    user.email ||
+    meta.email ||
+    telegramData.email ||
+    null;
+
+
+  /* =========================
+     СОХРАНЯЕМ
+  ========================= */
+
+  const profileData = {
+
+    user_id: user.id,
+
+    name:
+      name && name !== "ИГРОК"
+        ? name
+        : null,
+
+    telegram_username:
+      telegramUsername,
+
+    telegram_id:
+      telegramId
+        ? String(telegramId)
+        : null,
+
+    phone:
+      phone,
+
+    email:
+      email,
+
+    updated_at:
+      new Date().toISOString()
+
+  };
+
+
+  console.log(
+    "JAX profile sync:",
+    profileData
+  );
+
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("profiles")
+    .upsert(
+      profileData,
+      {
+        onConflict: "user_id"
+      }
+    )
+    .select()
+    .single();
+
+
+  if (error) {
+
+    console.error(
+      "Ошибка сохранения профиля:",
+      error
+    );
+
+    return null;
+
+  }
+
+
+  console.log(
+    "Профиль JAX сохранён:",
+    data
+  );
+
+  return data;
+
 }
 
 
 /* ==============================
    TELEGRAM
-   ПОКА ЗАГЛУШКА
 ============================== */
 
 if (telegramLoginBtn) {
-    telegramLoginBtn.addEventListener("click", async () => {
-  
-      // Проверяем согласие на обработку ПД
-      if (!privacyConsent.checked) {
+
+  telegramLoginBtn.addEventListener(
+    "click",
+    async () => {
+
+      // Проверяем согласие
+      if (
+        privacyConsent &&
+        !privacyConsent.checked
+      ) {
+
         const consent =
-          document.querySelector(".auth-consent");
-  
-        consent?.classList.add("consent-error");
-  
+          document.querySelector(
+            ".auth-consent"
+          );
+
+        consent?.classList.add(
+          "consent-error"
+        );
+
         setTimeout(() => {
-          consent?.classList.remove("consent-error");
+
+          consent?.classList.remove(
+            "consent-error"
+          );
+
         }, 2000);
-  
+
         return;
+
       }
-  
+
+
       // Вход через Telegram
       const { error } =
-        await supabaseClient.auth.signInWithOAuth({
-          provider: "custom:telegram",
-          options: {
-            redirectTo:
-              "https://milkamur.github.io/takta/account.html"
-          }
-        });
-  
+        await supabaseClient.auth
+          .signInWithOAuth({
+
+            provider:
+              "custom:telegram",
+
+            options: {
+
+              redirectTo:
+                "https://milkamur.github.io/takta/account.html"
+
+            }
+
+          });
+
+
       if (error) {
+
         console.error(
           "Telegram login error:",
           error
         );
-  
+
         alert(
           "Не удалось открыть вход через Telegram"
         );
+
       }
-    });
-  }
+
+    }
+  );
+
+}
 
 
 /* ==============================
@@ -196,127 +471,194 @@ if (telegramLoginBtn) {
 
 if (phoneForm) {
 
-  phoneForm.addEventListener("submit", async (event) => {
+  phoneForm.addEventListener(
+    "submit",
+    async (event) => {
 
-    event.preventDefault();
-
-    const phone = normalizePhone(authPhone.value);
-
-    if (!phone) {
-      alert("Введите корректный номер телефона");
-      return;
-    }
+      event.preventDefault();
 
 
-    /* Проверяем согласие */
-
-    if (!privacyConsent.checked) {
-
-      const consent =
-        document.querySelector(".auth-consent");
-
-      consent?.classList.add("consent-error");
-
-      setTimeout(() => {
-        consent?.classList.remove("consent-error");
-      }, 2000);
-
-      return;
-    }
+      const phone =
+        normalizePhone(
+          authPhone.value
+        );
 
 
-    const button =
-      phoneForm.querySelector(".auth-submit");
+      if (!phone) {
 
-    const buttonText =
-      button.querySelector(".auth-submit-text");
+        alert(
+          "Введите корректный номер телефона"
+        );
 
+        return;
 
-    button.disabled = true;
-    buttonText.textContent = "ВХОДИМ...";
-
-
-    /*
-      Создаём временного анонимного
-      пользователя Supabase.
-    */
-
-    const {
-      data,
-      error
-    } = await supabaseClient.auth.signInAnonymously();
+      }
 
 
-    if (error) {
+      /* Проверяем согласие */
 
-      console.error(error);
+      if (
+        privacyConsent &&
+        !privacyConsent.checked
+      ) {
 
-      button.disabled = false;
-      buttonText.textContent = "ВОЙТИ";
+        const consent =
+          document.querySelector(
+            ".auth-consent"
+          );
 
-      alert(
-        "Не удалось войти. Проверь настройки Supabase."
+        consent?.classList.add(
+          "consent-error"
+        );
+
+        setTimeout(() => {
+
+          consent?.classList.remove(
+            "consent-error"
+          );
+
+        }, 2000);
+
+        return;
+
+      }
+
+
+      const button =
+        phoneForm.querySelector(
+          ".auth-submit"
+        );
+
+      const buttonText =
+        button?.querySelector(
+          ".auth-submit-text"
+        );
+
+
+      if (button) {
+        button.disabled = true;
+      }
+
+      if (buttonText) {
+        buttonText.textContent =
+          "ВХОДИМ...";
+      }
+
+
+      /*
+        Пока сохраняем существующую
+        логику входа по телефону:
+        создаём анонимного пользователя.
+      */
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient.auth
+          .signInAnonymously();
+
+
+      if (error) {
+
+        console.error(error);
+
+        if (button) {
+          button.disabled = false;
+        }
+
+        if (buttonText) {
+          buttonText.textContent =
+            "ВОЙТИ";
+        }
+
+        alert(
+          "Не удалось войти. Проверь настройки Supabase."
+        );
+
+        return;
+
+      }
+
+
+      /*
+        Сохраняем телефон в metadata.
+        Пока номер не подтверждён SMS.
+      */
+
+      const {
+        data: updatedData,
+        error: updateError
+      } =
+        await supabaseClient.auth
+          .updateUser({
+
+            data: {
+
+              phone_unverified:
+                phone,
+
+              name:
+                "ИГРОК",
+
+              login_method:
+                "phone_unverified"
+
+            }
+
+          });
+
+
+      if (updateError) {
+
+        console.error(
+          updateError
+        );
+
+      }
+
+
+      /*
+        Локальная копия телефона.
+      */
+
+      localStorage.setItem(
+        "takta_phone",
+        phone
       );
 
-      return;
-    }
 
-
-    /*
-      Сохраняем введённый телефон
-      в metadata.
-
-      ВАЖНО:
-      телефон пока НЕ подтверждён.
-    */
-
-    const {
-      data: updatedData,
-      error: updateError
-    } = await supabaseClient.auth.updateUser({
-      data: {
-        phone_unverified: phone,
-        name: "ИГРОК",
-        login_method: "phone_unverified"
+      if (button) {
+        button.disabled = false;
       }
-    });
+
+      if (buttonText) {
+        buttonText.textContent =
+          "ВОЙТИ";
+      }
 
 
-    if (updateError) {
-      console.error(updateError);
-    }
+      const user =
+        updatedData?.user ||
+        data?.user;
 
 
-    /*
-      Дополнительная локальная копия,
-      чтобы номер точно отображался
-      в интерфейсе.
-    */
+      if (user) {
 
-    localStorage.setItem(
-      "takta_phone",
-      phone
-    );
+        // НОВОЕ:
+        // сохраняем пользователя
+        // в таблицу profiles
 
+        await syncProfile(user);
 
-    button.disabled = false;
-    buttonText.textContent = "ВОЙТИ";
+        showProfile(user);
 
+        await loadBookings();
 
-    const user =
-      updatedData?.user ||
-      data?.user;
-
-
-    if (user) {
-
-      showProfile(user);
-
-      await loadBookings();
+      }
 
     }
-
-  });
+  );
 
 }
 
@@ -327,55 +669,83 @@ if (phoneForm) {
 
 function showProfile(user) {
 
+  if (authBox) {
     authBox.style.display = "none";
-  
-    profileBox.classList.add("active");
-
-    if (settingsButton) {
-        settingsButton.style.display = "block";
-      }
-  
-  
-    /*
-      Настоящий подтверждённый телефон
-      появится позже.
-  
-      Пока берём временный номер
-      из metadata / localStorage.
-    */
-  
-    const phone =
-      user.phone ||
-      user.user_metadata?.phone_unverified ||
-      localStorage.getItem("takta_phone") ||
-      "";
-  
-  
-    if (profileEmail) {
-  
-      profileEmail.textContent =
-        phone
-          ? formatPhone(phone)
-          : "";
-  
-    }
-  
-  
-    const name =
-      user.user_metadata?.nickname ||
-      user.user_metadata?.name ||
-      "ИГРОК";
-  
-  
-    if (profileName) {
-  
-      profileName.textContent =
-        name.toUpperCase();
-  
-    }
-  
   }
 
+  if (profileBox) {
+    profileBox.classList.add("active");
+  }
+
+  if (settingsButton) {
+    settingsButton.style.display =
+      "block";
+  }
+
+
+  const phone =
+    user.phone ||
+    user.user_metadata?.phone ||
+    user.user_metadata?.phone_unverified ||
+    localStorage.getItem(
+      "takta_phone"
+    ) ||
+    "";
+
+
+  if (profileEmail) {
+
+    if (phone) {
+
+      profileEmail.textContent =
+        formatPhone(phone);
+
+    } else if (user.email) {
+
+      profileEmail.textContent =
+        user.email;
+
+    } else {
+
+      profileEmail.textContent = "";
+
+    }
+
+  }
+
+
+  const meta =
+    user.user_metadata || {};
+
+
+  const firstName =
+    meta.first_name || "";
+
+  const lastName =
+    meta.last_name || "";
+
+  const fullTelegramName =
+    `${firstName} ${lastName}`.trim();
+
+
+  const name =
+    fullTelegramName ||
+    meta.full_name ||
+    meta.nickname ||
+    meta.name ||
+    meta.username ||
+    meta.user_name ||
+    "ИГРОК";
+
+
+  if (profileName) {
+
+    profileName.textContent =
+      String(name).toUpperCase();
+
+  }
+
+}
 
 
 /* ==============================
@@ -384,12 +754,20 @@ function showProfile(user) {
 
 function showAuth() {
 
-  profileBox.classList.remove("active");
+  if (profileBox) {
+    profileBox.classList.remove(
+      "active"
+    );
+  }
 
-  authBox.style.display = "block";
+  if (authBox) {
+    authBox.style.display =
+      "block";
+  }
 
   if (settingsButton) {
-    settingsButton.style.display = "none";
+    settingsButton.style.display =
+      "none";
   }
 
 }
@@ -403,12 +781,26 @@ async function checkUserSession() {
 
   const {
     data: { session }
-  } = await supabaseClient.auth.getSession();
+  } =
+    await supabaseClient.auth
+      .getSession();
 
 
   if (session?.user) {
 
-    showProfile(session.user);
+    /*
+      НОВОЕ:
+      каждый раз после входа
+      синхронизируем профиль.
+    */
+
+    await syncProfile(
+      session.user
+    );
+
+    showProfile(
+      session.user
+    );
 
     await loadBookings();
 
@@ -430,23 +822,30 @@ checkUserSession();
 
 if (logoutBtn) {
 
-  logoutBtn.addEventListener("click", async () => {
+  logoutBtn.addEventListener(
+    "click",
+    async () => {
 
-    await supabaseClient.auth.signOut();
+      await supabaseClient.auth
+        .signOut();
 
-    localStorage.removeItem("takta_phone");
+      localStorage.removeItem(
+        "takta_phone"
+      );
 
-    if (authPhone) {
-      authPhone.value = "+7 ";
+      if (authPhone) {
+        authPhone.value = "+7 ";
+      }
+
+      if (privacyConsent) {
+        privacyConsent.checked =
+          false;
+      }
+
+      showAuth();
+
     }
-
-    if (privacyConsent) {
-      privacyConsent.checked = false;
-    }
-
-    showAuth();
-
-  });
+  );
 
 }
 
@@ -458,14 +857,19 @@ if (logoutBtn) {
 async function loadBookings() {
 
   const bookingList =
-    document.getElementById("bookingList");
+    document.getElementById(
+      "bookingList"
+    );
 
   if (!bookingList) return;
 
 
   const {
     data: { session }
-  } = await supabaseClient.auth.getSession();
+  } =
+    await supabaseClient.auth
+      .getSession();
+
 
   if (!session?.user) return;
 
@@ -473,13 +877,20 @@ async function loadBookings() {
   const {
     data,
     error
-  } = await supabaseClient
-    .from("bookings")
-    .select("*")
-    .eq("user_id", session.user.id)
-    .order("game_date", {
-      ascending: true
-    });
+  } =
+    await supabaseClient
+      .from("bookings")
+      .select("*")
+      .eq(
+        "user_id",
+        session.user.id
+      )
+      .order(
+        "game_date",
+        {
+          ascending: true
+        }
+      );
 
 
   if (error) {
@@ -487,13 +898,17 @@ async function loadBookings() {
     console.error(error);
 
     return;
+
   }
 
 
   bookingList.innerHTML = "";
 
 
-  if (!data || data.length === 0) {
+  if (
+    !data ||
+    data.length === 0
+  ) {
 
     bookingList.innerHTML = `
       <div class="booking-item">
@@ -506,13 +921,17 @@ async function loadBookings() {
     `;
 
     return;
+
   }
 
 
   data.forEach((booking) => {
 
     const date =
-      new Date(booking.game_date + "T00:00:00");
+      new Date(
+        booking.game_date +
+        "T00:00:00"
+      );
 
 
     const formattedDate =
@@ -540,28 +959,44 @@ async function loadBookings() {
     let paymentButton = "";
 
 
-// ОЖИДАЕТ ОПЛАТЫ
-if (booking.status === "pending") {
+    // ОЖИДАЕТ ОПЛАТЫ
 
-  statusText =
-    "ОЖИДАЕТ ОПЛАТЫ";
+    if (
+      booking.status ===
+      "pending"
+    ) {
 
-  statusClass =
-    "pending";
+      statusText =
+        "ОЖИДАЕТ ОПЛАТЫ";
 
-  paymentButton = `
-    <a
-      href="https://lnk.paykeeper.ru/KXpnUmdU"
-      class="booking-payment-btn"
-    >
-      ОПЛАТИТЬ 5 000 ₽
-      <span>→</span>
-    </a>
-  `;
-}
+      statusClass =
+        "pending";
+
+      /*
+        Эту старую кнопку пока
+        оставляем как в твоём файле.
+
+        Позже заменим её на оплату
+        с order_number, чтобы повторная
+        оплата тоже правильно
+        связывалась с бронью.
+      */
+
+      paymentButton = `
+        <a
+          href="https://lnk.paykeeper.ru/KXpnUmdU"
+          class="booking-payment-btn"
+        >
+          ОПЛАТИТЬ 5 000 ₽
+          <span>→</span>
+        </a>
+      `;
+
+    }
 
 
     // ОПЛАЧЕНО
+
     if (
       booking.status === "paid" ||
       booking.status === "confirmed"
@@ -574,11 +1009,16 @@ if (booking.status === "pending") {
         "paid";
 
       paymentButton = "";
+
     }
 
 
     // ОТМЕНЕНО
-    if (booking.status === "cancelled") {
+
+    if (
+      booking.status ===
+      "cancelled"
+    ) {
 
       statusText =
         "БРОНЬ ОТМЕНЕНА";
@@ -587,6 +1027,7 @@ if (booking.status === "pending") {
         "cancelled";
 
       paymentButton = "";
+
     }
 
 
@@ -595,8 +1036,9 @@ if (booking.status === "pending") {
     ========================= */
 
     const item =
-      document.createElement("div");
-
+      document.createElement(
+        "div"
+      );
 
     item.className =
       "booking-item";
@@ -622,7 +1064,9 @@ if (booking.status === "pending") {
     `;
 
 
-    bookingList.appendChild(item);
+    bookingList.appendChild(
+      item
+    );
 
   });
 
@@ -634,10 +1078,14 @@ if (booking.status === "pending") {
 ============================== */
 
 const bookingsBtn =
-  document.getElementById("bookingsBtn");
+  document.getElementById(
+    "bookingsBtn"
+  );
 
 const bookingList =
-  document.getElementById("bookingList");
+  document.getElementById(
+    "bookingList"
+  );
 
 
 if (
@@ -649,7 +1097,9 @@ if (
     "click",
     () => {
 
-      bookingList.classList.toggle("open");
+      bookingList.classList.toggle(
+        "open"
+      );
 
     }
   );
@@ -662,19 +1112,28 @@ if (
 ============================== */
 
 const phoneLoginToggle =
-  document.getElementById("phoneLoginToggle");
+  document.getElementById(
+    "phoneLoginToggle"
+  );
 
 
-if (phoneLoginToggle && phoneForm) {
+if (
+  phoneLoginToggle &&
+  phoneForm
+) {
 
   phoneLoginToggle.addEventListener(
     "click",
     () => {
 
-      phoneForm.classList.toggle("is-open");
+      phoneForm.classList.toggle(
+        "is-open"
+      );
 
       const isOpen =
-        phoneForm.classList.contains("is-open");
+        phoneForm.classList.contains(
+          "is-open"
+        );
 
       phoneLoginToggle.textContent =
         isOpen
