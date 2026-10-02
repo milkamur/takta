@@ -11,8 +11,14 @@ const cartTotal =
   document.getElementById('cartTotal');
 
 
+// =========================
+// КОРЗИНА
+// =========================
+
 function getCart() {
-  return JSON.parse(localStorage.getItem('jaxCart')) || [];
+  return JSON.parse(
+    localStorage.getItem('jaxCart')
+  ) || [];
 }
 
 
@@ -28,6 +34,10 @@ function formatPrice(price) {
   return price.toLocaleString('ru-RU') + ' ₽';
 }
 
+
+// =========================
+// ОТОБРАЖЕНИЕ КОРЗИНЫ
+// =========================
 
 function renderCart() {
 
@@ -56,7 +66,10 @@ function renderCart() {
 
     card.innerHTML = `
       <div class="cart-item-image">
-        <img src="${item.image}" alt="${item.name}">
+        <img
+          src="${item.image}"
+          alt="${item.name}"
+        >
       </div>
 
       <div class="cart-item-content">
@@ -74,13 +87,13 @@ function renderCart() {
         </p>
 
         <button
-        class="cart-remove-button"
-        type="button"
-        data-name="${item.name}"
-        aria-label="Удалить товар"
-      >
-        ×
-      </button>
+          class="cart-remove-button"
+          type="button"
+          data-name="${item.name}"
+          aria-label="Удалить товар"
+        >
+          ×
+        </button>
 
       </div>
     `;
@@ -90,35 +103,51 @@ function renderCart() {
   });
 
 
-  const total = cart.reduce(
-    (sum, item) => sum + item.price,
-    0
-  );
+  // =========================
+  // ИТОГОВАЯ СУММА
+  // =========================
+
+  const total =
+    cart.reduce(
+      (sum, item) =>
+        sum + item.price,
+      0
+    );
 
   cartTotal.textContent =
     formatPrice(total);
 
 
+  // =========================
+  // УДАЛЕНИЕ ТОВАРА
+  // =========================
+
   const removeButtons =
-    document.querySelectorAll('.cart-remove-button');
+    document.querySelectorAll(
+      '.cart-remove-button'
+    );
 
   removeButtons.forEach(button => {
 
-    button.addEventListener('click', () => {
+    button.addEventListener(
+      'click',
+      () => {
 
-      const productName =
-        button.dataset.name;
+        const productName =
+          button.dataset.name;
 
-      const newCart =
-        getCart().filter(
-          item => item.name !== productName
-        );
+        const newCart =
+          getCart().filter(
+            item =>
+              item.name !== productName
+          );
 
-      saveCart(newCart);
+        saveCart(newCart);
 
-      renderCart();
+        renderCart();
 
-    });
+      }
+    );
 
   });
 
@@ -127,19 +156,26 @@ function renderCart() {
 
 renderCart();
 
+
 // =========================
-// ОФОРМЛЕНИЕ ЗАКАЗА
+// СВЯЗАТЬСЯ С МЕНЕДЖЕРОМ
 // =========================
 
 const checkoutButton =
-  document.querySelector('.cart-checkout-button');
+  document.querySelector(
+    '.cart-checkout-button'
+  );
 
 
 if (checkoutButton) {
 
+  checkoutButton.textContent =
+    'СВЯЗАТЬСЯ С МЕНЕДЖЕРОМ';
+
+
   checkoutButton.addEventListener(
     'click',
-    async () => {
+    () => {
 
       const cart = getCart();
 
@@ -149,180 +185,64 @@ if (checkoutButton) {
 
 
       // =========================
-      // ПРОВЕРЯЕМ АВТОРИЗАЦИЮ
+      // СУММА ЗАКАЗА
       // =========================
 
-      const {
-        data: { session },
-        error: sessionError
-      } =
-        await supabaseClient.auth.getSession();
-
-
-      if (sessionError || !session?.user) {
-
-        window.location.href =
-          'account.html?mode=register&redirect=cart.html';
-
-        return;
-      }
-
-
-      checkoutButton.disabled = true;
-      checkoutButton.textContent =
-        'РЕЗЕРВИРУЕМ...';
-
-
-      try {
-
-        // =========================
-        // РЕЗЕРВИРУЕМ МАСКИ
-        // =========================
-
-        for (const item of cart) {
-
-          if (!item.productId) {
-            throw new Error(
-              `У товара ${item.name} отсутствует productId`
-            );
-          }
-
-
-          const {
-            data,
-            error
-          } =
-            await supabaseClient.rpc(
-              'reserve_product',
-              {
-                p_product_id:
-                  item.productId
-              }
-            );
-
-
-          if (error) {
-            throw error;
-          }
-
-
-          console.log(
-            'Товар зарезервирован:',
-            data
-          );
-        }
-
-
-// =========================
-// СОЗДАЁМ ЗАКАЗ
-// =========================
-
-const totalAmount = cart.reduce(
-  (sum, item) => sum + item.price,
-  0
-);
-
-const orderNumber =
-  'JAX-' +
-  Date.now();
-
-const {
-  data: order,
-  error: orderError
-} =
-  await supabaseClient
-    .from('shop_orders')
-    .insert({
-      order_number: orderNumber,
-      user_id: session.user.id,
-      total_amount: totalAmount,
-      status: 'pending'
-    })
-    .select()
-    .single();
-
-
-if (orderError) {
-  throw orderError;
-}
-
-console.log(
-  'Заказ создан:',
-  order
-);
-
-
-// =========================
-// ДОБАВЛЯЕМ ТОВАРЫ В ЗАКАЗ
-// =========================
-
-const orderItems =
-  cart.map(item => ({
-    order_id: order.id,
-    product_id: item.productId,
-    price: item.price
-  }));
-
-
-const {
-  error: itemsError
-} =
-  await supabaseClient
-    .from('shop_order_items')
-    .insert(orderItems);
-
-
-if (itemsError) {
-  throw itemsError;
-}
-
-
-// =========================
-// УСПЕХ
-// =========================
-
-checkoutButton.textContent =
-  'ЗАКАЗ СОЗДАН';
-
-console.log(
-  'Заказ полностью создан:',
-  orderNumber
-);
-
-
-      } catch (error) {
-
-        console.error(
-          'Ошибка резервирования:',
-          error
+      const total =
+        cart.reduce(
+          (sum, item) =>
+            sum + item.price,
+          0
         );
 
 
-        // Если товар уже забрал другой человек
-        if (
-          error.message?.includes(
-            'PRODUCT_NOT_AVAILABLE'
+      // =========================
+      // СПИСОК МАСОК
+      // =========================
+
+      const productList =
+        cart
+          .map(
+            item =>
+              `${item.name} — ${formatPrice(item.price)}`
           )
-        ) {
-
-          alert(
-            'Одна из масок уже находится в резерве или продана.'
-          );
-
-        } else {
-
-          alert(
-            'Не удалось зарезервировать товар. Попробуйте ещё раз.'
-          );
-        }
+          .join('\n');
 
 
-        checkoutButton.disabled = false;
+      // =========================
+      // ТЕКСТ ДЛЯ TELEGRAM
+      // =========================
 
-        checkoutButton.textContent =
-          'ОФОРМИТЬ ЗАКАЗ';
-      }
+      const message =
+`Здравствуйте!
+
+Хочу приобрести:
+
+${productList}
+
+Итого: ${formatPrice(total)}`;
+
+
+      console.log(
+        'Сообщение для менеджера:',
+        message
+      );
+
+
+      // =========================
+      // TELEGRAM
+      // =========================
+
+      const telegramUrl =
+      'https://t.me/stonedks';
+
+
+      window.open(
+        telegramUrl,
+        '_blank'
+      );
 
     }
   );
+
 }
