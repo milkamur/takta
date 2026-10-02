@@ -213,16 +213,81 @@ if (checkoutButton) {
         }
 
 
-        // =========================
-        // УСПЕХ
-        // =========================
+// =========================
+// СОЗДАЁМ ЗАКАЗ
+// =========================
 
-        checkoutButton.textContent =
-          'ТОВАР В РЕЗЕРВЕ';
+const totalAmount = cart.reduce(
+  (sum, item) => sum + item.price,
+  0
+);
 
-        console.log(
-          'Все товары успешно зарезервированы'
-        );
+const orderNumber =
+  'JAX-' +
+  Date.now();
+
+const {
+  data: order,
+  error: orderError
+} =
+  await supabaseClient
+    .from('shop_orders')
+    .insert({
+      order_number: orderNumber,
+      user_id: session.user.id,
+      total_amount: totalAmount,
+      status: 'pending'
+    })
+    .select()
+    .single();
+
+
+if (orderError) {
+  throw orderError;
+}
+
+console.log(
+  'Заказ создан:',
+  order
+);
+
+
+// =========================
+// ДОБАВЛЯЕМ ТОВАРЫ В ЗАКАЗ
+// =========================
+
+const orderItems =
+  cart.map(item => ({
+    order_id: order.id,
+    product_id: item.productId,
+    price: item.price
+  }));
+
+
+const {
+  error: itemsError
+} =
+  await supabaseClient
+    .from('shop_order_items')
+    .insert(orderItems);
+
+
+if (itemsError) {
+  throw itemsError;
+}
+
+
+// =========================
+// УСПЕХ
+// =========================
+
+checkoutButton.textContent =
+  'ЗАКАЗ СОЗДАН';
+
+console.log(
+  'Заказ полностью создан:',
+  orderNumber
+);
 
 
       } catch (error) {
