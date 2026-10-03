@@ -827,8 +827,6 @@ async function checkUserSession() {
       session.user
     );
 
-    await ;
-
   } else {
 
     showAuth();
