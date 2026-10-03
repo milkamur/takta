@@ -10,34 +10,52 @@ const cartSummary =
 const cartTotal =
   document.getElementById('cartTotal');
 
+const checkoutButton =
+  document.querySelector('.cart-checkout-button');
 
-// =========================
-// КОРЗИНА
-// =========================
+
+/* =========================
+   КОРЗИНА
+========================= */
 
 function getCart() {
-  return JSON.parse(
-    localStorage.getItem('jaxCart')
-  ) || [];
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem('jaxCart')
+    ) || [];
+
+  } catch {
+
+    return [];
+
+  }
+
 }
 
 
 function saveCart(cart) {
+
   localStorage.setItem(
     'jaxCart',
     JSON.stringify(cart)
   );
+
 }
 
 
 function formatPrice(price) {
-  return price.toLocaleString('ru-RU') + ' ₽';
+
+  return Number(price)
+    .toLocaleString('ru-RU') + ' ₽';
+
 }
 
 
-// =========================
-// ОТОБРАЖЕНИЕ КОРЗИНЫ
-// =========================
+/* =========================
+   ОТОБРАЖЕНИЕ КОРЗИНЫ
+========================= */
 
 function renderCart() {
 
@@ -45,32 +63,39 @@ function renderCart() {
 
   cartItemsContainer.innerHTML = '';
 
+
   if (cart.length === 0) {
 
     cartEmpty.style.display = '';
     cartSummary.style.display = 'none';
 
     return;
+
   }
+
 
   cartEmpty.style.display = 'none';
   cartSummary.style.display = '';
 
 
-  cart.forEach(item => {
+  cart.forEach((item, index) => {
 
     const card =
       document.createElement('article');
 
     card.className = 'cart-item';
 
+
     card.innerHTML = `
       <div class="cart-item-image">
+
         <img
           src="${item.image}"
           alt="${item.name}"
         >
+
       </div>
+
 
       <div class="cart-item-content">
 
@@ -86,10 +111,11 @@ function renderCart() {
           ${formatPrice(item.price)}
         </p>
 
+
         <button
           class="cart-remove-button"
           type="button"
-          data-name="${item.name}"
+          data-index="${index}"
           aria-label="Удалить товар"
         >
           ×
@@ -98,34 +124,29 @@ function renderCart() {
       </div>
     `;
 
+
     cartItemsContainer.appendChild(card);
 
   });
 
 
-  // =========================
-  // ИТОГОВАЯ СУММА
-  // =========================
-
   const total =
     cart.reduce(
       (sum, item) =>
-        sum + item.price,
+        sum + Number(item.price),
       0
     );
+
 
   cartTotal.textContent =
     formatPrice(total);
 
 
-  // =========================
-  // УДАЛЕНИЕ ТОВАРА
-  // =========================
-
   const removeButtons =
     document.querySelectorAll(
       '.cart-remove-button'
     );
+
 
   removeButtons.forEach(button => {
 
@@ -133,14 +154,13 @@ function renderCart() {
       'click',
       () => {
 
-        const productName =
-          button.dataset.name;
+        const index =
+          Number(button.dataset.index);
 
         const newCart =
-          getCart().filter(
-            item =>
-              item.name !== productName
-          );
+          getCart();
+
+        newCart.splice(index, 1);
 
         saveCart(newCart);
 
@@ -158,24 +178,14 @@ renderCart();
 
 
 // =========================
-// СВЯЗАТЬСЯ С МЕНЕДЖЕРОМ
+// ОФОРМЛЕНИЕ ЗАКАЗА
 // =========================
-
-const checkoutButton =
-  document.querySelector(
-    '.cart-checkout-button'
-  );
-
 
 if (checkoutButton) {
 
-  checkoutButton.textContent =
-    'СВЯЗАТЬСЯ С МЕНЕДЖЕРОМ';
-
-
   checkoutButton.addEventListener(
     'click',
-    () => {
+    async () => {
 
       const cart = getCart();
 
@@ -185,64 +195,127 @@ if (checkoutButton) {
 
 
       // =========================
-      // СУММА ЗАКАЗА
+      // ПРОВЕРЯЕМ АВТОРИЗАЦИЮ
       // =========================
 
-      const total =
-        cart.reduce(
-          (sum, item) =>
-            sum + item.price,
-          0
+      const {
+        data: { session },
+        error: sessionError
+      } =
+        await supabaseClient.auth.getSession();
+
+
+      if (sessionError || !session?.user) {
+
+        window.location.href =
+          'account.html?mode=register&redirect=cart.html';
+
+        return;
+      }
+
+
+      checkoutButton.disabled = true;
+      checkoutButton.textContent =
+        'ОФОРМЛЯЕМ...';
+
+
+      try {
+
+        // =========================
+        // СОЗДАЁМ ЗАКАЗ
+        // =========================
+
+        const totalAmount =
+          cart.reduce(
+            (sum, item) => sum + item.price,
+            0
+          );
+
+
+        const orderNumber =
+          'JAX-' + Date.now();
+
+
+        const {
+          data: order,
+          error: orderError
+        } =
+          await supabaseClient
+            .from('shop_orders')
+            .insert({
+              order_number: orderNumber,
+              user_id: session.user.id,
+              total_amount: totalAmount,
+              status: 'new'
+            })
+            .select()
+            .single();
+
+
+        if (orderError) {
+          throw orderError;
+        }
+
+
+        // =========================
+        // ДОБАВЛЯЕМ ТОВАРЫ
+        // В ЗАКАЗ
+        // =========================
+
+        const orderItems =
+          cart.map(item => ({
+            order_id: order.id,
+            product_id: item.productId,
+            price: item.price
+          }));
+
+
+        const {
+          error: itemsError
+        } =
+          await supabaseClient
+            .from('shop_order_items')
+            .insert(orderItems);
+
+
+        if (itemsError) {
+          throw itemsError;
+        }
+
+
+        // =========================
+        // ОЧИЩАЕМ КОРЗИНУ
+        // =========================
+
+        localStorage.removeItem('jaxCart');
+
+
+        // =========================
+        // ОТКРЫВАЕМ СТРАНИЦУ УСПЕХА
+        // =========================
+
+        window.location.href =
+          `order-success.html?order=${encodeURIComponent(orderNumber)}`;
+
+
+      } catch (error) {
+
+        console.error(
+          'Ошибка оформления заказа:',
+          error
         );
 
 
-      // =========================
-      // СПИСОК МАСОК
-      // =========================
-
-      const productList =
-        cart
-          .map(
-            item =>
-              `${item.name} — ${formatPrice(item.price)}`
-          )
-          .join('\n');
+        alert(
+          'Не удалось оформить заказ. Попробуйте ещё раз.'
+        );
 
 
-      // =========================
-      // ТЕКСТ ДЛЯ TELEGRAM
-      // =========================
-
-      const message =
-`Здравствуйте!
-
-Хочу приобрести:
-
-${productList}
-
-Итого: ${formatPrice(total)}`;
-
-
-      console.log(
-        'Сообщение для менеджера:',
-        message
-      );
-
-
-      // =========================
-      // TELEGRAM
-      // =========================
-
-      const telegramUrl =
-      'https://t.me/stonedks';
-
-
-      window.open(
-        telegramUrl,
-        '_blank'
-      );
+        checkoutButton.disabled = false;
+        checkoutButton.textContent =
+          'ОФОРМИТЬ ЗАКАЗ';
+      }
 
     }
   );
-
 }
