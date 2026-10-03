@@ -827,7 +827,7 @@ async function checkUserSession() {
       session.user
     );
 
-    await loadBookings();
+    await ;
 
   } else {
 
@@ -874,6 +874,172 @@ if (logoutBtn) {
 
 }
 
+// =========================
+// ПОВТОРНАЯ ОПЛАТА БРОНИ
+// =========================
+
+async function repeatBookingPayment(bookingId) {
+
+  try {
+
+    // Получаем бронь
+    const {
+      data: booking,
+      error: bookingError
+    } = await supabaseClient
+      .from("bookings")
+      .select("*")
+      .eq("id", bookingId)
+      .single();
+
+    if (bookingError || !booking) {
+      console.error(
+        "Не удалось получить бронь:",
+        bookingError
+      );
+
+      alert("Не удалось подготовить оплату.");
+      return;
+    }
+
+
+    // Получаем текущего пользователя
+    const {
+      data: { session }
+    } = await supabaseClient.auth.getSession();
+
+    if (!session?.user) {
+      alert("Необходимо войти в аккаунт.");
+      return;
+    }
+
+    const user = session.user;
+
+
+    // Получаем профиль
+    const {
+      data: profile,
+      error: profileError
+    } = await supabaseClient
+      .from("profiles")
+      .select(
+        "name, telegram_username, phone, email"
+      )
+      .eq("user_id", user.id)
+      .maybeSingle();
+
+    if (profileError) {
+      console.error(
+        "Ошибка получения профиля:",
+        profileError
+      );
+    }
+
+
+    // Номер заказа уже должен быть у брони
+    const orderNumber = booking.order_number;
+
+    if (!orderNumber) {
+      console.error(
+        "У брони отсутствует order_number"
+      );
+
+      alert("Не удалось определить номер заказа.");
+      return;
+    }
+
+    // Получаем актуальную цену игры
+const {
+  data: game,
+  error: gameError
+} = await supabaseClient
+  .from("games")
+  .select("price")
+  .eq("is_active", true)
+  .limit(1)
+  .maybeSingle();
+
+if (gameError || !game) {
+  console.error(
+    "Не удалось получить цену игры:",
+    gameError
+  );
+
+  alert("Не удалось определить стоимость игры.");
+  return;
+}
+
+const gamePrice =
+  Number(game.price).toFixed(2);
+
+    // Данные клиента
+    const clientName =
+      profile?.name ||
+      profile?.telegram_username ||
+      user.user_metadata?.full_name ||
+      user.user_metadata?.name ||
+      "Клиент JAX";
+
+    const clientEmail =
+      profile?.email ||
+      user.email ||
+      "";
+
+    const clientPhone =
+      profile?.phone ||
+      user.phone ||
+      "";
+
+
+    // Создаём форму PayKeeper
+    const form = document.createElement("form");
+
+    form.method = "POST";
+    form.action =
+      "https://club241640526-vk.server.paykeeper.ru/create/";
+
+
+      const fields = {
+        sum: gamePrice,
+      orderid: orderNumber,
+      clientid: clientName,
+      service_name: "Бронирование игры JAX",
+      client_email: clientEmail,
+      client_phone: clientPhone
+    };
+
+
+    Object.entries(fields).forEach(
+      ([name, value]) => {
+
+        const input =
+          document.createElement("input");
+
+        input.type = "hidden";
+        input.name = name;
+        input.value = value ?? "";
+
+        form.appendChild(input);
+      }
+    );
+
+
+    document.body.appendChild(form);
+
+    form.submit();
+
+  } catch (error) {
+
+    console.error(
+      "Ошибка повторной оплаты:",
+      error
+    );
+
+    alert(
+      "Не удалось перейти к оплате."
+    );
+  }
+}
 
 /* ==============================
    ЗАГРУЗКА БРОНЕЙ
@@ -1007,14 +1173,15 @@ async function loadBookings() {
         связывалась с бронью.
       */
 
-      paymentButton = `
-        <a
-          href="https://lnk.paykeeper.ru/KXpnUmdU"
+        paymentButton = `
+        <button
+          type="button"
           class="booking-payment-btn"
+          onclick="repeatBookingPayment('${booking.id}')"
         >
-          ОПЛАТИТЬ 5 000 ₽
+          ОПЛАТИТЬ
           <span>→</span>
-        </a>
+        </button>
       `;
 
     }
