@@ -44,6 +44,80 @@
         ЗАКАЗЫ
       </h1>
 
+      <!-- =========================
+     УПРАВЛЕНИЕ ИГРОЙ
+========================= -->
+
+<section class="admin-game">
+
+  <p class="admin-game-label">
+    ТЕКУЩАЯ ИГРА
+  </p>
+
+  <div class="admin-game-fields">
+
+    <label class="admin-game-field">
+      <span>НАЗВАНИЕ</span>
+
+      <input
+        type="text"
+        id="adminGameTitle"
+        autocomplete="off"
+      >
+    </label>
+
+
+    <label class="admin-game-field">
+      <span>ДАТА</span>
+
+      <input
+        type="date"
+        id="adminGameDate"
+      >
+    </label>
+
+
+    <label class="admin-game-field">
+      <span>ВРЕМЯ</span>
+
+      <input
+        type="time"
+        id="adminGameTime"
+      >
+    </label>
+
+
+    <label class="admin-game-field">
+      <span>ЦЕНА, ₽</span>
+
+      <input
+        type="number"
+        id="adminGamePrice"
+        min="0"
+        step="1"
+        inputmode="numeric"
+      >
+    </label>
+
+  </div>
+
+
+  <button
+    type="button"
+    class="admin-game-save"
+    id="adminGameSave"
+  >
+    СОХРАНИТЬ ИГРУ
+  </button>
+
+
+  <p
+    class="admin-game-message"
+    id="adminGameMessage"
+  ></p>
+
+</section>
+
       <div class="admin-tabs">
 
         <button
