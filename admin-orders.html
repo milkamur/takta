@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Заказы — JAX Admin</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin-orders.css">
+</head>
+
+<body>
+
+  <main class="admin-page">
+
+    <header class="admin-header">
+
+      <a href="index.html" class="admin-back">
+        ‹
+      </a>
+
+      <div class="admin-logo">
+        JAX
+      </div>
+
+      <div class="admin-header-space"></div>
+
+    </header>
+
+
+    <section class="admin-content">
+
+      <p class="admin-label">
+        ADMIN
+      </p>
+
+      <h1>
+        ЗАКАЗЫ
+      </h1>
+
+      <div class="admin-tabs">
+
+        <button
+          class="admin-tab active"
+          data-filter="all"
+          type="button"
+        >
+          ВСЕ
+        </button>
+
+        <button
+          class="admin-tab"
+          data-filter="pending"
+          type="button"
+        >
+          НОВЫЕ
+        </button>
+
+        <button
+          class="admin-tab"
+          data-filter="paid"
+          type="button"
+        >
+          ОПЛАЧЕНЫ
+        </button>
+
+      </div>
+
+
+      <div
+        id="adminOrdersLoading"
+        class="admin-loading"
+      >
+        ЗАГРУЖАЕМ ЗАКАЗЫ...
+      </div>
+
+
+      <div
+        id="adminOrdersEmpty"
+        class="admin-empty"
+        hidden
+      >
+        ЗАКАЗОВ НЕТ
+      </div>
+
+
+      <div
+        id="adminOrdersList"
+        class="admin-orders-list"
+        hidden
+      ></div>
+
+    </section>
+
+  </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="supabase.js"></script>
+  <script src="admin-orders.js"></script>
+
+</body>
+
+</html>
