@@ -1,0 +1,367 @@
+/* =========================
+   JAX ADMIN — ORDERS
+   MOBILE
+========================= */
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #050505;
+}
+
+body {
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "CinzelRus";
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.admin-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  padding:
+    env(safe-area-inset-top)
+    22px
+    70px;
+
+  background: #050505;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.admin-header {
+  position: relative;
+
+  height: 82px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-back {
+  width: 40px;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 36px;
+  font-weight: 300;
+
+  line-height: 1;
+
+  text-decoration: none;
+}
+
+.admin-logo {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  font-size: 18px;
+  font-weight: 400;
+
+  letter-spacing: 0.32em;
+
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.admin-header-space {
+  width: 40px;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.admin-content {
+  padding-top: 34px;
+}
+
+.admin-label {
+  margin: 0 0 12px;
+
+  font-size: 9px;
+
+  letter-spacing: 0.35em;
+
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.admin-content h1 {
+  margin: 0;
+
+  font-size: 46px;
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: 0.04em;
+
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* =========================
+   FILTERS
+========================= */
+
+.admin-tabs {
+  display: flex;
+
+  gap: 26px;
+
+  margin-top: 38px;
+  margin-bottom: 34px;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+.admin-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-tab {
+  flex: 0 0 auto;
+
+  padding: 0 0 9px;
+
+  border: 0;
+  border-bottom: 1px solid transparent;
+
+  background: transparent;
+
+  font-family: "CinzelRus";
+  font-size: 9px;
+
+  letter-spacing: 0.22em;
+
+  color: rgba(255, 255, 255, 0.32);
+
+  cursor: pointer;
+}
+
+.admin-tab.active {
+  color: rgba(255, 255, 255, 0.88);
+
+  border-bottom-color:
+    rgba(255, 255, 255, 0.55);
+}
+
+
+/* =========================
+   ORDERS
+========================= */
+
+.admin-orders-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+
+/* =========================
+   ORDER CARD
+========================= */
+
+.admin-order-card {
+  padding: 22px 20px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.13);
+
+  border-radius: 20px;
+
+  background:
+    rgba(255, 255, 255, 0.015);
+}
+
+.admin-order-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 15px;
+
+  margin-bottom: 24px;
+}
+
+.admin-order-number {
+  font-size: 11px;
+
+  letter-spacing: 0.16em;
+
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.admin-order-date {
+  font-size: 8px;
+
+  letter-spacing: 0.12em;
+
+  color: rgba(255, 255, 255, 0.28);
+
+  text-align: right;
+}
+
+
+/* =========================
+   PRODUCT
+========================= */
+
+.admin-product-label {
+  margin-bottom: 7px;
+
+  font-size: 8px;
+
+  letter-spacing: 0.25em;
+
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.admin-product-name {
+  margin: 0;
+
+  font-size: 24px;
+  font-weight: 400;
+
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.admin-order-price {
+  margin-top: 9px;
+
+  font-size: 13px;
+
+  letter-spacing: 0.12em;
+
+  color: rgba(255, 255, 255, 0.52);
+}
+
+
+/* =========================
+   CUSTOMER
+========================= */
+
+.admin-customer {
+  margin-top: 24px;
+  padding-top: 20px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.09);
+}
+
+.admin-customer-label {
+  margin-bottom: 14px;
+
+  font-size: 8px;
+
+  letter-spacing: 0.25em;
+
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.admin-customer-name {
+  margin-bottom: 10px;
+
+  font-size: 13px;
+
+  letter-spacing: 0.1em;
+
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.admin-customer a {
+  display: block;
+
+  width: fit-content;
+
+  margin-top: 8px;
+
+  font-size: 10px;
+
+  letter-spacing: 0.1em;
+
+  color: rgba(255, 255, 255, 0.48);
+
+  text-decoration: none;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.admin-status {
+  margin-top: 24px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 16px;
+}
+
+.admin-status-label {
+  font-size: 8px;
+
+  letter-spacing: 0.22em;
+
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.admin-status-select {
+  max-width: 190px;
+
+  padding: 10px 12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.14);
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background: #090909;
+
+  font-family: "CinzelRus";
+  font-size: 8px;
+
+  letter-spacing: 0.1em;
+
+  color: rgba(255, 255, 255, 0.72);
+}
+
+
+/* =========================
+   LOADING / EMPTY
+========================= */
+
+.admin-loading,
+.admin-empty {
+  padding: 50px 0;
+
+  text-align: center;
+
+  font-size: 9px;
+
+  letter-spacing: 0.25em;
+
+  color: rgba(255, 255, 255, 0.3);
+}

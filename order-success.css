@@ -1,92 +1,134 @@
-@font-face {
-    font-family: "CinzelRus";
-    src: url("fonts/CinzelRus.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-  }
+/* =========================
+   ORDER SUCCESS
+========================= */
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #050505;
+}
+
+body {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.success-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  padding:
+    env(safe-area-inset-top)
+    22px
+    calc(50px + env(safe-area-inset-bottom));
+
+  background:
+    radial-gradient(
+      circle at 50% 18%,
+      rgba(255, 255, 255, 0.035),
+      transparent 32%
+    ),
+    #050505;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.success-header {
+  position: relative;
+
+  height: 92px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding-top: 28px;
+
+  box-sizing: border-box;
+}
+
+.success-logo {
+  font-family: "CinzelRus";
+  font-size: 21px;
+  font-weight: 400;
+
+  letter-spacing: 0.32em;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.success-content {
+  width: 100%;
+  max-width: 520px;
+
+  margin: 25px auto 0;
+}
+
+
+/* =========================
+   SUCCESS MARK
+========================= */
+
+.success-content {
+    width: 100%;
+    max-width: 520px;
   
-  * {
-    box-sizing: border-box;
-  }
+    margin: 25px auto 0;
   
-  html,
-  body {
-    margin: 0;
-    min-height: 100%;
-    background: #000;
-  }
-  
-  body {
-    font-family: "CinzelRus", serif;
-    color: rgba(255, 255, 255, 0.92);
+    text-align: center;
   }
   
   
   /* =========================
-     PAGE
+     SUCCESS MARK
   ========================= */
-  
-  .success-page {
-    min-height: 100vh;
-    padding:
-      22px
-      22px
-      60px;
-  }
-  
-  
-  /* =========================
-     HEADER
-  ========================= */
-  
-  .success-header {
-    position: relative;
-  
-    height: 70px;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .success-logo {
-    font-size: 16px;
-    letter-spacing: 0.34em;
-  
-    color: rgba(255, 255, 255, 0.62);
-  
-    cursor: pointer;
-  }
-  
-  
-  /* =========================
-     CONTENT
-  ========================= */
-  
-  .success-content {
-    padding-top: 85px;
-  }
   
   .success-mark {
-    width: 42px;
-    height: 42px;
+    width: 52px;
+    height: 52px;
   
     display: flex;
     align-items: center;
     justify-content: center;
   
-    margin-bottom: 34px;
+    margin:
+      0
+      auto
+      36px;
   
     border:
-      1px solid rgba(255, 255, 255, 0.28);
+      1px solid
+      rgba(255, 255, 255, 0.34);
   
     border-radius: 50%;
   
-    font-size: 17px;
+    color: rgba(255, 255, 255, 0.92);
   
-    color:
-      rgba(255, 255, 255, 0.75);
+    font-family: "CinzelRus";
+    font-size: 22px;
+    font-weight: 400;
+  
+    box-shadow:
+      0 0 24px
+      rgba(255, 255, 255, 0.035);
   }
+  
+  
+  /* =========================
+     LABEL
+  ========================= */
   
   .success-label {
     margin:
@@ -94,145 +136,214 @@
       0
       18px;
   
-    font-size: 10px;
-    letter-spacing: 0.3em;
+    text-align: center;
   
-    color:
-      rgba(255, 255, 255, 0.30);
+    font-family: "CinzelRus";
+    font-size: 10px;
+    font-weight: 400;
+  
+    line-height: 1;
+  
+    letter-spacing: 0.34em;
+  
+    color: rgba(255, 255, 255, 0.34);
   }
+  
+  
+  /* =========================
+     TITLE
+  ========================= */
   
   .success-content h1 {
     margin: 0;
   
-    font-size: clamp(
-      42px,
-      12vw,
-      66px
-    );
+    text-align: center;
   
-    line-height: 1.08;
-  
+    font-family: "CinzelRus";
+    font-size: clamp(42px, 11vw, 52px);
     font-weight: 400;
   
-    letter-spacing: 0.025em;
+    line-height: 0.98;
   
-    color:
-      rgba(255, 255, 255, 0.90);
+    letter-spacing: -0.02em;
+  
+    color: rgba(255, 255, 255, 0.94);
   }
+  
+  
+  /* =========================
+     LINE
+  ========================= */
   
   .success-line {
     width: 100%;
     height: 1px;
   
     margin:
-      42px
+      38px
       0
-      34px;
+      30px;
   
     background:
-      rgba(255, 255, 255, 0.14);
+      rgba(255, 255, 255, 0.18);
   }
+  
+  
+  /* =========================
+     TEXT
+  ========================= */
   
   .success-text {
-    margin: 0;
+    margin-top: 32px;
   
-    font-size: 12px;
-    line-height: 2;
+    text-align: center;
   
-    letter-spacing: 0.15em;
-  
-    color:
-      rgba(255, 255, 255, 0.42);
-  }
-  
-  
-  /* =========================
-     MANAGER
-  ========================= */
-  
-  .success-manager-button {
-    width: 100%;
-  
-    min-height: 62px;
-  
-    margin-top: 55px;
-  
-    padding:
-      0
-      24px;
-  
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  
-    border:
-      1px solid rgba(255, 255, 255, 0.28);
-  
-    border-radius: 999px;
-  
-    color:
-      rgba(255, 255, 255, 0.78);
-  
-    text-decoration: none;
-  
+    font-family: "CinzelRus";
     font-size: 10px;
+    font-weight: 400;
+  
+    line-height: 2.1;
+  
+    letter-spacing: 0.20em;
+  
+    color: rgba(255, 255, 255, 0.46);
+  }
+
+
+/* =========================
+   MAIN BUTTON
+========================= */
+
+.success-manager-button {
+  width: 100%;
+  min-height: 64px;
+
+  margin-top: 52px;
+
+  padding:
+    0
+    24px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.32);
+
+  border-radius: 34px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.025),
+      rgba(255, 255, 255, 0.005)
+    );
+
+  color: rgba(255, 255, 255, 0.78);
+
+  text-decoration: none;
+
+  font-family: "CinzelRus";
+  font-size: 10px;
+  font-weight: 400;
+
+  letter-spacing: 0.27em;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.15s ease;
+}
+
+.success-manager-button span:last-child {
+  font-size: 18px;
+  letter-spacing: 0;
+
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.success-manager-button:active {
+  transform: scale(0.985);
+
+  background:
+    rgba(255, 255, 255, 0.045);
+}
+
+
+/* =========================
+   MANAGER LINK
+========================= */
+
+.success-orders-link {
+  width: 100%;
+
+  margin-top: 30px;
+
+  padding:
+    0
+    5px
+    22px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.18);
+
+  color: rgba(255, 255, 255, 0.52);
+
+  text-decoration: none;
+
+  font-family: "CinzelRus";
+  font-size: 9px;
+  font-weight: 400;
+
+  line-height: 1.5;
+
+  letter-spacing: 0.25em;
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.success-orders-link span:last-child {
+  flex-shrink: 0;
+
+  margin-left: 18px;
+
+  font-size: 16px;
+  letter-spacing: 0;
+
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.success-manager-link {
+    display: block;
+  
+    margin-top: 32px;
+  
+    font-family: "CinzelRus";
+    font-size: 10px;
+    font-weight: 400;
+  
     letter-spacing: 0.24em;
   
-    transition:
-      border-color 0.25s ease,
-      background 0.25s ease;
-  }
+    color: rgba(255, 255, 255, 0.48);
   
-  .success-manager-button:active {
-    background:
-      rgba(255, 255, 255, 0.05);
-  
-    border-color:
-      rgba(255, 255, 255, 0.45);
-  }
-  
-  
-  /* =========================
-     ORDERS
-  ========================= */
-  
-  .success-orders-link {
-    min-height: 68px;
-  
-    padding:
-      0
-      5px;
-  
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  
-    border-bottom:
-      1px solid rgba(255, 255, 255, 0.20);
-  
-    color:
-      rgba(255, 255, 255, 0.52);
-  
+    text-align: center;
     text-decoration: none;
-  
-    font-size: 10px;
-    letter-spacing: 0.30em;
   }
   
-  
-  /* =========================
-     DESKTOP
-  ========================= */
-  
-  @media (min-width: 700px) {
-  
-    .success-page {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-  
-    .success-content {
-      padding-top: 110px;
-    }
-  
+  .success-manager-link:visited {
+    color: rgba(255, 255, 255, 0.48);
   }
