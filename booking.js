@@ -5,10 +5,63 @@ const bookingMessage = document.getElementById("bookingMessage");
 // НАСТРОЙКИ ИГРЫ
 // =========================
 
-const GAME_DATE = "2026-09-26";
-const GAME_TIME = "20:00:00";
-const GAME_TITLE = "JAX — ЗАКРЫТАЯ ИГРА";
-const GAME_PRICE = "5000.00";
+let GAME_DATE = null;
+let GAME_TIME = null;
+let GAME_TITLE = null;
+let GAME_PRICE = null;
+
+
+// =========================
+// ПОЛУЧАЕМ АКТИВНУЮ ИГРУ
+// =========================
+
+async function loadActiveGame() {
+
+  const {
+    data: game,
+    error
+  } = await supabaseClient
+    .from("games")
+    .select(
+      "id, title, game_date, game_time, price"
+    )
+    .eq("is_active", true)
+    .limit(1)
+    .maybeSingle();
+
+
+  if (error) {
+    console.error(
+      "Ошибка получения активной игры:",
+      error
+    );
+
+    return false;
+  }
+
+
+  if (!game) {
+    console.error(
+      "Активная игра не найдена"
+    );
+
+    return false;
+  }
+
+
+  GAME_DATE = game.game_date;
+  GAME_TIME = game.game_time;
+  GAME_TITLE = game.title;
+  GAME_PRICE = Number(game.price).toFixed(2);
+
+
+  console.log(
+    "Активная игра:",
+    game
+  );
+
+  return true;
+}
 
 // PayKeeper
 const PAYKEEPER_URL =
@@ -185,6 +238,16 @@ bookingButton.addEventListener(
 
     bookingMessage.textContent = "";
 
+    const gameLoaded =
+    await loadActiveGame();
+
+  if (!gameLoaded) {
+
+    bookingMessage.textContent =
+      "Сейчас нет доступной игры для бронирования.";
+
+    return;
+  }
 
     // =========================
     // ПРОВЕРЯЕМ АВТОРИЗАЦИЮ
