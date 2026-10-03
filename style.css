@@ -530,16 +530,20 @@
   }
   
   .main-card p {
-    min-height: 30px;
+    height: 32px;
     margin: 5px 0 7px;
-  
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
     font-family: "CinzelRus", serif;
-    font-size: 10px;
-    line-height: 1.25;
-    letter-spacing: 1.2px;
-  
+    font-size: 9px;
+    line-height: 1.35;
+    letter-spacing: 0.8px;
+
     color: rgba(255,255,255,.66);
-  }
+}
   .card-arrow {
     width: 28px;
     height: 28px;
