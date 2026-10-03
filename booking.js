@@ -54,6 +54,43 @@ async function loadActiveGame() {
   GAME_TITLE = game.title;
   GAME_PRICE = Number(game.price).toFixed(2);
 
+  // =========================
+// ПОКАЗЫВАЕМ ИГРУ НА СТРАНИЦЕ
+// =========================
+
+const dateElement =
+document.getElementById("gameDate");
+
+const timeElement =
+document.getElementById("gameTime");
+
+if (dateElement) {
+const [year, month, day] =
+  GAME_DATE.split("-");
+
+const months = [
+  "ЯНВАРЯ",
+  "ФЕВРАЛЯ",
+  "МАРТА",
+  "АПРЕЛЯ",
+  "МАЯ",
+  "ИЮНЯ",
+  "ИЮЛЯ",
+  "АВГУСТА",
+  "СЕНТЯБРЯ",
+  "ОКТЯБРЯ",
+  "НОЯБРЯ",
+  "ДЕКАБРЯ"
+];
+
+dateElement.textContent =
+  `${Number(day)} ${months[Number(month) - 1]}`;
+}
+
+if (timeElement) {
+timeElement.textContent =
+  GAME_TIME.slice(0, 5);
+}
 
   console.log(
     "Активная игра:",
@@ -524,3 +561,9 @@ bookingButton.addEventListener(
     );
   }
 );
+
+// =========================
+// ЗАГРУЖАЕМ ИГРУ ПРИ ОТКРЫТИИ СТРАНИЦЫ
+// =========================
+
+loadActiveGame();
