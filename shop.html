@@ -146,6 +146,7 @@
           <button
           class="shop-add-button"
           type="button"
+          data-product-id="1"
           data-product="Медведь"
           data-price="12000"
           data-image="images/bear-mask-1.png"
@@ -218,6 +219,7 @@
           <button
           class="shop-add-button"
           type="button"
+          data-product-id="2"
           data-product="Тигр"
           data-price="20000"
           data-image="images/tiger-mask-1.png"
@@ -291,6 +293,7 @@
     <button
     class="shop-add-button"
     type="button"
+    data-product-id="3"
     data-product="Лев"
     data-price="20000"
     data-image="images/lion-mask-1.png"
@@ -469,9 +472,10 @@ button.addEventListener('click', event => {
   event.preventDefault();
   event.stopPropagation();
 
-  const name = button.dataset.product;
-  const price = Number(button.dataset.price);
-  const image = button.dataset.image;
+  const productId = Number(button.dataset.productId);
+const name = button.dataset.product;
+const price = Number(button.dataset.price);
+const image = button.dataset.image;
 
   let cart = getCart();
 
@@ -488,10 +492,11 @@ button.addEventListener('click', event => {
   } else {
 
     cart.push({
-      name,
-      price,
-      image
-    });
+  productId,
+  name,
+  price,
+  image
+});
 
   }
 
