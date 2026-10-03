@@ -693,3 +693,118 @@ async function loadAdminGame() {
 
 // Загружаем игру при открытии админки
 loadAdminGame();
+
+// =========================
+// СОХРАНЕНИЕ ТЕКУЩЕЙ ИГРЫ
+// =========================
+
+const adminGameSave =
+  document.getElementById("adminGameSave");
+
+if (adminGameSave) {
+
+  adminGameSave.addEventListener(
+    "click",
+    async () => {
+
+      const titleInput =
+        document.getElementById("adminGameTitle");
+
+      const dateInput =
+        document.getElementById("adminGameDate");
+
+      const timeInput =
+        document.getElementById("adminGameTime");
+
+      const priceInput =
+        document.getElementById("adminGamePrice");
+
+      const message =
+        document.getElementById("adminGameMessage");
+
+
+      const title =
+        titleInput.value.trim();
+
+      const gameDate =
+        dateInput.value;
+
+      const gameTime =
+        timeInput.value;
+
+      const price =
+        Number(priceInput.value);
+
+
+      // Проверяем заполнение
+      if (
+        !title ||
+        !gameDate ||
+        !gameTime ||
+        !price ||
+        price <= 0
+      ) {
+
+        message.textContent =
+          "ЗАПОЛНИТЕ ВСЕ ПОЛЯ";
+
+        return;
+      }
+
+
+      // Блокируем кнопку
+      adminGameSave.disabled = true;
+      adminGameSave.textContent =
+        "СОХРАНЯЕМ...";
+
+      message.textContent = "";
+
+
+      const {
+        data,
+        error
+      } = await supabaseClient
+        .from("games")
+        .update({
+          title: title,
+          game_date: gameDate,
+          game_time: gameTime,
+          price: price
+        })
+        .eq("is_active", true)
+        .select();
+
+
+      if (error) {
+
+        console.error(
+          "Ошибка сохранения игры:",
+          error
+        );
+
+        message.textContent =
+          "НЕ УДАЛОСЬ СОХРАНИТЬ";
+
+        adminGameSave.disabled = false;
+        adminGameSave.textContent =
+          "СОХРАНИТЬ ИГРУ";
+
+        return;
+      }
+
+
+      console.log(
+        "Игра обновлена:",
+        data
+      );
+
+
+      message.textContent =
+        "ИЗМЕНЕНИЯ СОХРАНЕНЫ";
+
+      adminGameSave.disabled = false;
+      adminGameSave.textContent =
+        "СОХРАНИТЬ ИГРУ";
+    }
+  );
+}
