@@ -246,7 +246,7 @@ if (checkoutButton) {
               order_number: orderNumber,
               user_id: session.user.id,
               total_amount: totalAmount,
-              status: 'new'
+              status: 'pending'
             })
             .select()
             .single();
