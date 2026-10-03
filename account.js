@@ -669,6 +669,31 @@ if (phoneForm) {
 
 function showProfile(user) {
 
+  const adminProfileCard =
+  document.getElementById(
+    "adminProfileCard"
+  );
+
+const ADMIN_USER_ID =
+  "850be360-1346-4ddc-88bd-3670835272b9";
+
+
+if (adminProfileCard) {
+
+  if (user.id === ADMIN_USER_ID) {
+
+    adminProfileCard.style.display =
+      "";
+
+  } else {
+
+    adminProfileCard.style.display =
+      "none";
+
+  }
+
+}
+
   if (authBox) {
     authBox.style.display = "none";
   }
