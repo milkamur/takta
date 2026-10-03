@@ -595,3 +595,101 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   
   });
+
+  // =========================
+// УПРАВЛЕНИЕ ТЕКУЩЕЙ ИГРОЙ
+// =========================
+
+async function loadAdminGame() {
+
+  const titleInput =
+    document.getElementById("adminGameTitle");
+
+  const dateInput =
+    document.getElementById("adminGameDate");
+
+  const timeInput =
+    document.getElementById("adminGameTime");
+
+  const priceInput =
+    document.getElementById("adminGamePrice");
+
+  const message =
+    document.getElementById("adminGameMessage");
+
+
+  // Если блока управления игрой нет
+  if (
+    !titleInput ||
+    !dateInput ||
+    !timeInput ||
+    !priceInput
+  ) {
+    return;
+  }
+
+
+  const {
+    data: game,
+    error
+  } = await supabaseClient
+    .from("games")
+    .select(
+      "id, title, game_date, game_time, price"
+    )
+    .eq("is_active", true)
+    .limit(1)
+    .maybeSingle();
+
+
+  if (error) {
+
+    console.error(
+      "Ошибка загрузки игры:",
+      error
+    );
+
+    if (message) {
+      message.textContent =
+        "НЕ УДАЛОСЬ ЗАГРУЗИТЬ ИГРУ";
+    }
+
+    return;
+  }
+
+
+  if (!game) {
+
+    if (message) {
+      message.textContent =
+        "АКТИВНАЯ ИГРА НЕ НАЙДЕНА";
+    }
+
+    return;
+  }
+
+
+  titleInput.value =
+    game.title || "";
+
+  dateInput.value =
+    game.game_date || "";
+
+  timeInput.value =
+    game.game_time
+      ? game.game_time.slice(0, 5)
+      : "";
+
+  priceInput.value =
+    game.price ?? "";
+
+
+  console.log(
+    "Игра загружена в админку:",
+    game
+  );
+}
+
+
+// Загружаем игру при открытии админки
+loadAdminGame();
