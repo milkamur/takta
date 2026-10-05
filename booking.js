@@ -395,26 +395,68 @@ if (bookingPayButton) {
 
 
       // =========================
-      // ПРОВЕРКА ФОРМЫ
-      // =========================
+      // // =========================
+// ПРОВЕРКА ФОРМЫ
+// =========================
 
-      if (!guestName) {
-        bookingMessage.textContent =
-          "УКАЖИТЕ ИМЯ";
-        return;
-      }
+// Имя:
+// только русские буквы, пробел и дефис
+const nameRegex =
+/^[А-ЯЁа-яё]+(?:[ -][А-ЯЁа-яё]+)*$/;
 
-      if (!guestPhone) {
-        bookingMessage.textContent =
-          "УКАЖИТЕ НОМЕР ТЕЛЕФОНА";
-        return;
-      }
+if (!guestName) {
+bookingMessage.textContent =
+  "УКАЖИТЕ ИМЯ";
+return;
+}
 
-      if (!guestEmail) {
-        bookingMessage.textContent =
-          "УКАЖИТЕ ПОЧТУ";
-        return;
-      }
+if (!nameRegex.test(guestName)) {
+bookingMessage.textContent =
+  "ИМЯ ДОЛЖНО БЫТЬ НА РУССКОМ";
+return;
+}
+
+
+// Телефон:
+// убираем пробелы, скобки и дефисы
+const phoneDigits =
+guestPhone.replace(/\D/g, "");
+
+// Принимаем:
+// 89505373217
+// +79505373217
+const phoneIsValid =
+/^7\d{10}$/.test(phoneDigits) ||
+/^8\d{10}$/.test(phoneDigits);
+
+if (!guestPhone) {
+bookingMessage.textContent =
+  "УКАЖИТЕ НОМЕР ТЕЛЕФОНА";
+return;
+}
+
+if (!phoneIsValid) {
+bookingMessage.textContent =
+  "УКАЖИТЕ КОРРЕКТНЫЙ НОМЕР ТЕЛЕФОНА РФ";
+return;
+}
+
+
+// Email
+const emailRegex =
+/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+if (!guestEmail) {
+bookingMessage.textContent =
+  "УКАЖИТЕ ПОЧТУ";
+return;
+}
+
+if (!emailRegex.test(guestEmail)) {
+bookingMessage.textContent =
+  "УКАЖИТЕ КОРРЕКТНУЮ ПОЧТУ";
+return;
+}
 
 
       // =========================
