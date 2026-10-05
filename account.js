@@ -438,7 +438,7 @@ if (telegramLoginBtn) {
               options: {
 
                 redirectTo:
-                  "https://milkamur.github.io/takta/index.html"
+                  `${window.location.origin}/account.html${window.location.search || ""}`
               
               }
 
@@ -648,7 +648,10 @@ if (phoneForm) {
           // Сохраняем пользователя
           // в таблицу profiles
         
-          await syncProfile(user);
+          // Не задерживаем переход сетевой синхронизацией профиля.
+          syncProfile(user).catch((error) => {
+            console.error("Ошибка синхронизации профиля:", error);
+          });
         
           // После регистрации / входа возвращаем пользователя
           // туда, откуда он пришёл.
@@ -828,19 +831,19 @@ async function checkUserSession() {
 
   if (session?.user) {
 
-    /*
-      НОВОЕ:
-      каждый раз после входа
-      синхронизируем профиль.
-    */
+    // Показываем кабинет сразу. Сетевые запросы не должны
+    // задерживать восстановление уже существующей сессии.
+    showProfile(session.user);
 
-    await syncProfile(
-      session.user
-    );
+    // Брони загружаем сразу после восстановления сессии.
+    loadBookings().catch((error) => {
+      console.error("Ошибка загрузки броней:", error);
+    });
 
-    showProfile(
-      session.user
-    );
+    // Синхронизация профиля идёт в фоне.
+    syncProfile(session.user).catch((error) => {
+      console.error("Ошибка синхронизации профиля:", error);
+    });
 
   } else {
 
@@ -961,29 +964,15 @@ async function repeatBookingPayment(bookingId) {
       return;
     }
 
-    // Получаем актуальную цену игры
-const {
-  data: game,
-  error: gameError
-} = await supabaseClient
-  .from("games")
-  .select("price")
-  .eq("is_active", true)
-  .limit(1)
-  .maybeSingle();
+    // Повторная оплата всегда использует цену именно этой брони,
+    // а не цену другой текущей активной игры.
+    const gamePrice = Number(booking.price).toFixed(2);
 
-if (gameError || !game) {
-  console.error(
-    "Не удалось получить цену игры:",
-    gameError
-  );
-
-  alert("Не удалось определить стоимость игры.");
-  return;
-}
-
-const gamePrice =
-  Number(game.price).toFixed(2);
+    if (!Number.isFinite(Number(booking.price))) {
+      console.error("У брони некорректная цена:", booking.price);
+      alert("Не удалось определить стоимость брони.");
+      return;
+    }
 
     // Данные клиента
     const clientName =
@@ -1302,9 +1291,13 @@ if (
     "click",
     () => {
 
-      bookingList.classList.toggle(
-        "open"
-      );
+      bookingList.classList.toggle("open");
+
+      if (bookingList.classList.contains("open")) {
+        loadBookings().catch((error) => {
+          console.error("Ошибка обновления броней:", error);
+        });
+      }
 
     }
   );

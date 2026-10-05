@@ -13,6 +13,61 @@ let GAME_PRICE = null;
 
 
 // =========================
+// КЭШ АКТИВНОЙ ИГРЫ
+// =========================
+
+const GAME_CACHE_KEY = "jaxActiveGame";
+const GAME_CACHE_TTL = 5 * 60 * 1000;
+
+function applyGame(game) {
+  if (!game) return false;
+
+  GAME_ID = game.id;
+  GAME_DATE = game.game_date;
+  GAME_TIME = game.game_time;
+  GAME_TITLE = game.title;
+  GAME_PRICE = Number(game.price).toFixed(2);
+
+  const endTimeElement = document.getElementById("gameEndTime");
+  const formatElement = document.getElementById("gameFormat");
+  const locationElement = document.getElementById("gameLocation");
+  const locationDetailsElement = document.getElementById("gameLocationDetails");
+  const priceElement = document.getElementById("gamePrice");
+  const dateElement = document.getElementById("gameDate");
+  const timeElement = document.getElementById("gameTime");
+
+  if (endTimeElement) endTimeElement.textContent = game.end_time ? game.end_time.slice(0, 5) : "—";
+  if (formatElement) formatElement.textContent = game.format || "—";
+  if (locationElement) locationElement.textContent = game.location || "—";
+  if (locationDetailsElement) locationDetailsElement.textContent = game.location_details || "";
+  if (priceElement) priceElement.textContent = game.price ? `${Number(game.price).toLocaleString("ru-RU")} ₽` : "—";
+
+  if (dateElement && GAME_DATE) {
+    const [, month, day] = GAME_DATE.split("-");
+    const months = ["ЯНВАРЯ","ФЕВРАЛЯ","МАРТА","АПРЕЛЯ","МАЯ","ИЮНЯ","ИЮЛЯ","АВГУСТА","СЕНТЯБРЯ","ОКТЯБРЯ","НОЯБРЯ","ДЕКАБРЯ"];
+    dateElement.textContent = `${Number(day)} ${months[Number(month) - 1]}`;
+  }
+  if (timeElement && GAME_TIME) timeElement.textContent = GAME_TIME.slice(0, 5);
+
+  const bookingPayText = document.getElementById("bookingPayText");
+  if (bookingPayText && GAME_PRICE) {
+    bookingPayText.textContent = `ОПЛАТИТЬ ${Number(GAME_PRICE).toLocaleString("ru-RU")} ₽`;
+  }
+  return true;
+}
+
+function loadCachedGame() {
+  try {
+    const cached = JSON.parse(localStorage.getItem(GAME_CACHE_KEY) || "null");
+    if (!cached?.game || !cached?.savedAt) return false;
+    if (Date.now() - cached.savedAt > GAME_CACHE_TTL) return false;
+    return applyGame(cached.game);
+  } catch {
+    return false;
+  }
+}
+
+// =========================
 // ПОЛУЧАЕМ АКТИВНУЮ ИГРУ
 // =========================
 
@@ -50,103 +105,14 @@ async function loadActiveGame() {
   }
 
 
-  GAME_ID = game.id;
-  GAME_DATE = game.game_date;
-  GAME_TIME = game.game_time;
-  GAME_TITLE = game.title;
-  GAME_PRICE = Number(game.price).toFixed(2);
+  applyGame(game);
 
-  // =========================
-// ПОКАЗЫВАЕМ ДАННЫЕ ИГРЫ
-// =========================
-
-const endTimeElement =
-document.getElementById("gameEndTime");
-
-const formatElement =
-document.getElementById("gameFormat");
-
-const locationElement =
-document.getElementById("gameLocation");
-
-const locationDetailsElement =
-document.getElementById("gameLocationDetails");
-
-const priceElement =
-document.getElementById("gamePrice");
-
-
-if (endTimeElement) {
-endTimeElement.textContent =
-  game.end_time
-    ? game.end_time.slice(0, 5)
-    : "—";
-}
-
-if (formatElement) {
-formatElement.textContent =
-  game.format || "—";
-}
-
-if (locationElement) {
-locationElement.textContent =
-  game.location || "—";
-}
-
-if (locationDetailsElement) {
-locationDetailsElement.textContent =
-  game.location_details || "";
-}
-
-if (priceElement) {
-priceElement.textContent =
-  game.price
-    ? `${Number(game.price).toLocaleString("ru-RU")} ₽`
-    : "—";
-}
-
-  // =========================
-// ПОКАЗЫВАЕМ ИГРУ НА СТРАНИЦЕ
-// =========================
-
-const dateElement =
-document.getElementById("gameDate");
-
-const timeElement =
-document.getElementById("gameTime");
-
-if (dateElement) {
-const [year, month, day] =
-  GAME_DATE.split("-");
-
-const months = [
-  "ЯНВАРЯ",
-  "ФЕВРАЛЯ",
-  "МАРТА",
-  "АПРЕЛЯ",
-  "МАЯ",
-  "ИЮНЯ",
-  "ИЮЛЯ",
-  "АВГУСТА",
-  "СЕНТЯБРЯ",
-  "ОКТЯБРЯ",
-  "НОЯБРЯ",
-  "ДЕКАБРЯ"
-];
-
-dateElement.textContent =
-  `${Number(day)} ${months[Number(month) - 1]}`;
-}
-
-if (timeElement) {
-timeElement.textContent =
-  GAME_TIME.slice(0, 5);
-}
-
-  console.log(
-    "Активная игра:",
-    game
-  );
+  try {
+    localStorage.setItem(
+      GAME_CACHE_KEY,
+      JSON.stringify({ game, savedAt: Date.now() })
+    );
+  } catch {}
 
   return true;
 }
@@ -358,85 +324,49 @@ if (bookingButton) {
 // ЗАГРУЖАЕМ ИГРУ ПРИ ОТКРЫТИИ СТРАНИЦЫ
 // =========================
 
-loadActiveGame();
+// Сначала мгновенно показываем последние известные данные,
+// затем тихо обновляем их из Supabase.
+loadCachedGame();
+const activeGamePromise = loadActiveGame();
+
+// Сессию начинаем восстанавливать заранее, до нажатия «Оплатить».
+const sessionPromise = supabaseClient.auth.getSession();
 
 // =========================
 // ФОРМАТ ТЕЛЕФОНА РФ
 // =========================
 
-const guestPhoneInput =
-  document.getElementById("guestPhone");
+const guestPhoneInput = document.getElementById("guestPhone");
+
+function formatGuestPhoneFromDigits(digits) {
+  digits = String(digits).replace(/\D/g, "");
+  if (digits.startsWith("7") || digits.startsWith("8")) digits = digits.slice(1);
+  digits = digits.slice(0, 10);
+
+  let result = "+7";
+  if (digits.length) result += ` (${digits.slice(0, 3)}`;
+  if (digits.length >= 3) result += `) ${digits.slice(3, 6)}`;
+  if (digits.length >= 6) result += `-${digits.slice(6, 8)}`;
+  if (digits.length >= 8) result += `-${digits.slice(8, 10)}`;
+  return result;
+}
 
 if (guestPhoneInput) {
+  if (!guestPhoneInput.value.trim()) guestPhoneInput.value = "+7";
 
-  // Если поле пустое — сразу ставим +7
-  if (!guestPhoneInput.value.trim()) {
-    guestPhoneInput.value = "+7 ";
-  }
+  guestPhoneInput.addEventListener("input", () => {
+    guestPhoneInput.value = formatGuestPhoneFromDigits(guestPhoneInput.value);
+  });
 
-  guestPhoneInput.addEventListener(
-    "input",
-    () => {
-
-      let digits =
-        guestPhoneInput.value.replace(/\D/g, "");
-
-      // Убираем код страны
-      if (digits.startsWith("7")) {
-        digits = digits.slice(1);
-      }
-
-      // Максимум 10 цифр после +7
-      digits = digits.slice(0, 10);
-
-      let formatted = "+7";
-
-      if (digits.length > 0) {
-        formatted +=
-          " (" + digits.slice(0, 3);
-      }
-
-      if (digits.length >= 3) {
-        formatted +=
-          ") " + digits.slice(3, 6);
-      }
-
-      if (digits.length >= 6) {
-        formatted +=
-          "-" + digits.slice(6, 8);
-      }
-
-      if (digits.length >= 8) {
-        formatted +=
-          "-" + digits.slice(8, 10);
-      }
-
-      guestPhoneInput.value =
-        formatted;
-    }
-  );
-
-  guestPhoneInput.addEventListener(
-    "focus",
-    () => {
-      if (!guestPhoneInput.value.trim()) {
-        guestPhoneInput.value = "+7 ";
-      }
-    }
-  );
-
-  guestPhoneInput.addEventListener(
-    "blur",
-    () => {
-
-      const digits =
-        guestPhoneInput.value.replace(/\D/g, "");
-
-      if (digits.length <= 1) {
-        guestPhoneInput.value = "+7 ";
-      }
-    }
-  );
+  // Backspace всегда удаляет последнюю цифру номера, но не +7.
+  guestPhoneInput.addEventListener("keydown", (event) => {
+    if (event.key !== "Backspace") return;
+    event.preventDefault();
+    let digits = guestPhoneInput.value.replace(/\D/g, "");
+    if (digits.startsWith("7")) digits = digits.slice(1);
+    digits = digits.slice(0, -1);
+    guestPhoneInput.value = formatGuestPhoneFromDigits(digits);
+  });
 }
 
 // =========================
@@ -546,7 +476,7 @@ return;
         data: { session },
         error: sessionError
       } =
-        await supabaseClient.auth.getSession();
+        await sessionPromise;
 
 
       if (sessionError) {
@@ -579,18 +509,15 @@ return;
       // ПРОВЕРЯЕМ ИГРУ
       // =========================
 
-      if (!GAME_ID) {
+      // Кэш нужен только для мгновенного показа данных.
+      // Перед созданием брони обязательно дожидаемся
+      // актуальной активной игры из Supabase.
+      const gameLoaded = await activeGamePromise;
 
-        const gameLoaded =
-          await loadActiveGame();
-
-        if (!gameLoaded || !GAME_ID) {
-
-          bookingMessage.textContent =
-            "ИГРА НЕ НАЙДЕНА";
-
-          return;
-        }
+      if (!gameLoaded || !GAME_ID) {
+        bookingMessage.textContent =
+          "ИГРА НЕ НАЙДЕНА";
+        return;
       }
 
 
