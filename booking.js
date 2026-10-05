@@ -5,6 +5,7 @@ const bookingMessage = document.getElementById("bookingMessage");
 // НАСТРОЙКИ ИГРЫ
 // =========================
 
+let GAME_ID = null;
 let GAME_DATE = null;
 let GAME_TIME = null;
 let GAME_TITLE = null;
@@ -23,7 +24,7 @@ async function loadActiveGame() {
   } = await supabaseClient
     .from("games")
     .select(
-      "id, title, game_date, game_time, price"
+      "id, title, game_date, game_time, end_time, format, location, location_details, price"
     )
     .eq("is_active", true)
     .limit(1)
@@ -49,10 +50,60 @@ async function loadActiveGame() {
   }
 
 
+  GAME_ID = game.id;
   GAME_DATE = game.game_date;
   GAME_TIME = game.game_time;
   GAME_TITLE = game.title;
   GAME_PRICE = Number(game.price).toFixed(2);
+
+  // =========================
+// ПОКАЗЫВАЕМ ДАННЫЕ ИГРЫ
+// =========================
+
+const endTimeElement =
+document.getElementById("gameEndTime");
+
+const formatElement =
+document.getElementById("gameFormat");
+
+const locationElement =
+document.getElementById("gameLocation");
+
+const locationDetailsElement =
+document.getElementById("gameLocationDetails");
+
+const priceElement =
+document.getElementById("gamePrice");
+
+
+if (endTimeElement) {
+endTimeElement.textContent =
+  game.end_time
+    ? game.end_time.slice(0, 5)
+    : "—";
+}
+
+if (formatElement) {
+formatElement.textContent =
+  game.format || "—";
+}
+
+if (locationElement) {
+locationElement.textContent =
+  game.location || "—";
+}
+
+if (locationDetailsElement) {
+locationDetailsElement.textContent =
+  game.location_details || "";
+}
+
+if (priceElement) {
+priceElement.textContent =
+  game.price
+    ? `${Number(game.price).toLocaleString("ru-RU")} ₽`
+    : "—";
+}
 
   // =========================
 // ПОКАЗЫВАЕМ ИГРУ НА СТРАНИЦЕ
@@ -266,304 +317,273 @@ function resetBookingButton() {
 
 
 // =========================
-// БРОНИРОВАНИЕ
+// ОТКРЫВАЕМ ФОРМУ БРОНИРОВАНИЯ
 // =========================
 
-bookingButton.addEventListener(
-  "click",
-  async () => {
+if (bookingButton) {
 
-    bookingMessage.textContent = "";
+  bookingButton.addEventListener("click", () => {
 
-    const gameLoaded =
-    await loadActiveGame();
+    console.log("КНОПКА ЗАБРОНИРОВАТЬ НАЖАТА");
 
-  if (!gameLoaded) {
+    const bookingForm =
+      document.getElementById("bookingForm");
 
-    bookingMessage.textContent =
-      "Сейчас нет доступной игры для бронирования.";
+    const bookingPayText =
+      document.getElementById("bookingPayText");
 
-    return;
-  }
-
-    // =========================
-    // ПРОВЕРЯЕМ АВТОРИЗАЦИЮ
-    // =========================
-
-    const {
-      data: { session },
-      error: sessionError
-    } =
-      await supabaseClient.auth.getSession();
-
-
-    if (sessionError) {
-
-      console.error(
-        "Ошибка получения сессии:",
-        sessionError
-      );
-
-      bookingMessage.textContent =
-        "Не удалось проверить аккаунт.";
-
+    if (!bookingForm) {
+      console.error("НЕ НАЙДЕН #bookingForm");
       return;
     }
 
-
-    if (!session?.user) {
-
-      window.location.href =
-        "account.html?mode=register&redirect=booking.html";
-
-      return;
+    if (bookingPayText && GAME_PRICE) {
+      bookingPayText.textContent =
+        `ОПЛАТИТЬ ${Number(GAME_PRICE).toLocaleString("ru-RU")} ₽`;
     }
 
+    bookingForm.hidden = false;
+    bookingButton.hidden = true;
 
-    const user = session.user;
+    bookingForm.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
 
+  });
 
-    bookingButton.disabled = true;
-
-    bookingButton
-      .querySelector("span")
-      .textContent =
-        "ПРОВЕРЯЕМ ДАННЫЕ...";
-
-
-    // =========================
-    // ПОЛУЧАЕМ PROFILE
-    // =========================
-
-    const profile =
-      await getProfile(user.id);
-
-
-    if (!profile) {
-
-      bookingMessage.textContent =
-        "Не удалось получить данные профиля.";
-
-      resetBookingButton();
-
-      return;
-    }
-
-
-    // =========================
-    // ПРОВЕРЯЕМ БРОНЬ
-    // =========================
-
-    bookingButton
-      .querySelector("span")
-      .textContent =
-        "ПРОВЕРЯЕМ БРОНЬ...";
-
-
-    const {
-      data: existingBooking,
-      error: checkError
-    } =
-      await supabaseClient
-        .from("bookings")
-        .select("*")
-        .eq(
-          "user_id",
-          user.id
-        )
-        .eq(
-          "game_date",
-          GAME_DATE
-        )
-        .eq(
-          "game_time",
-          GAME_TIME
-        )
-        .eq(
-          "status",
-          "pending"
-        )
-        .order(
-          "created_at",
-          { ascending: false }
-        )
-        .limit(1)
-        .maybeSingle();
-
-
-    if (checkError) {
-
-      console.error(
-        "Ошибка проверки брони:",
-        checkError
-      );
-
-      bookingMessage.textContent =
-        "Не удалось проверить бронь. Попробуйте ещё раз.";
-
-      resetBookingButton();
-
-      return;
-    }
-
-
-    // =========================
-    // БРОНЬ УЖЕ СУЩЕСТВУЕТ
-    // =========================
-
-    if (existingBooking) {
-
-      let orderNumber =
-        existingBooking.order_number;
-
-
-      // Если номера заказа нет
-      if (!orderNumber) {
-
-        orderNumber =
-          createOrderNumber();
-
-
-        const {
-          error: updateError
-        } =
-          await supabaseClient
-            .from("bookings")
-            .update({
-              order_number:
-                orderNumber
-            })
-            .eq(
-              "id",
-              existingBooking.id
-            );
-
-
-        if (updateError) {
-
-          console.error(
-            "Ошибка создания номера заказа:",
-            updateError
-          );
-
-          bookingMessage.textContent =
-            "Не удалось подготовить оплату.";
-
-          resetBookingButton();
-
-          return;
-        }
-      }
-
-
-      bookingMessage.textContent =
-        "ПЕРЕХОДИМ К ОПЛАТЕ...";
-
-      bookingButton
-        .querySelector("span")
-        .textContent =
-          "ПЕРЕХОД К ОПЛАТЕ...";
-
-
-      goToPayKeeper(
-        orderNumber,
-        user,
-        profile
-      );
-
-      return;
-    }
-
-
-    // =========================
-    // СОЗДАЁМ НОВУЮ БРОНЬ
-    // =========================
-
-    bookingButton
-      .querySelector("span")
-      .textContent =
-        "БРОНИРУЕМ...";
-
-
-    const orderNumber =
-      createOrderNumber();
-
-
-    const {
-      data: newBooking,
-      error: insertError
-    } =
-      await supabaseClient
-        .from("bookings")
-        .insert({
-
-          user_id:
-            user.id,
-
-          game_date:
-            GAME_DATE,
-
-          game_time:
-            GAME_TIME,
-
-          game_title:
-            GAME_TITLE,
-
-          status:
-            "pending",
-
-          order_number:
-            orderNumber
-        })
-        .select()
-        .single();
-
-
-    if (insertError) {
-
-      console.error(
-        "Ошибка создания брони:",
-        insertError
-      );
-
-      bookingMessage.textContent =
-        "Не удалось создать бронь. Попробуйте ещё раз.";
-
-      resetBookingButton();
-
-      return;
-    }
-
-
-    console.log(
-      "Бронь создана:",
-      newBooking
-    );
-
-
-    // =========================
-    // ПЕРЕХОД В PAYKEEPER
-    // =========================
-
-    bookingMessage.textContent =
-      "БРОНЬ СОЗДАНА. ПЕРЕХОДИМ К ОПЛАТЕ...";
-
-    bookingButton
-      .querySelector("span")
-      .textContent =
-        "ПЕРЕХОД К ОПЛАТЕ...";
-
-
-    goToPayKeeper(
-      orderNumber,
-      user,
-      profile
-    );
-  }
-);
+}
 
 // =========================
 // ЗАГРУЖАЕМ ИГРУ ПРИ ОТКРЫТИИ СТРАНИЦЫ
 // =========================
 
 loadActiveGame();
+
+// =========================
+// ОПЛАТА БРОНИ
+// =========================
+
+const bookingPayButton =
+  document.getElementById("bookingPayButton");
+
+if (bookingPayButton) {
+
+  bookingPayButton.addEventListener(
+    "click",
+    async () => {
+
+      bookingMessage.textContent = "";
+
+      const guestName =
+        document
+          .getElementById("guestName")
+          .value
+          .trim();
+
+      const guestPhone =
+        document
+          .getElementById("guestPhone")
+          .value
+          .trim();
+
+      const guestEmail =
+        document
+          .getElementById("guestEmail")
+          .value
+          .trim();
+
+
+      // =========================
+      // ПРОВЕРКА ФОРМЫ
+      // =========================
+
+      if (!guestName) {
+        bookingMessage.textContent =
+          "УКАЖИТЕ ИМЯ";
+        return;
+      }
+
+      if (!guestPhone) {
+        bookingMessage.textContent =
+          "УКАЖИТЕ НОМЕР ТЕЛЕФОНА";
+        return;
+      }
+
+      if (!guestEmail) {
+        bookingMessage.textContent =
+          "УКАЖИТЕ ПОЧТУ";
+        return;
+      }
+
+
+      // =========================
+      // ПРОВЕРЯЕМ АВТОРИЗАЦИЮ
+      // =========================
+
+      const {
+        data: { session },
+        error: sessionError
+      } =
+        await supabaseClient.auth.getSession();
+
+
+      if (sessionError) {
+
+        console.error(
+          "Ошибка получения сессии:",
+          sessionError
+        );
+
+        bookingMessage.textContent =
+          "НЕ УДАЛОСЬ ПРОВЕРИТЬ АККАУНТ";
+
+        return;
+      }
+
+
+      if (!session?.user) {
+
+        window.location.href =
+          "account.html?mode=register&redirect=booking.html";
+
+        return;
+      }
+
+
+      const user = session.user;
+
+
+      // =========================
+      // ПРОВЕРЯЕМ ИГРУ
+      // =========================
+
+      if (!GAME_ID) {
+
+        const gameLoaded =
+          await loadActiveGame();
+
+        if (!gameLoaded || !GAME_ID) {
+
+          bookingMessage.textContent =
+            "ИГРА НЕ НАЙДЕНА";
+
+          return;
+        }
+      }
+
+
+      bookingPayButton.disabled = true;
+
+      const bookingPayText =
+        document.getElementById("bookingPayText");
+
+      if (bookingPayText) {
+        bookingPayText.textContent =
+          "СОЗДАЁМ БРОНЬ...";
+      }
+
+
+      // =========================
+      // НОМЕР ЗАКАЗА
+      // =========================
+
+      const orderNumber =
+        createOrderNumber();
+
+
+      // =========================
+      // СОЗДАЁМ БРОНЬ
+      // =========================
+
+      const { error: insertError } =
+      await supabaseClient
+        .from("bookings")
+        .insert({
+    
+          user_id: user.id,
+    
+          game_id: GAME_ID,
+    
+          game_date: GAME_DATE,
+    
+          game_time: GAME_TIME,
+    
+          game_title: GAME_TITLE,
+    
+          guest_name: guestName,
+    
+          guest_phone: guestPhone,
+    
+          guest_email: guestEmail,
+    
+          price: Number(GAME_PRICE),
+    
+          status: "pending",
+    
+          order_number: orderNumber
+    
+        });
+
+      if (insertError) {
+
+        console.error(
+          "Ошибка создания брони:",
+          insertError
+        );
+
+        bookingMessage.textContent =
+          "НЕ УДАЛОСЬ СОЗДАТЬ БРОНЬ";
+
+        bookingPayButton.disabled = false;
+
+        if (bookingPayText) {
+          bookingPayText.textContent =
+            `ОПЛАТИТЬ ${Number(GAME_PRICE).toLocaleString("ru-RU")} ₽`;
+        }
+
+        return;
+      }
+
+
+      console.log(
+        "Бронь создана:",
+        orderNumber
+      );
+
+
+      // =========================
+      // ПЕРЕХОД К ОПЛАТЕ
+      // =========================
+
+      bookingMessage.textContent =
+        "ПЕРЕХОДИМ К ОПЛАТЕ...";
+
+      if (bookingPayText) {
+        bookingPayText.textContent =
+          "ПЕРЕХОД К ОПЛАТЕ...";
+      }
+
+
+// Запоминаем номер брони перед переходом в PayKeeper
+localStorage.setItem(
+  "jaxLastBookingOrder",
+  orderNumber
+);
+
+// Передаём в PayKeeper именно
+// данные из заполненной формы
+goToPayKeeper(
+        orderNumber,
+        user,
+        {
+          name: guestName,
+          phone: guestPhone,
+          email: guestEmail
+        }
+      );
+
+    }
+  );
+
+}

@@ -38,15 +38,35 @@
       </h1>
       
       <div class="booking-info">
-      
+
         <div class="booking-row">
-          <span>ВРЕМЯ</span>
+          <span>СБОР ГОСТЕЙ</span>
           <strong id="gameTime">—</strong>
         </div>
       
         <div class="booking-row">
+          <span>ОКОНЧАНИЕ</span>
+          <strong id="gameEndTime">—</strong>
+        </div>
+      
+        <div class="booking-row">
+          <span>ЛОКАЦИЯ</span>
+          <strong id="gameLocation">—</strong>
+        </div>
+      
+        <div
+          class="booking-location-details"
+          id="gameLocationDetails"
+        ></div>
+      
+        <div class="booking-row">
           <span>ФОРМАТ</span>
-          <strong>ЗАКРЫТАЯ ИГРА</strong>
+          <strong id="gameFormat">—</strong>
+        </div>
+      
+        <div class="booking-row">
+          <span>СТОИМОСТЬ</span>
+          <strong id="gamePrice">—</strong>
         </div>
       
       </div>
@@ -62,6 +82,56 @@
         <span>ЗАБРОНИРОВАТЬ</span>
         <span class="booking-arrow">→</span>
       </button>
+
+      <div class="booking-form" id="bookingForm" hidden>
+
+        <div class="booking-form-title">
+          ДАННЫЕ ГОСТЯ
+        </div>
+      
+        <label class="booking-field">
+          <span>ИМЯ</span>
+          <input
+            type="text"
+            id="guestName"
+            autocomplete="name"
+            placeholder="ВАШЕ ИМЯ"
+          >
+        </label>
+      
+        <label class="booking-field">
+          <span>НОМЕР ТЕЛЕФОНА</span>
+          <input
+            type="tel"
+            id="guestPhone"
+            autocomplete="tel"
+            placeholder="+7"
+          >
+        </label>
+      
+        <label class="booking-field">
+          <span>ПОЧТА</span>
+          <input
+            type="email"
+            id="guestEmail"
+            autocomplete="email"
+            placeholder="EMAIL"
+          >
+        </label>
+      
+        <button
+          class="booking-button booking-pay-button"
+          id="bookingPayButton"
+          type="button"
+        >
+          <span id="bookingPayText">
+            ОПЛАТИТЬ
+          </span>
+      
+          <span class="booking-arrow">→</span>
+        </button>
+      
+      </div>
 
       <p class="booking-message" id="bookingMessage"></p>
 

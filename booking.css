@@ -207,3 +207,79 @@
   .booking-logo {
     cursor: pointer;
   }
+
+  /* =========================
+   ФОРМА БРОНИРОВАНИЯ
+========================= */
+
+.booking-form {
+  margin-top: 28px;
+}
+
+.booking-form[hidden] {
+  display: none;
+}
+
+.booking-form-title {
+  margin-bottom: 28px;
+
+  font-size: 13px;
+  letter-spacing: 0.32em;
+
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.booking-field {
+  display: block;
+  margin-bottom: 22px;
+}
+
+.booking-field > span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 11px;
+  letter-spacing: 0.28em;
+
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.booking-field input {
+  display: block;
+
+  width: 100%;
+  height: 58px;
+
+  box-sizing: border-box;
+
+  padding: 0 20px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-family: inherit;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.booking-field input::placeholder {
+  color: rgba(255, 255, 255, 0.22);
+}
+
+.booking-field input:focus {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.booking-pay-button {
+  margin-top: 10px;
+}

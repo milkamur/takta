@@ -617,6 +617,18 @@ async function loadAdminGame() {
   const message =
     document.getElementById("adminGameMessage");
 
+    const gameEndTimeInput =
+  document.getElementById("adminGameEndTime");
+
+const gameFormatInput =
+  document.getElementById("adminGameFormat");
+
+const gameLocationInput =
+  document.getElementById("adminGameLocation");
+
+const gameLocationDetailsInput =
+  document.getElementById("adminGameLocationDetails");
+
 
   // Если блока управления игрой нет
   if (
@@ -635,7 +647,7 @@ async function loadAdminGame() {
   } = await supabaseClient
     .from("games")
     .select(
-      "id, title, game_date, game_time, price"
+      "id, title, game_date, game_time, end_time, format, location, location_details, price"
     )
     .eq("is_active", true)
     .limit(1)
@@ -683,6 +695,27 @@ async function loadAdminGame() {
   priceInput.value =
     game.price ?? "";
 
+    if (gameEndTimeInput) {
+      gameEndTimeInput.value =
+        game.end_time
+          ? game.end_time.slice(0, 5)
+          : "";
+    }
+    
+    if (gameFormatInput) {
+      gameFormatInput.value =
+        game.format || "";
+    }
+    
+    if (gameLocationInput) {
+      gameLocationInput.value =
+        game.location || "";
+    }
+    
+    if (gameLocationDetailsInput) {
+      gameLocationDetailsInput.value =
+        game.location_details || "";
+    }
 
   console.log(
     "Игра загружена в админку:",
@@ -721,6 +754,7 @@ if (adminGameSave) {
 
       const message =
         document.getElementById("adminGameMessage");
+
 
 
       const title =
@@ -766,10 +800,34 @@ if (adminGameSave) {
       } = await supabaseClient
         .from("games")
         .update({
-          title: title,
-          game_date: gameDate,
-          game_time: gameTime,
-          price: price
+          title:
+            document.getElementById("adminGameTitle").value.trim(),
+        
+          game_date:
+            document.getElementById("adminGameDate").value,
+        
+          game_time:
+            document.getElementById("adminGameTime").value,
+        
+          end_time:
+            document.getElementById("adminGameEndTime").value || null,
+        
+          format:
+            document.getElementById("adminGameFormat").value.trim(),
+        
+          location:
+            document.getElementById("adminGameLocation").value.trim(),
+        
+          location_details:
+            document
+              .getElementById("adminGameLocationDetails")
+              .value
+              .trim(),
+        
+          price:
+            Number(
+              document.getElementById("adminGamePrice").value
+            )
         })
         .eq("is_active", true)
         .select();

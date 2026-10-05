@@ -435,12 +435,12 @@ if (telegramLoginBtn) {
             provider:
               "custom:telegram",
 
-            options: {
+              options: {
 
-              redirectTo:
-                "https://milkamur.github.io/takta/account.html"
-
-            }
+                redirectTo:
+                  "https://milkamur.github.io/takta/index.html"
+              
+              }
 
           });
 
@@ -643,19 +643,20 @@ if (phoneForm) {
         data?.user;
 
 
-      if (user) {
+        if (user) {
 
-        // НОВОЕ:
-        // сохраняем пользователя
-        // в таблицу profiles
-
-        await syncProfile(user);
-
-        showProfile(user);
-
-        await loadBookings();
-
-      }
+          // Сохраняем пользователя
+          // в таблицу profiles
+        
+          await syncProfile(user);
+        
+          // После регистрации / входа
+          // отправляем на главную
+        
+          window.location.href = "index.html";
+        
+          return;
+        }
 
     }
   );
