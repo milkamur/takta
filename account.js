@@ -1,9 +1,6 @@
 const authBox = document.querySelector(".auth-box");
 const profileBox = document.getElementById("profileBox");
 
-const phoneForm = document.getElementById("phoneForm");
-const authPhone = document.getElementById("authPhone");
-
 const privacyConsent =
   document.getElementById("privacyConsent");
 
@@ -40,137 +37,6 @@ if (privacyConsent) {
     }
 
   });
-
-}
-
-
-/* ==============================
-   НОРМАЛИЗАЦИЯ НОМЕРА
-============================== */
-
-function normalizePhone(value) {
-
-  let digits = value.replace(/\D/g, "");
-
-  if (
-    digits.length === 11 &&
-    digits.startsWith("8")
-  ) {
-    digits = "7" + digits.slice(1);
-  }
-
-  if (digits.length === 10) {
-    digits = "7" + digits;
-  }
-
-  if (
-    digits.length !== 11 ||
-    !digits.startsWith("7")
-  ) {
-    return null;
-  }
-
-  return "+" + digits;
-}
-
-
-/* ==============================
-   ФОРМАТИРОВАНИЕ ПОЛЯ
-============================== */
-
-function formatPhoneInput(value) {
-
-  let digits = value.replace(/\D/g, "");
-
-  if (digits.startsWith("8")) {
-    digits = "7" + digits.slice(1);
-  }
-
-  if (!digits.startsWith("7")) {
-    digits = "7" + digits;
-  }
-
-  digits = digits.slice(0, 11);
-
-  const number = digits.slice(1);
-
-  let result = "+7";
-
-  if (number.length > 0) {
-    result += " " + number.slice(0, 3);
-  }
-
-  if (number.length >= 4) {
-    result += " " + number.slice(3, 6);
-  }
-
-  if (number.length >= 7) {
-    result += "-" + number.slice(6, 8);
-  }
-
-  if (number.length >= 9) {
-    result += "-" + number.slice(8, 10);
-  }
-
-  return result;
-}
-
-
-if (authPhone) {
-
-  authPhone.addEventListener("input", () => {
-
-    authPhone.value =
-      formatPhoneInput(authPhone.value);
-
-  });
-
-
-  authPhone.addEventListener("focus", () => {
-
-    if (
-      !authPhone.value ||
-      authPhone.value.trim() === "+7"
-    ) {
-      authPhone.value = "+7 ";
-    }
-
-  });
-
-
-  authPhone.addEventListener("blur", () => {
-
-    if (
-      !authPhone.value ||
-      authPhone.value.trim() === "+7"
-    ) {
-      authPhone.value = "+7 ";
-    }
-
-  });
-
-}
-
-
-/* ==============================
-   КРАСИВО ПОКАЗАТЬ НОМЕР
-============================== */
-
-function formatPhone(phone) {
-
-  const digits =
-    String(phone).replace(/\D/g, "");
-
-  if (digits.length !== 11) {
-    return phone;
-  }
-
-  return (
-    `+7 ${digits.slice(1, 4)} ` +
-    `${digits.slice(4, 7)}-` +
-    `${digits.slice(7, 9)}-` +
-    `${digits.slice(9, 11)}`
-  );
 
 }
 
@@ -297,8 +163,6 @@ async function syncProfile(user) {
   const phone =
     user.phone ||
     meta.phone ||
-    meta.phone_unverified ||
-    localStorage.getItem("takta_phone") ||
     null;
 
 
@@ -465,223 +329,6 @@ if (telegramLoginBtn) {
 
 
 /* ==============================
-   ВРЕМЕННЫЙ ВХОД ПО ТЕЛЕФОНУ
-   БЕЗ SMS
-============================== */
-
-if (phoneForm) {
-
-  phoneForm.addEventListener(
-    "submit",
-    async (event) => {
-
-      event.preventDefault();
-
-
-      const phone =
-        normalizePhone(
-          authPhone.value
-        );
-
-
-      if (!phone) {
-
-        alert(
-          "Введите корректный номер телефона"
-        );
-
-        return;
-
-      }
-
-
-      /* Проверяем согласие */
-
-      if (
-        privacyConsent &&
-        !privacyConsent.checked
-      ) {
-
-        const consent =
-          document.querySelector(
-            ".auth-consent"
-          );
-
-        consent?.classList.add(
-          "consent-error"
-        );
-
-        setTimeout(() => {
-
-          consent?.classList.remove(
-            "consent-error"
-          );
-
-        }, 2000);
-
-        return;
-
-      }
-
-
-      const button =
-        phoneForm.querySelector(
-          ".auth-submit"
-        );
-
-      const buttonText =
-        button?.querySelector(
-          ".auth-submit-text"
-        );
-
-
-      if (button) {
-        button.disabled = true;
-      }
-
-      if (buttonText) {
-        buttonText.textContent =
-          "ВХОДИМ...";
-      }
-
-
-      /*
-        Пока сохраняем существующую
-        логику входа по телефону:
-        создаём анонимного пользователя.
-      */
-
-      const {
-        data,
-        error
-      } =
-        await supabaseClient.auth
-          .signInAnonymously();
-
-
-      if (error) {
-
-        console.error(error);
-
-        if (button) {
-          button.disabled = false;
-        }
-
-        if (buttonText) {
-          buttonText.textContent =
-            "ВОЙТИ";
-        }
-
-        alert(
-          "Не удалось войти. Проверь настройки Supabase."
-        );
-
-        return;
-
-      }
-
-
-      /*
-        Сохраняем телефон в metadata.
-        Пока номер не подтверждён SMS.
-      */
-
-      const {
-        data: updatedData,
-        error: updateError
-      } =
-        await supabaseClient.auth
-          .updateUser({
-
-            data: {
-
-              phone_unverified:
-                phone,
-
-              name:
-                "ИГРОК",
-
-              login_method:
-                "phone_unverified"
-
-            }
-
-          });
-
-
-      if (updateError) {
-
-        console.error(
-          updateError
-        );
-
-      }
-
-
-      /*
-        Локальная копия телефона.
-      */
-
-      localStorage.setItem(
-        "takta_phone",
-        phone
-      );
-
-
-      if (button) {
-        button.disabled = false;
-      }
-
-      if (buttonText) {
-        buttonText.textContent =
-          "ВОЙТИ";
-      }
-
-
-      const user =
-        updatedData?.user ||
-        data?.user;
-
-
-        if (user) {
-
-          // Сохраняем пользователя
-          // в таблицу profiles
-        
-          // Не задерживаем переход сетевой синхронизацией профиля.
-          syncProfile(user).catch((error) => {
-            console.error("Ошибка синхронизации профиля:", error);
-          });
-        
-          // После регистрации / входа возвращаем пользователя
-          // туда, откуда он пришёл.
-          // Например: ВСТУПИТЬ В ИГРУ -> booking.html.
-          // Обычный вход в личный кабинет -> account.html.
-
-          const params = new URLSearchParams(window.location.search);
-          const requestedRedirect = params.get("redirect");
-
-          // Разрешаем только локальные HTML-страницы JAX,
-          // чтобы параметр redirect нельзя было использовать
-          // для перехода на посторонний сайт.
-          const safeRedirect =
-            requestedRedirect &&
-            /^[a-zA-Z0-9_-]+\.html(?:[?#].*)?$/.test(requestedRedirect)
-              ? requestedRedirect
-              : "account.html";
-
-          window.location.href = safeRedirect;
-
-          return;
-        }
-
-    }
-  );
-
-}
-
-
-/* ==============================
    ПОКАЗАТЬ ПРОФИЛЬ
 ============================== */
 
@@ -729,10 +376,6 @@ if (adminProfileCard) {
   const phone =
     user.phone ||
     user.user_metadata?.phone ||
-    user.user_metadata?.phone_unverified ||
-    localStorage.getItem(
-      "takta_phone"
-    ) ||
     "";
 
 
@@ -817,6 +460,35 @@ function showAuth() {
 
 
 /* ==============================
+   REDIRECT ПОСЛЕ TELEGRAM
+============================== */
+
+function getSafeAuthRedirect() {
+  const params = new URLSearchParams(window.location.search);
+  const requestedRedirect = params.get("redirect");
+
+  if (
+    requestedRedirect &&
+    /^[a-zA-Z0-9_-]+\.html(?:[?#].*)?$/.test(requestedRedirect)
+  ) {
+    return requestedRedirect;
+  }
+
+  return null;
+}
+
+function redirectAfterTelegramAuth() {
+  const target = getSafeAuthRedirect();
+
+  if (target) {
+    window.location.replace(target);
+    return true;
+  }
+
+  return false;
+}
+
+/* ==============================
    ПРОВЕРКА СЕССИИ
 ============================== */
 
@@ -830,6 +502,12 @@ async function checkUserSession() {
 
 
   if (session?.user) {
+
+    // Если пользователь пришёл через «Вступить в игру»,
+    // после возврата из Telegram сразу отправляем на бронь.
+    if (redirectAfterTelegramAuth()) {
+      return;
+    }
 
     // Показываем кабинет сразу. Сетевые запросы не должны
     // задерживать восстановление уже существующей сессии.
@@ -856,6 +534,32 @@ async function checkUserSession() {
 
 checkUserSession();
 
+// Следим за реальным состоянием Supabase-сессии.
+// TOKEN_REFRESHED не должен выбрасывать пользователя из кабинета.
+let lastRenderedUserId = null;
+
+supabaseClient.auth.onAuthStateChange((event, session) => {
+  if (session?.user) {
+    if (redirectAfterTelegramAuth()) {
+      return;
+    }
+
+    if (lastRenderedUserId !== session.user.id) {
+      lastRenderedUserId = session.user.id;
+      showProfile(session.user);
+      loadBookings().catch((error) => {
+        console.error("Ошибка загрузки броней:", error);
+      });
+    }
+    return;
+  }
+
+  if (event === "SIGNED_OUT") {
+    lastRenderedUserId = null;
+    showAuth();
+  }
+});
+
 
 /* ==============================
    ВЫХОД
@@ -869,14 +573,6 @@ if (logoutBtn) {
 
       await supabaseClient.auth
         .signOut();
-
-      localStorage.removeItem(
-        "takta_phone"
-      );
-
-      if (authPhone) {
-        authPhone.value = "+7 ";
-      }
 
       if (privacyConsent) {
         privacyConsent.checked =
@@ -1305,40 +1001,3 @@ if (
 }
 
 
-/* ==============================
-   ВХОД ПО НОМЕРУ
-============================== */
-
-const phoneLoginToggle =
-  document.getElementById(
-    "phoneLoginToggle"
-  );
-
-
-if (
-  phoneLoginToggle &&
-  phoneForm
-) {
-
-  phoneLoginToggle.addEventListener(
-    "click",
-    () => {
-
-      phoneForm.classList.toggle(
-        "is-open"
-      );
-
-      const isOpen =
-        phoneForm.classList.contains(
-          "is-open"
-        );
-
-      phoneLoginToggle.textContent =
-        isOpen
-          ? "СКРЫТЬ ВХОД ПО НОМЕРУ"
-          : "ВОЙТИ ПО НОМЕРУ ТЕЛЕФОНА";
-
-    }
-  );
-
-}
