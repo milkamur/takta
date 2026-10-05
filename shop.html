@@ -1,385 +1,202 @@
 <!DOCTYPE html>
+
 <html lang="ru">
-
 <head>
-  <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Магазин — JAX</title>
-
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="shop.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Магазин — JAX</title>
+<link href="style.css" rel="stylesheet"/>
+<link href="shop.css" rel="stylesheet"/>
 </head>
-
 <body>
-
-  <main class="shop-page">
-
-    <!-- ШАПКА -->
-    <header class="shop-header">
-
-      <a href="index.html" class="shop-back jax-back" aria-label="Назад">
+<main class="shop-page">
+<!-- ШАПКА -->
+<header class="shop-header">
+<a aria-label="Назад" class="shop-back jax-back" href="index.html">
         ←
       </a>
-    
-      <div
-        class="shop-logo jax-logo"
-        onclick="window.location.href='index.html'"
-        role="link"
-        tabindex="0"
-      >
+<div class="shop-logo jax-logo" onclick="window.location.href='index.html'" role="link" tabindex="0">
         JAX
       </div>
-
-      <a href="cart.html" class="shop-cart-button" aria-label="Корзина">
-        <img
-        src="images/cart.svg"
-        class="shop-cart-icon"
-        alt=""
-      >
-        <span class="shop-cart-count">0</span>
-      </a>
-
-    </header>
-
-
-    <!-- HERO -->
-    <section class="shop-intro">
-
-      <h1>
+<a aria-label="Корзина" class="shop-cart-button" href="cart.html">
+<img alt="" class="shop-cart-icon" decoding="async" loading="lazy" src="images/cart.svg"/>
+<span class="shop-cart-count">0</span>
+</a>
+</header>
+<!-- HERO -->
+<section class="shop-intro">
+<h1>
         МАГАЗИН
       </h1>
-
-      <p class="shop-description">
-        БОЛЬШЕ, ЧЕМ АКСЕССУАР.<br>
+<p class="shop-description">
+        БОЛЬШЕ, ЧЕМ АКСЕССУАР.<br/>
         ЧАСТЬ ИГРЫ.
       </p>
-
-    </section>
-
-
+</section>
 <!-- ФИЛЬТР -->
 <nav class="shop-filter">
-
-  <button
-    class="shop-filter-btn is-active"
-    type="button"
-    data-shop-tab="masks"
-  >
+<button class="shop-filter-btn is-active" data-shop-tab="masks" type="button">
     МАСКИ
   </button>
-
-  <button
-    class="shop-filter-btn"
-    type="button"
-    data-shop-tab="features"
-  >
+<button class="shop-filter-btn" data-shop-tab="features" type="button">
     ВОЗМОЖНОСТИ
   </button>
-
 </nav>
-
-
-    <!-- ТОВАРЫ -->
-    <section class="shop-grid" id="masksSection">
-
-
-      <!-- МЕДВЕДЬ -->
-      <article
-        class="shop-product"
-        data-name="Медведь"
-        data-price="12000"
-      >
-
-      <div class="shop-product-image shop-product-slider">
-
-        <div class="shop-product-slides">
-      
-          <div class="shop-product-slide">
-            <img
-              src="images/bear-mask-1.png"
-              alt="Маска Медведь — вид 1"
-            >
-          </div>
-      
-          <div class="shop-product-slide">
-            <img
-              src="images/bear-mask-2.png"
-              alt="Маска Медведь — вид 2"
-            >
-          </div>
-      
-          <div class="shop-product-slide">
-            <img
-              src="images/bear-mask-3.png"
-              alt="Маска Медведь — вид 3"
-            >
-          </div>
-      
-        </div>
-      
-        <div class="shop-slider-dots">
-          <span class="shop-slider-dot is-active"></span>
-          <span class="shop-slider-dot"></span>
-          <span class="shop-slider-dot"></span>
-        </div>
-      
-      </div>
-
-        <div class="shop-product-content">
-
-          <span class="shop-product-label">
+<!-- ТОВАРЫ -->
+<section class="shop-grid" id="masksSection">
+<!-- МЕДВЕДЬ -->
+<article class="shop-product" data-name="Медведь" data-price="12000">
+<div class="shop-product-image shop-product-slider">
+<div class="shop-product-slides">
+<div class="shop-product-slide">
+<img alt="Маска Медведь — вид 1" decoding="async" loading="lazy" src="images/bear-mask-1.webp"/>
+</div>
+<div class="shop-product-slide">
+<img alt="Маска Медведь — вид 2" decoding="async" loading="lazy" src="images/bear-mask-2.webp"/>
+</div>
+<div class="shop-product-slide">
+<img alt="Маска Медведь — вид 3" decoding="async" loading="lazy" src="images/bear-mask-3.webp"/>
+</div>
+</div>
+<div class="shop-slider-dots">
+<span class="shop-slider-dot is-active"></span>
+<span class="shop-slider-dot"></span>
+<span class="shop-slider-dot"></span>
+</div>
+</div>
+<div class="shop-product-content">
+<span class="shop-product-label">
             МАСКА
           </span>
-
-          <h2>
+<h2>
             МЕДВЕДЬ
           </h2>
-
-          <p class="shop-product-price">
+<p class="shop-product-price">
             12 000 ₽
           </p>
-
-          <button
-          class="shop-add-button"
-          type="button"
-          data-product-id="1"
-          data-product="Медведь"
-          data-price="12000"
-          data-image="images/bear-mask-1.png"
-        >
-          <span>В КОРЗИНУ</span>
-          <span class="shop-add-icon">+</span>
-        </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- ТИГР -->
-      <article
-        class="shop-product"
-        data-name="Тигр"
-        data-price="20000"
-      >
-
-      <div class="shop-product-image shop-product-slider">
-
-        <div class="shop-product-slides">
-      
-          <div class="shop-product-slide">
-            <img
-              src="images/tiger-mask-1.png"
-              alt="Маска Тигр — вид 1"
-            >
-          </div>
-      
-          <div class="shop-product-slide">
-            <img
-              src="images/tiger-mask-2.png"
-              alt="Маска Тигр — вид 2"
-            >
-          </div>
-      
-          <div class="shop-product-slide">
-            <img
-              src="images/tiger-mask-3.png"
-              alt="Маска Тигр — вид 3"
-            >
-          </div>
-      
-        </div>
-      
-        <div class="shop-slider-dots">
-          <span class="shop-slider-dot is-active"></span>
-          <span class="shop-slider-dot"></span>
-          <span class="shop-slider-dot"></span>
-        </div>
-      
-      </div>
-
-        <div class="shop-product-content">
-
-          <span class="shop-product-label">
+<button class="shop-add-button" data-image="images/bear-mask-1.webp" data-price="12000" data-product="Медведь" data-product-id="1" type="button">
+<span>В КОРЗИНУ</span>
+<span class="shop-add-icon">+</span>
+</button>
+</div>
+</article>
+<!-- ТИГР -->
+<article class="shop-product" data-name="Тигр" data-price="20000">
+<div class="shop-product-image shop-product-slider">
+<div class="shop-product-slides">
+<div class="shop-product-slide">
+<img alt="Маска Тигр — вид 1" decoding="async" loading="lazy" src="images/tiger-mask-1.webp"/>
+</div>
+<div class="shop-product-slide">
+<img alt="Маска Тигр — вид 2" decoding="async" loading="lazy" src="images/tiger-mask-2.webp"/>
+</div>
+<div class="shop-product-slide">
+<img alt="Маска Тигр — вид 3" decoding="async" loading="lazy" src="images/tiger-mask-3.webp"/>
+</div>
+</div>
+<div class="shop-slider-dots">
+<span class="shop-slider-dot is-active"></span>
+<span class="shop-slider-dot"></span>
+<span class="shop-slider-dot"></span>
+</div>
+</div>
+<div class="shop-product-content">
+<span class="shop-product-label">
             МАСКА
           </span>
-
-          <h2>
+<h2>
             ТИГР
           </h2>
-
-          <p class="shop-product-price">
+<p class="shop-product-price">
             20 000 ₽
           </p>
-
-          <button
-          class="shop-add-button"
-          type="button"
-          data-product-id="2"
-          data-product="Тигр"
-          data-price="20000"
-          data-image="images/tiger-mask-1.png"
-        >
-          <span>В КОРЗИНУ</span>
-          <span class="shop-add-icon">+</span>
-        </button>
-
-        </div>
-
-      </article>
-
-
-
+<button class="shop-add-button" data-image="images/tiger-mask-1.webp" data-price="20000" data-product="Тигр" data-product-id="2" type="button">
+<span>В КОРЗИНУ</span>
+<span class="shop-add-icon">+</span>
+</button>
+</div>
+</article>
 <!-- ЛЕВ -->
-<article
-  class="shop-product shop-product-wide"
-  data-name="Лев"
-  data-price="20000"
->
-
+<article class="shop-product shop-product-wide" data-name="Лев" data-price="20000">
 <div class="shop-product-image shop-product-slider">
-
-    <div class="shop-product-slides">
-  
-      <div class="shop-product-slide">
-        <img
-          src="images/lion-mask-1.png"
-          alt="Маска Лев — вид 1"
-        >
-      </div>
-  
-      <div class="shop-product-slide">
-        <img
-          src="images/lion-mask-2.png"
-          alt="Маска Лев — вид 2"
-        >
-      </div>
-  
-      <div class="shop-product-slide">
-        <img
-          src="images/lion-mask-3.png"
-          alt="Маска Лев — вид 3"
-        >
-      </div>
-  
-    </div>
-  
-    <div class="shop-slider-dots">
-      <span class="shop-slider-dot is-active"></span>
-      <span class="shop-slider-dot"></span>
-      <span class="shop-slider-dot"></span>
-    </div>
-  
-  </div>
-
-  <div class="shop-product-content">
-
-    <span class="shop-product-label">
+<div class="shop-product-slides">
+<div class="shop-product-slide">
+<img alt="Маска Лев — вид 1" decoding="async" loading="lazy" src="images/lion-mask-1.webp"/>
+</div>
+<div class="shop-product-slide">
+<img alt="Маска Лев — вид 2" decoding="async" loading="lazy" src="images/lion-mask-2.webp"/>
+</div>
+<div class="shop-product-slide">
+<img alt="Маска Лев — вид 3" decoding="async" loading="lazy" src="images/lion-mask-3.webp"/>
+</div>
+</div>
+<div class="shop-slider-dots">
+<span class="shop-slider-dot is-active"></span>
+<span class="shop-slider-dot"></span>
+<span class="shop-slider-dot"></span>
+</div>
+</div>
+<div class="shop-product-content">
+<span class="shop-product-label">
       МАСКА
     </span>
-
-    <h2>
+<h2>
       ЛЕВ
     </h2>
-
-    <p class="shop-product-price">
+<p class="shop-product-price">
       20 000 ₽
     </p>
-
-    <button
-    class="shop-add-button"
-    type="button"
-    data-product-id="3"
-    data-product="Лев"
-    data-price="20000"
-    data-image="images/lion-mask-1.png"
-  >
-    <span>В КОРЗИНУ</span>
-    <span class="shop-add-icon">+</span>
-  </button>
-
-  </div>
-
+<button class="shop-add-button" data-image="images/lion-mask-1.webp" data-price="20000" data-product="Лев" data-product-id="3" type="button">
+<span>В КОРЗИНУ</span>
+<span class="shop-add-icon">+</span>
+</button>
+</div>
 </article>
-
-    </section>
-
+</section>
 <!-- ВОЗМОЖНОСТИ -->
-<section class="shop-features" id="featuresSection" hidden>
-
-  <article
-    class="shop-feature-card"
-    id="nicknameFeature"
-  >
-
-    <div class="shop-feature-visual">
-
-      <span class="shop-feature-mini">
+<section class="shop-features" hidden="" id="featuresSection">
+<article class="shop-feature-card" id="nicknameFeature">
+<div class="shop-feature-visual">
+<span class="shop-feature-mini">
         JAX
       </span>
-
-      <div class="shop-feature-nickname">
+<div class="shop-feature-nickname">
         @YOURNAME
       </div>
-
-      <span class="shop-feature-status">
+<span class="shop-feature-status">
         UNIQUE ID
       </span>
-
-    </div>
-
-
-    <div class="shop-feature-content">
-
-      <span class="shop-product-label">
+</div>
+<div class="shop-feature-content">
+<span class="shop-product-label">
         ВОЗМОЖНОСТЬ
       </span>
-
-      <h2>
+<h2>
         УНИКАЛЬНЫЙ НИК
       </h2>
-      
-      <p class="shop-feature-price">
+<p class="shop-feature-price">
         2 000 ₽
       </p>
-      
-      <p class="shop-feature-description">
-        ИМЯ, КОТОРОЕ ПРИНАДЛЕЖИТ<br>
+<p class="shop-feature-description">
+        ИМЯ, КОТОРОЕ ПРИНАДЛЕЖИТ<br/>
         ТОЛЬКО ТЕБЕ.
       </p>
-
-      <button
-        class="shop-feature-button"
-        id="nicknameDetailsBtn"
-        type="button"
-      >
-        <span>ПОДРОБНЕЕ</span>
-        <span>→</span>
-      </button>
-
-    </div>
-
-  </article>
-
+<button class="shop-feature-button" id="nicknameDetailsBtn" type="button">
+<span>ПОДРОБНЕЕ</span>
+<span>→</span>
+</button>
+</div>
+</article>
 </section>
-
-
-    <!-- ФИНАЛЬНЫЙ ТЕКСТ -->
-    <section class="shop-ending">
-        <p>
-          ИНДИВИДУАЛЬНОСТЬ В ОБРАЗЕ.<br>
+<!-- ФИНАЛЬНЫЙ ТЕКСТ -->
+<section class="shop-ending">
+<p>
+          ИНДИВИДУАЛЬНОСТЬ В ОБРАЗЕ.<br/>
           СТИЛЬ В ДЕТАЛЯХ.
         </p>
-      </section>
-
-  </main>
-
-
-  <script>
+</section>
+</main>
+<script>
 const addButtons =
   document.querySelectorAll('.shop-add-button');
 
@@ -641,17 +458,13 @@ bearCard.addEventListener('click', (event) => {
 });
 
   </script>
-
-<a href="cart.html" class="floating-cart" id="floatingCart">
-    <span id="floatingCartText">
+<a class="floating-cart" href="cart.html" id="floatingCart">
+<span id="floatingCartText">
       КОРЗИНА · 1 ТОВАР
     </span>
-  
-    <span class="floating-cart-arrow">→</span>
-  </a>
-
+<span class="floating-cart-arrow">→</span>
+</a>
 <!-- ЛОГИКА МАГАЗИНА -->
 <script src="shop.js"></script>
-
 </body>
 </html>

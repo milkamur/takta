@@ -52,7 +52,7 @@
         rgba(0, 0, 0, 0.86) 90%,
         #000 100%
       ),
-      url("images/takta-bg.png");
+      url("images/takta-bg.webp");
   
       background-size: auto 76%;
       background-position: center top;
@@ -287,7 +287,7 @@
         rgba(0, 0, 0, 0.50) 62%,
         rgba(0, 0, 0, 0.12) 100%
       ),
-      url("images/next-game-bg.png");
+      url("images/next-game-bg.webp");
   
     background-size: cover;
     background-position: center;

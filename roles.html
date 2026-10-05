@@ -1,340 +1,232 @@
 <!DOCTYPE html>
+
 <html lang="ru">
-
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Роли — JAX</title>
-
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="roles.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Роли — JAX</title>
+<link href="style.css" rel="stylesheet"/>
+<link href="roles.css" rel="stylesheet"/>
 </head>
-
 <body>
-
-  <main class="roles-page">
-
-    <!-- ШАПКА -->
-    <header class="roles-header">
-
-      <a href="index.html" class="roles-back jax-back" aria-label="Назад">
+<main class="roles-page">
+<!-- ШАПКА -->
+<header class="roles-header">
+<a aria-label="Назад" class="roles-back jax-back" href="index.html">
         ←
       </a>
-    
-      <a href="index.html" class="roles-logo jax-logo">
+<a class="roles-logo jax-logo" href="index.html">
         JAX
       </a>
-    
-    </header>
-
-
-    <!-- ЗАГОЛОВОК -->
-    <section class="roles-intro">
-
-        <h1>РОЛИ</h1>
-      
-        <p class="roles-description">
-          ЗДЕСЬ КАЖДЫЙ<br>
+</header>
+<!-- ЗАГОЛОВОК -->
+<section class="roles-intro">
+<h1>РОЛИ</h1>
+<p class="roles-description">
+          ЗДЕСЬ КАЖДЫЙ<br/>
           ИГРАЕТ СВОЮ РОЛЬ.
         </p>
-      
-      </section>
-
-      <nav class="roles-filter">
-
-        <button
-          class="roles-filter-btn is-active"
-          type="button"
-          data-filter="all"
-        >
+</section>
+<nav class="roles-filter">
+<button class="roles-filter-btn is-active" data-filter="all" type="button">
           ВСЕ РОЛИ
         </button>
-      
-        <button
-          class="roles-filter-btn"
-          type="button"
-          data-filter="peaceful"
-        >
+<button class="roles-filter-btn" data-filter="peaceful" type="button">
           МИРНЫЕ
         </button>
-      
-        <button
-          class="roles-filter-btn"
-          type="button"
-          data-filter="mafia"
-        >
+<button class="roles-filter-btn" data-filter="mafia" type="button">
           МАФИЯ
         </button>
-      
-        <button
-          class="roles-filter-btn"
-          type="button"
-          data-filter="neutral"
-        >
+<button class="roles-filter-btn" data-filter="neutral" type="button">
           НЕЙТРАЛЬНЫЕ
         </button>
-      
-      </nav>
-
-      <section class="roles-grid">
-
-        <!-- ДОН МАФИИ -->
-        <a href="don-mafia.html" class="role-card" data-category="mafia">
-          <div class="role-card-image">
-            <img src="images/don.png" alt="Дон мафии">
-          </div>
-      
-          <div class="role-card-content">
-            <h2>ДОН МАФИИ</h2>
-            <p>
+</nav>
+<section class="roles-grid">
+<!-- ДОН МАФИИ -->
+<a class="role-card" data-category="mafia" href="don-mafia.html">
+<div class="role-card-image">
+<img alt="Дон мафии" decoding="async" loading="lazy" src="images/don.webp"/>
+</div>
+<div class="role-card-content">
+<h2>ДОН МАФИИ</h2>
+<p>
               ЛИДЕР МАФИИ. ПРИ СПОРЕ ПО ЦЕЛИ
               МАФИЯ СЛЕДУЕТ ЗА ДОНОМ.
             </p>
-          </div>
-        </a>
-      
-      
-        <!-- МАФИЯ -->
-        <a href="mafia.html" class="role-card" data-category="mafia">
-          <div class="role-card-image">
-            <img src="images/mafia.png" alt="Мафия">
-          </div>
-      
-          <div class="role-card-content">
-            <h2>МАФИЯ</h2>
-            <p>
+</div>
+</a>
+<!-- МАФИЯ -->
+<a class="role-card" data-category="mafia" href="mafia.html">
+<div class="role-card-image">
+<img alt="Мафия" decoding="async" loading="lazy" src="images/mafia.webp"/>
+</div>
+<div class="role-card-content">
+<h2>МАФИЯ</h2>
+<p>
               НОЧЬЮ ВЫБИРАЕТ ЦЕЛЬ
               И УСТРАНЯЕТ ОДНОГО ИГРОКА.
             </p>
-          </div>
-        </a>
-
-        <!-- ПСИХ -->
-        <a href="psycho.html" class="role-card" data-category="neutral">
-
-    <div class="role-card-image">
-      <img src="images/psycho.png" alt="Псих">
-    </div>
-  
-    <div class="role-card-content">
-      <h2>ПСИХ</h2>
-  
-      <p>
+</div>
+</a>
+<!-- ПСИХ -->
+<a class="role-card" data-category="neutral" href="psycho.html">
+<div class="role-card-image">
+<img alt="Псих" decoding="async" loading="lazy" src="images/psycho.webp"/>
+</div>
+<div class="role-card-content">
+<h2>ПСИХ</h2>
+<p>
         ИГРАЕТ САМ ЗА СЕБЯ.
         КАЖДУЮ НОЧЬ УСТРАНЯЕТ ОДНОГО ИГРОКА.
       </p>
-    </div>
-  
-  </a>
-
-  <!-- РЕШАЛА -->
-  <a href="reshala.html" class="role-card" data-category="peaceful">
-
-    <div class="role-card-image">
-      <img src="images/reshala.png" alt="Решала">
-    </div>
-  
-    <div class="role-card-content">
-      <h2>РЕШАЛА</h2>
-  
-      <p>
+</div>
+</a>
+<!-- РЕШАЛА -->
+<a class="role-card" data-category="peaceful" href="reshala.html">
+<div class="role-card-image">
+<img alt="Решала" decoding="async" loading="lazy" src="images/reshala.webp"/>
+</div>
+<div class="role-card-content">
+<h2>РЕШАЛА</h2>
+<p>
         ИГРАЕТ ЗА МИРНЫХ.
         ОДИН РАЗ ЗА ИГРУ МОЖЕТ ВЫВЕСТИ ИГРОКА БЕЗ ГОЛОСОВАНИЯ.
       </p>
-    </div>
-  
-  </a>
-
-  <!-- КОП -->
-  <a href="cop.html" class="role-card" data-category="peaceful">
-
-    <div class="role-card-image">
-      <img src="images/cop.png" alt="Коп">
-    </div>
-  
-    <div class="role-card-content">
-      <h2>КОП</h2>
-  
-      <p>
+</div>
+</a>
+<!-- КОП -->
+<a class="role-card" data-category="peaceful" href="cop.html">
+<div class="role-card-image">
+<img alt="Коп" decoding="async" loading="lazy" src="images/cop.webp"/>
+</div>
+<div class="role-card-content">
+<h2>КОП</h2>
+<p>
         КАЖДУЮ НОЧЬ ПРОВЕРЯЕТ ОДНОГО ИГРОКА
         И ВЫЧИСЛЯЕТ МАФИЮ.
       </p>
-    </div>
-  
-  </a>
-
-  <!-- МИРНЫЙ -->
-  <a href="peaceful.html" class="role-card" data-category="peaceful">
-
-    <div class="role-card-image">
-      <img src="images/peaceful.png" alt="Мирный">
-    </div>
-  
-    <div class="role-card-content">
-      <h2>МИРНЫЙ</h2>
-  
-      <p>
+</div>
+</a>
+<!-- МИРНЫЙ -->
+<a class="role-card" data-category="peaceful" href="peaceful.html">
+<div class="role-card-image">
+<img alt="Мирный" decoding="async" loading="lazy" src="images/peaceful.webp"/>
+</div>
+<div class="role-card-content">
+<h2>МИРНЫЙ</h2>
+<p>
         НАБЛЮДАЕТ, ОБСУЖДАЕТ
         И ПОМОГАЕТ ГОРОДУ ВЫЧИСЛИТЬ МАФИЮ.
       </p>
-    </div>
-  
-  </a>
-
-  <!-- СУДЬЯ -->
-  <a href="judge.html" class="role-card" data-category="peaceful">
-
-    <div class="role-card-image">
-      <img src="images/judge.png" alt="Судья">
-    </div>
-  
-    <div class="role-card-content">
-      <h2>СУДЬЯ</h2>
-  
-      <p>
+</div>
+</a>
+<!-- СУДЬЯ -->
+<a class="role-card" data-category="peaceful" href="judge.html">
+<div class="role-card-image">
+<img alt="Судья" decoding="async" loading="lazy" src="images/judge.webp"/>
+</div>
+<div class="role-card-content">
+<h2>СУДЬЯ</h2>
+<p>
         ПРИ РАВЕНСТВЕ ГОЛОСОВ
         ПРИНИМАЕТ ОКОНЧАТЕЛЬНОЕ РЕШЕНИЕ.
       </p>
-    </div>
-  
-  </a>
-
-  <!-- МАТЬ -->
-  <a href="mother.html" class="role-card" data-category="peaceful">
-
-    <div class="role-card-image">
-      <img src="images/mother.png" alt="Мать">
-    </div>
-  
-    <div class="role-card-content">
-      <h2>МАТЬ</h2>
-  
-      <p>
+</div>
+</a>
+<!-- МАТЬ -->
+<a class="role-card" data-category="peaceful" href="mother.html">
+<div class="role-card-image">
+<img alt="Мать" decoding="async" loading="lazy" src="images/mother.webp"/>
+</div>
+<div class="role-card-content">
+<h2>МАТЬ</h2>
+<p>
         КАЖДУЮ НОЧЬ ЗАЩИЩАЕТ
         ОДНОГО ИГРОКА ОТ НАПАДЕНИЯ.
       </p>
-    </div>
-  
-  </a>
-
+</div>
+</a>
 <!-- БОМБА -->
-<a href="bomb.html" class="role-card" data-category="peaceful">
-
-  <div class="role-card-image">
-    <img src="images/bomb.png" alt="Бомба">
-  </div>
-
-  <div class="role-card-content">
-    <h2>БОМБА</h2>
-
-    <p>
+<a class="role-card" data-category="peaceful" href="bomb.html">
+<div class="role-card-image">
+<img alt="Бомба" decoding="async" loading="lazy" src="images/bomb.webp"/>
+</div>
+<div class="role-card-content">
+<h2>БОМБА</h2>
+<p>
       ПРИ УХОДЕ ЗАПУСКАЕТ ЦЕПНУЮ РЕАКЦИЮ
       И ЗАБИРАЕТ С СОБОЙ ЕЩЁ ДВУХ ИГРОКОВ.
     </p>
-  </div>
-
+</div>
 </a>
-
-  <!-- ДВОЙНИК -->
-  <a href="double.html" class="role-card" data-category="neutral">
-
-    <div class="role-card-image">
-      <img src="images/double.png" alt="Двойник">
-    </div>
-  
-    <div class="role-card-content">
-      <h2>ДВОЙНИК</h2>
-  
-      <p>
+<!-- ДВОЙНИК -->
+<a class="role-card" data-category="neutral" href="double.html">
+<div class="role-card-image">
+<img alt="Двойник" decoding="async" loading="lazy" src="images/double.webp"/>
+</div>
+<div class="role-card-content">
+<h2>ДВОЙНИК</h2>
+<p>
         ПОСЛЕ ПЕРВОЙ НОЧИ КОПИРУЕТ
         РОЛЬ ОДНОГО ИЗ ПОГИБШИХ ИГРОКОВ.
       </p>
-    </div>
-  
-  </a>
-
-  <!-- СКОРОСТРЕЛ -->
-  <a href="sharpshooter.html" class="role-card" data-category="peaceful">
-
-    <div class="role-card-image">
-      <img src="images/sharpshooter.png" alt="Скорострел">
-    </div>
-  
-    <div class="role-card-content">
-      <h2>СКОРОСТРЕЛ</h2>
-  
-      <p>
+</div>
+</a>
+<!-- СКОРОСТРЕЛ -->
+<a class="role-card" data-category="peaceful" href="sharpshooter.html">
+<div class="role-card-image">
+<img alt="Скорострел" decoding="async" loading="lazy" src="images/sharpshooter.webp"/>
+</div>
+<div class="role-card-content">
+<h2>СКОРОСТРЕЛ</h2>
+<p>
         ПЕРЕД УХОДОМ ВЫБИРАЕТ ДВУХ ИГРОКОВ
         И МОЖЕТ ЗАБРАТЬ МАФИЮ С СОБОЙ.
       </p>
-    </div>
-  
-  </a>
-
-  <!-- ВОЛШЕБНИК -->
-  <a href="wizard.html" class="role-card" data-category="peaceful">
-
-    <div class="role-card-image">
-      <img src="images/wizard.png" alt="Волшебник">
-    </div>
-  
-    <div class="role-card-content">
-      <h2>ВОЛШЕБНИК</h2>
-  
-      <p>
+</div>
+</a>
+<!-- ВОЛШЕБНИК -->
+<a class="role-card" data-category="peaceful" href="wizard.html">
+<div class="role-card-image">
+<img alt="Волшебник" decoding="async" loading="lazy" src="images/wizard.webp"/>
+</div>
+<div class="role-card-content">
+<h2>ВОЛШЕБНИК</h2>
+<p>
         ОДИН РАЗ ЗА ИГРУ ДАЁТ ИГРОКУ
         ИММУНИТЕТ ОТ ДНЕВНОГО ГОЛОСОВАНИЯ.
       </p>
-    </div>
-  
-  </a>
-
-  <!-- NEO -->
-  <a href="neo.html" class="role-card" data-category="peaceful">
-
-    <div class="role-card-image">
-      <img src="images/neo.png" alt="NEO">
-    </div>
-  
-    <div class="role-card-content">
-      <h2>NEO</h2>
-  
-      <p>
+</div>
+</a>
+<!-- NEO -->
+<a class="role-card" data-category="peaceful" href="neo.html">
+<div class="role-card-image">
+<img alt="NEO" decoding="async" loading="lazy" src="images/neo.webp"/>
+</div>
+<div class="role-card-content">
+<h2>NEO</h2>
+<p>
         ПЕРЕНАПРАВЛЯЕТ АТАКУ
         НА ДРУГОГО ИГРОКА.
       </p>
-    </div>
-  
-  </a>
-
-  <!-- ЧУМА -->
-  <a href="plague.html" class="role-card" data-category="neutral">
-
-    <div class="role-card-image">
-      <img src="images/plague.png" alt="Чума">
-    </div>
-  
-    <div class="role-card-content">
-      <h2>ЧУМА</h2>
-  
-      <p>
+</div>
+</a>
+<!-- ЧУМА -->
+<a class="role-card" data-category="neutral" href="plague.html">
+<div class="role-card-image">
+<img alt="Чума" decoding="async" loading="lazy" src="images/plague.webp"/>
+</div>
+<div class="role-card-content">
+<h2>ЧУМА</h2>
+<p>
         ПОБЕЖДАЕТ, ЕСЛИ ЗАСТАВИТ
         ОСТАЛЬНЫХ УСТРАНИТЬ СЕБЯ.
       </p>
-    </div>
-  
-  </a>
-      
-      </section>
-
-  </main>
-
-  <script>
+</div>
+</a>
+</section>
+</main>
+<script>
     const filterButtons = document.querySelectorAll('.roles-filter-btn');
     const roleCards = document.querySelectorAll('.role-card');
   
@@ -362,8 +254,5 @@
       });
     });
   </script>
-  
-
 </body>
-
 </html>
