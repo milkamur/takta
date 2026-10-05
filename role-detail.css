@@ -553,3 +553,42 @@
   .role-detail-logo {
     cursor: pointer;
   }
+
+  /* =========================
+   МАЛЕНЬКИЕ ЭКРАНЫ
+========================= */
+
+@media (max-width: 390px) {
+
+  /* Длинные названия ролей */
+  .role-hero h1 {
+    font-size: 48px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Именно СКОРОСТРЕЛ ещё немного меньше */
+/* Длинные названия: СКОРОСТРЕЛ и ВОЛШЕБНИК */
+.sharpshooter-page .role-hero h1,
+.wizard-page .role-hero h1 {
+  font-size: 43px;
+  letter-spacing: 0.01em;
+}
+
+  /* Карточки чуть компактнее */
+  .role-info-block {
+    padding: 16px 16px 18px;
+  }
+
+  /* Текст описаний */
+  .role-info-block p {
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: 0.035em;
+  }
+
+  /* Заголовки СТОРОНА / ТИП РОЛИ / СПОСОБНОСТЬ */
+  .role-info-label {
+    margin-bottom: 9px;
+    font-size: 7.5px;
+  }
+}

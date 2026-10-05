@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Бронь подтверждена — JAX</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #050505;
+    }
+
+    body {
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .payment-success-page {
+      min-height: 100vh;
+
+      box-sizing: border-box;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 40px 22px;
+    }
+
+    .payment-success-logo {
+      margin-bottom: 55px;
+
+      text-align: center;
+
+      font-size: 24px;
+      letter-spacing: 0.35em;
+
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .payment-success-mark {
+      width: 64px;
+      height: 64px;
+
+      margin: 0 auto 35px;
+
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 28px;
+      font-weight: 300;
+    }
+
+    .payment-success-title {
+      margin: 0;
+
+      text-align: center;
+
+      font-size: clamp(25px, 7vw, 38px);
+      font-weight: 400;
+
+      letter-spacing: 0.16em;
+      line-height: 1.5;
+    }
+
+    .payment-success-text {
+      max-width: 520px;
+
+      margin:
+        28px
+        auto
+        0;
+
+      text-align: center;
+
+      font-size: 13px;
+      line-height: 1.9;
+
+      letter-spacing: 0.14em;
+
+      color: rgba(255, 255, 255, 0.48);
+    }
+
+    .payment-success-line {
+      width: 100%;
+      max-width: 520px;
+
+      height: 1px;
+
+      margin:
+        48px
+        auto;
+
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .payment-success-button {
+      width: 100%;
+      max-width: 520px;
+
+      min-height: 62px;
+
+      margin: 0 auto;
+
+      box-sizing: border-box;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.55);
+
+      border-radius: 40px;
+
+      background:
+        linear-gradient(
+          100deg,
+          rgba(255, 255, 255, 0.10),
+          rgba(255, 255, 255, 0.02)
+        );
+
+      color: #fff;
+
+      text-decoration: none;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 14px;
+      letter-spacing: 0.25em;
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <main class="payment-success-page">
+
+    <div class="payment-success-logo">
+      JAX
+    </div>
+
+    <div class="payment-success-mark">
+      ✓
+    </div>
+
+    <h1 class="payment-success-title">
+      БРОНЬ<br>
+      ПОДТВЕРЖДЕНА
+    </h1>
+
+    <p class="payment-success-text">
+      ОПЛАТА ПРОШЛА УСПЕШНО.<br>
+      ВАШЕ МЕСТО В ИГРЕ ЗАБРОНИРОВАНО.
+    </p>
+
+    <div
+    id="bookingDetails"
+    class="payment-success-details"
+    hidden
+  >
+    <div id="successGameTitle"></div>
+  
+    <div id="successGameDate"></div>
+  
+    <div id="successGameTime"></div>
+  
+    <div id="successOrderNumber"></div>
+  </div>
+
+    <div class="payment-success-line"></div>
+
+    <a
+      href="account.html"
+      class="payment-success-button"
+    >
+      ЛИЧНЫЙ КАБИНЕТ
+    </a>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  
+  <script>
+    const orderNumber =
+      localStorage.getItem("jaxLastBookingOrder");
+  
+    const bookingDetails =
+      document.getElementById("bookingDetails");
+  
+    const successGameTitle =
+      document.getElementById("successGameTitle");
+  
+    const successGameDate =
+      document.getElementById("successGameDate");
+  
+    const successGameTime =
+      document.getElementById("successGameTime");
+  
+    const successOrderNumber =
+      document.getElementById("successOrderNumber");
+  
+  
+    async function loadPaidBooking() {
+  
+      if (!orderNumber) {
+        console.error(
+          "Нет номера последней брони"
+        );
+        return;
+      }
+  
+  
+      const {
+        data: booking,
+        error
+      } =
+        await supabaseClient
+          .from("bookings")
+          .select(
+            "order_number, game_title, game_date, game_time, status"
+          )
+          .eq(
+            "order_number",
+            orderNumber
+          )
+          .maybeSingle();
+  
+  
+      if (error) {
+  
+        console.error(
+          "Ошибка загрузки брони:",
+          error
+        );
+  
+        return;
+      }
+  
+  
+      if (!booking) {
+  
+        console.error(
+          "Бронь не найдена:",
+          orderNumber
+        );
+  
+        return;
+      }
+  
+  
+      if (booking.status !== "paid") {
+  
+        console.log(
+          "Платёж ещё не подтверждён:",
+          booking.status
+        );
+  
+        return;
+      }
+  
+  
+      const date =
+        new Date(
+          `${booking.game_date}T00:00:00`
+        );
+  
+  
+      const formattedDate =
+        date.toLocaleDateString(
+          "ru-RU",
+          {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+          }
+        );
+  
+  
+      const formattedTime =
+        booking.game_time
+          ? booking.game_time.slice(0, 5)
+          : "";
+  
+  
+      successGameTitle.textContent =
+        booking.game_title;
+  
+      successGameDate.textContent =
+        formattedDate;
+  
+      successGameTime.textContent =
+        formattedTime;
+  
+      successOrderNumber.textContent =
+        `БРОНЬ ${booking.order_number}`;
+  
+  
+      bookingDetails.hidden = false;
+    }
+  
+  
+    loadPaidBooking();
+  </script>
+
+</body>
+
+</html>
