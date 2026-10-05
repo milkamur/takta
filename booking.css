@@ -283,3 +283,21 @@
 .booking-pay-button {
   margin-top: 10px;
 }
+
+/* =========================
+   МИНИМАЛЬНЫЙ ЗАКАЗ
+========================= */
+
+.booking-row-minimum {
+  min-height: 72px;
+}
+
+.booking-row-minimum span {
+  line-height: 1.6;
+}
+
+.booking-row-minimum strong {
+  flex-shrink: 0;
+  margin-left: 20px;
+  white-space: nowrap;
+}

@@ -361,6 +361,85 @@ if (bookingButton) {
 loadActiveGame();
 
 // =========================
+// ФОРМАТ ТЕЛЕФОНА РФ
+// =========================
+
+const guestPhoneInput =
+  document.getElementById("guestPhone");
+
+if (guestPhoneInput) {
+
+  // Если поле пустое — сразу ставим +7
+  if (!guestPhoneInput.value.trim()) {
+    guestPhoneInput.value = "+7 ";
+  }
+
+  guestPhoneInput.addEventListener(
+    "input",
+    () => {
+
+      let digits =
+        guestPhoneInput.value.replace(/\D/g, "");
+
+      // Убираем код страны
+      if (digits.startsWith("7")) {
+        digits = digits.slice(1);
+      }
+
+      // Максимум 10 цифр после +7
+      digits = digits.slice(0, 10);
+
+      let formatted = "+7";
+
+      if (digits.length > 0) {
+        formatted +=
+          " (" + digits.slice(0, 3);
+      }
+
+      if (digits.length >= 3) {
+        formatted +=
+          ") " + digits.slice(3, 6);
+      }
+
+      if (digits.length >= 6) {
+        formatted +=
+          "-" + digits.slice(6, 8);
+      }
+
+      if (digits.length >= 8) {
+        formatted +=
+          "-" + digits.slice(8, 10);
+      }
+
+      guestPhoneInput.value =
+        formatted;
+    }
+  );
+
+  guestPhoneInput.addEventListener(
+    "focus",
+    () => {
+      if (!guestPhoneInput.value.trim()) {
+        guestPhoneInput.value = "+7 ";
+      }
+    }
+  );
+
+  guestPhoneInput.addEventListener(
+    "blur",
+    () => {
+
+      const digits =
+        guestPhoneInput.value.replace(/\D/g, "");
+
+      if (digits.length <= 1) {
+        guestPhoneInput.value = "+7 ";
+      }
+    }
+  );
+}
+
+// =========================
 // ОПЛАТА БРОНИ
 // =========================
 
