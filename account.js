@@ -650,11 +650,25 @@ if (phoneForm) {
         
           await syncProfile(user);
         
-          // После регистрации / входа
-          // отправляем на главную
-        
-          window.location.href = "index.html";
-        
+          // После регистрации / входа возвращаем пользователя
+          // туда, откуда он пришёл.
+          // Например: ВСТУПИТЬ В ИГРУ -> booking.html.
+          // Обычный вход в личный кабинет -> account.html.
+
+          const params = new URLSearchParams(window.location.search);
+          const requestedRedirect = params.get("redirect");
+
+          // Разрешаем только локальные HTML-страницы JAX,
+          // чтобы параметр redirect нельзя было использовать
+          // для перехода на посторонний сайт.
+          const safeRedirect =
+            requestedRedirect &&
+            /^[a-zA-Z0-9_-]+\.html(?:[?#].*)?$/.test(requestedRedirect)
+              ? requestedRedirect
+              : "account.html";
+
+          window.location.href = safeRedirect;
+
           return;
         }
 
