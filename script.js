@@ -37,89 +37,106 @@ if (joinGameBtn) {
 ========================= */
 
 const jaxIntro =
-  document.getElementById('jaxIntro');
+  document.getElementById("jaxIntro");
 
 const jaxIntroVideo =
-  document.getElementById('jaxIntroVideo');
-
+  document.getElementById("jaxIntroVideo");
 
 if (jaxIntro && jaxIntroVideo) {
 
-  /*
-    Проверяем, пришёл ли пользователь
-    на главную с другой страницы JAX.
-  */
+  let introFinished = false;
+  let startTimer = null;
 
+  const hideIntro = () => {
+    if (introFinished) return;
+
+    introFinished = true;
+
+    if (startTimer) {
+      clearTimeout(startTimer);
+    }
+
+    jaxIntro.classList.add("is-hidden");
+
+    setTimeout(() => {
+      jaxIntro.remove();
+    }, 500);
+  };
+
+  // Если заставку уже показывали в этой вкладке,
+  // второй раз её не запускаем.
+  const introAlreadyShown =
+    sessionStorage.getItem("jaxIntroShown") === "1";
+
+  // Если пользователь вернулся на главную
+  // с другой страницы JAX, заставку тоже пропускаем.
   let cameFromJaxPage = false;
 
   if (document.referrer) {
-
     try {
-
-      const referrer =
-        new URL(document.referrer);
-
-      const current =
-        new URL(window.location.href);
+      const referrer = new URL(document.referrer);
+      const current = new URL(window.location.href);
 
       cameFromJaxPage =
         referrer.origin === current.origin &&
         referrer.pathname !== current.pathname;
-
     } catch (error) {
-
       cameFromJaxPage = false;
-
     }
-
   }
 
-
-  /*
-    Если вернулись на главную
-    с другой страницы сайта —
-    заставку не показываем.
-  */
-
-  if (cameFromJaxPage) {
-
+  if (introAlreadyShown || cameFromJaxPage) {
     jaxIntro.remove();
-
   } else {
-
-    /*
-      Прямой вход или обновление
-      главной страницы —
-      показываем заставку.
-    */
-
-    jaxIntroVideo.addEventListener(
-      'ended',
-      () => {
-
-        jaxIntro.classList.add(
-          'is-hidden'
-        );
-
-        setTimeout(() => {
-
-          jaxIntro.remove();
-
-        }, 500);
-
-      }
-    );
-
+    // Для мобильных браузеров эти свойства должны
+    // быть установлены и в HTML, и непосредственно
+    // перед попыткой воспроизведения.
+    jaxIntroVideo.muted = true;
+    jaxIntroVideo.defaultMuted = true;
+    jaxIntroVideo.playsInline = true;
 
     jaxIntroVideo.addEventListener(
-      'error',
+      "playing",
       () => {
+        sessionStorage.setItem("jaxIntroShown", "1");
 
-        jaxIntro.remove();
-
-      }
+        if (startTimer) {
+          clearTimeout(startTimer);
+          startTimer = null;
+        }
+      },
+      { once: true }
     );
 
+    jaxIntroVideo.addEventListener(
+      "ended",
+      hideIntro,
+      { once: true }
+    );
+
+    jaxIntroVideo.addEventListener(
+      "error",
+      hideIntro,
+      { once: true }
+    );
+
+    // Не держим человека на заставке, если браузер
+    // не начал воспроизведение достаточно быстро.
+    startTimer = setTimeout(() => {
+      if (jaxIntroVideo.paused) {
+        hideIntro();
+      }
+    }, 1500);
+
+    // Явно просим браузер запустить видео.
+    // Если autoplay запрещён — сразу открываем сайт,
+    // без кнопки Play и без зависшей заставки.
+    const playPromise = jaxIntroVideo.play();
+
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {
+        hideIntro();
+      });
+    }
   }
-
 }
