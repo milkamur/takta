@@ -433,12 +433,12 @@ if (telegramLoginBtn) {
           .signInWithOAuth({
 
             provider:
-              "custom:telegram",
+              "custom:telegram-jax",
 
               options: {
 
                 redirectTo:
-                  "https://milkamur.github.io/takta/index.html"
+                  "https://jaxmafia.ru/index.html"
               
               }
 
