@@ -689,8 +689,8 @@ function showProfile(user) {
     "adminProfileCard"
   );
 
-const ADMIN_USER_ID =
-  "850be360-1346-4ddc-88bd-3670835272b9";
+  const ADMIN_USER_ID =
+  "afb282d1-0ccc-49d2-8542-b8e955b85ec7";
 
 
 if (adminProfileCard) {
