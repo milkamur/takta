@@ -438,7 +438,7 @@ if (telegramLoginBtn) {
               options: {
 
                 redirectTo:
-                  "https://milkamur.github.io/takta/index.html"
+                  "https://jaxmafia.ru/index.html"
               
               }
 
