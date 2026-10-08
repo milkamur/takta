@@ -86,63 +86,9 @@
         </p>
       </div>
 
-      <button class="booking-button" id="bookingButton" type="button">
-        <span>ЗАБРОНИРОВАТЬ</span>
-        <span class="booking-arrow">→</span>
-      </button>
-
-      <div class="booking-form" id="bookingForm" hidden>
-
-        <div class="booking-form-title">
-          ДАННЫЕ ГОСТЯ
-        </div>
-      
-        <label class="booking-field">
-          <span>ИМЯ</span>
-          <input
-            type="text"
-            id="guestName"
-            autocomplete="name"
-            placeholder="ВАШЕ ИМЯ"
-          >
-        </label>
-      
-        <label class="booking-field">
-          <span>НОМЕР ТЕЛЕФОНА</span>
-          <input
-            type="tel"
-            id="guestPhone"
-            autocomplete="tel"
-            inputmode="numeric"
-            value="+7 "
-          >
-        </label>
-      
-        <label class="booking-field">
-          <span>ПОЧТА</span>
-          <input
-            type="email"
-            id="guestEmail"
-            autocomplete="email"
-            placeholder="EMAIL"
-          >
-        </label>
-      
-        <button
-          class="booking-button booking-pay-button"
-          id="bookingPayButton"
-          type="button"
-        >
-          <span id="bookingPayText">
-            ОПЛАТИТЬ
-          </span>
-      
-          <span class="booking-arrow">→</span>
-        </button>
-      
-      </div>
-
-      <p class="booking-message" id="bookingMessage"></p>
+      <p class="booking-description" style="margin-top: 24px; text-align: center; opacity: .85;">
+        Онлайн-бронирование временно недоступно.
+      </p>
 
     </section>
 
@@ -150,7 +96,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
-  <script src="booking.js"></script>
+  <script src="game-info.js"></script>
 
 </body>
 </html>

@@ -22,9 +22,12 @@ function getCart() {
 
   try {
 
-    return JSON.parse(
-      localStorage.getItem('jaxCart')
-    ) || [];
+    const items = JSON.parse(localStorage.getItem('jaxCart')) || [];
+    return Array.isArray(items) ? items.map(item => ({
+      ...item,
+      price: item.name === 'Медведь' ? 12000 :
+        (item.name === 'Лев' || item.name === 'Тигр') ? 15000 : item.price
+    })) : [];
 
   } catch {
 
@@ -177,145 +180,8 @@ function renderCart() {
 renderCart();
 
 
-// =========================
-// ОФОРМЛЕНИЕ ЗАКАЗА
-// =========================
-
+// Временная версия: оформление заказов отключено.
 if (checkoutButton) {
-
-  checkoutButton.addEventListener(
-    'click',
-    async () => {
-
-      const cart = getCart();
-
-      if (cart.length === 0) {
-        return;
-      }
-
-
-      // =========================
-      // ПРОВЕРЯЕМ АВТОРИЗАЦИЮ
-      // =========================
-
-      const {
-        data: { session },
-        error: sessionError
-      } =
-        await supabaseClient.auth.getSession();
-
-
-      if (sessionError || !session?.user) {
-
-        window.location.href =
-          'account.html?mode=register&redirect=cart.html';
-
-        return;
-      }
-
-
-      checkoutButton.disabled = true;
-      checkoutButton.textContent =
-        'ОФОРМЛЯЕМ...';
-
-
-      try {
-
-        // =========================
-        // СОЗДАЁМ ЗАКАЗ
-        // =========================
-
-        const totalAmount =
-          cart.reduce(
-            (sum, item) => sum + item.price,
-            0
-          );
-
-
-        const orderNumber =
-          'JAX-' + Date.now();
-
-
-        const {
-          data: order,
-          error: orderError
-        } =
-          await supabaseClient
-            .from('shop_orders')
-            .insert({
-              order_number: orderNumber,
-              user_id: session.user.id,
-              total_amount: totalAmount,
-              status: 'pending'
-            })
-            .select()
-            .single();
-
-
-        if (orderError) {
-          throw orderError;
-        }
-
-
-        // =========================
-        // ДОБАВЛЯЕМ ТОВАРЫ
-        // В ЗАКАЗ
-        // =========================
-
-        const orderItems =
-          cart.map(item => ({
-            order_id: order.id,
-            product_id: item.productId,
-            price: item.price
-          }));
-
-
-        const {
-          error: itemsError
-        } =
-          await supabaseClient
-            .from('shop_order_items')
-            .insert(orderItems);
-
-
-        if (itemsError) {
-          throw itemsError;
-        }
-
-
-        // =========================
-        // ОЧИЩАЕМ КОРЗИНУ
-        // =========================
-
-        localStorage.removeItem('jaxCart');
-
-
-        // =========================
-        // ОТКРЫВАЕМ СТРАНИЦУ УСПЕХА
-        // =========================
-
-        window.location.href =
-          `order-success.html?order=${encodeURIComponent(orderNumber)}`;
-
-
-      } catch (error) {
-
-        console.error(
-          'Ошибка оформления заказа:',
-          error
-        );
-
-
-        alert(
-          'Не удалось оформить заказ. Попробуйте ещё раз.'
-        );
-
-
-        checkoutButton.disabled = false;
-        checkoutButton.textContent =
-          'ОФОРМИТЬ ЗАКАЗ';
-      }
-
-    }
-  );
+  checkoutButton.disabled = true;
+  checkoutButton.textContent = "ОФОРМЛЕНИЕ ВРЕМЕННО НЕДОСТУПНО";
 }
